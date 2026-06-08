@@ -6,13 +6,11 @@
   <title>EcofluidSystem – Reusar es mil veces mejor que disponer</title>
   <meta name="description" content="Soluciones de tratamiento de lodos, relaves y aguas residuales para la industria minera y mediambiental." />
 
-  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
 
   <style>
-    /* ─── RESET & VARIABLES ─────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
       --green:   #74e88f;
@@ -33,7 +31,7 @@
     img  { max-width: 100%; display: block; }
     a    { text-decoration: none; color: inherit; }
 
-    /* ─── TOP BAR ───────────────────────────────────────────── */
+    /* ─── TOP BAR ─── */
     .topbar {
       background: var(--dark);
       color: #a8c4b4;
@@ -58,7 +56,7 @@
     }
     .topbar-right a:hover { background: var(--green); }
 
-    /* ─── NAVBAR ────────────────────────────────────────────── */
+    /* ─── NAVBAR ─── */
     nav {
       position: sticky; top: 0; z-index: 100;
       background: rgba(255,255,255,.96);
@@ -99,7 +97,7 @@
     .burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
     .burger span { width: 24px; height: 2px; background: var(--text); border-radius: 2px; transition: .3s; }
 
-    /* ─── HERO ──────────────────────────────────────────────── */
+    /* ─── HERO ─── */
     .hero {
       min-height: 92vh;
       background:
@@ -149,7 +147,6 @@
     }
     .btn-outline:hover { border-color: #fff; background: rgba(255,255,255,.08); }
 
-    /* floating stat cards */
     .hero-stats {
       position: absolute; right: 4vw; top: 50%;
       transform: translateY(-50%);
@@ -168,7 +165,7 @@
     }
     .stat-card span { font-size: .75rem; color: rgba(255,255,255,.75); }
 
-    /* ─── SECTION COMMONS ───────────────────────────────────── */
+    /* ─── SECTION COMMONS ─── */
     section { padding: 5rem 2rem; }
     .container { max-width: 1100px; margin: 0 auto; }
     .section-label {
@@ -185,36 +182,6 @@
       font-size: 1rem; line-height: 1.7; color: var(--muted);
       max-width: 620px;
     }
-
-    /* ─── TLR SOLUTION ──────────────────────────────────────── */
-    #solucionTLR { background: var(--gray); }
-    .tlr-grid {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 4rem; align-items: center; margin-top: 3rem;
-    }
-    .tlr-image {
-      border-radius: 16px; overflow: hidden;
-      box-shadow: 0 20px 60px rgba(15,107,66,.18);
-      position: relative;
-    }
-    .tlr-image img { width: 100%; height: 400px; object-fit: cover; }
-    .tlr-image-badge {
-      position: absolute; bottom: 1.5rem; left: 1.5rem;
-      background: var(--green); color: #fff;
-      font-family: var(--ff-head); font-size: .85rem; font-weight: 700;
-      padding: .5rem 1rem; border-radius: 6px;
-    }
-    .tabs { display: flex; gap: .5rem; margin-bottom: 2rem; flex-wrap: wrap; }
-    .tab-btn {
-      font-size: .82rem; font-weight: 600; padding: .45rem 1.1rem;
-      border-radius: 20px; border: 1.5px solid #cde0d6; cursor: pointer;
-      background: #fff; color: var(--muted); transition: .2s;
-    }
-    .tab-btn.active, .tab-btn:hover {
-      background: var(--green); color: #fff; border-color: var(--green);
-    }
-    .tab-panel { display: none; }
-    .tab-panel.active { display: block; animation: fadeIn .3s ease; }
     .check-list { list-style: none; display: flex; flex-direction: column; gap: .9rem; }
     .check-list li {
       display: flex; align-items: flex-start; gap: .75rem;
@@ -227,7 +194,7 @@
       margin-top: .1rem;
     }
 
-    /* ─── QUIÉNES SOMOS ─────────────────────────────────────── */
+    /* ─── QUIÉNES SOMOS ─── */
     #quienessomos { background: var(--white); }
     .quienes-grid {
       display: grid; grid-template-columns: 1fr 1fr;
@@ -245,7 +212,63 @@
     }
     .mv-card p { font-size: .95rem; line-height: 1.7; color: var(--muted); }
 
-    /* ─── TRANSFORMAR / CTA BANNER ──────────────────────────── */
+    /* ─── FLOCULANTES ─── */
+    #floculantes { background: var(--gray); }
+    .floc-intro {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 4rem; align-items: center; margin-bottom: 3.5rem;
+    }
+    .floc-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .floc-card {
+      background: var(--white); border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,.07);
+      transition: transform .3s, box-shadow .3s;
+      position: relative;
+    }
+    .floc-card:hover { transform: translateY(-6px); box-shadow: 0 16px 48px rgba(15,107,66,.15); }
+    .floc-card-img {
+      width: 100%; height: 200px; object-fit: cover;
+      background: linear-gradient(135deg, var(--green3), #a8e6bf);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3.5rem;
+    }
+    .floc-card-img img { width: 100%; height: 100%; object-fit: cover; }
+    .floc-card-body { padding: 1.4rem 1.5rem 1.6rem; }
+    .floc-badge {
+      display: inline-block;
+      background: var(--green3); color: var(--green2);
+      font-size: .68rem; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase; padding: .25rem .7rem;
+      border-radius: 12px; margin-bottom: .7rem;
+    }
+    .floc-card h3 {
+      font-family: var(--ff-head); font-size: 1.05rem; font-weight: 700;
+      color: var(--dark); margin-bottom: .5rem;
+    }
+    .floc-card p { font-size: .88rem; line-height: 1.6; color: var(--muted); }
+    .floc-specs {
+      margin-top: .9rem; padding-top: .9rem;
+      border-top: 1px solid #e8f2ec;
+      display: flex; flex-wrap: wrap; gap: .5rem;
+    }
+    .floc-spec {
+      font-size: .75rem; font-weight: 600; color: var(--green2);
+      background: var(--green3); padding: .2rem .6rem; border-radius: 10px;
+    }
+    .floc-number {
+      position: absolute; top: 1rem; right: 1rem;
+      width: 32px; height: 32px; border-radius: 50%;
+      background: var(--dark); color: var(--accent);
+      font-family: var(--ff-head); font-size: .85rem; font-weight: 800;
+      display: grid; place-items: center;
+    }
+
+    /* ─── CTA BANNER ─── */
     .cta-banner {
       background: linear-gradient(135deg, var(--dark) 0%, var(--green2) 100%);
       padding: 5rem 2rem;
@@ -258,7 +281,91 @@
     .cta-banner p { color: rgba(255,255,255,.75); margin-bottom: 2rem; font-size: 1rem; }
     .cta-banner .btn-primary { font-size: 1rem; }
 
-    /* ─── TRATAMIENTO / APLICACIONES ────────────────────────── */
+    /* ─── PLANTAS PTAR ─── */
+    #PTAR { background: var(--white); }
+    .ptar-intro {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 4rem; align-items: center; margin-bottom: 4rem;
+    }
+    .ptar-image {
+      border-radius: 16px; overflow: hidden;
+      box-shadow: 0 20px 60px rgba(15,107,66,.18);
+      position: relative;
+    }
+    .ptar-image img { width: 100%; height: 420px; object-fit: cover; }
+    .ptar-image-badge {
+      position: absolute; bottom: 1.5rem; left: 1.5rem;
+      background: var(--accent); color: var(--dark);
+      font-family: var(--ff-head); font-size: .85rem; font-weight: 700;
+      padding: .5rem 1rem; border-radius: 6px;
+    }
+    .ptar-features {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1rem; margin-top: 3rem;
+    }
+    .ptar-feature {
+      background: var(--gray); border-radius: 12px;
+      padding: 1.5rem; border-top: 3px solid var(--green);
+      transition: transform .25s, box-shadow .25s;
+    }
+    .ptar-feature:hover { transform: translateY(-4px); box-shadow: 0 10px 30px rgba(15,107,66,.1); }
+    .ptar-feature .feat-icon { font-size: 1.8rem; margin-bottom: .7rem; }
+    .ptar-feature h4 {
+      font-family: var(--ff-head); font-size: .95rem; font-weight: 700;
+      color: var(--dark); margin-bottom: .4rem;
+    }
+    .ptar-feature p { font-size: .85rem; line-height: 1.6; color: var(--muted); }
+    .ptar-types {
+      margin-top: 4rem;
+    }
+    .ptar-types h3 {
+      font-family: var(--ff-head); font-size: 1.5rem; font-weight: 700;
+      color: var(--dark); margin-bottom: 1.5rem; text-align: center;
+    }
+    .ptar-types-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1.2rem;
+    }
+    .ptar-type-card {
+      background: linear-gradient(160deg, var(--dark) 0%, var(--mid) 100%);
+      border-radius: 14px; padding: 2rem;
+      border: 1px solid rgba(45,209,123,.15);
+      transition: border-color .25s, transform .25s;
+      position: relative; overflow: hidden;
+    }
+    .ptar-type-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: var(--accent);
+    }
+    .ptar-type-card:hover { border-color: rgba(45,209,123,.4); transform: translateY(-4px); }
+    .ptar-type-card .type-icon { font-size: 2rem; margin-bottom: .8rem; }
+    .ptar-type-card h4 {
+      font-family: var(--ff-head); font-size: 1rem; font-weight: 700;
+      color: #fff; margin-bottom: .6rem;
+    }
+    .ptar-type-card p { font-size: .85rem; line-height: 1.6; color: rgba(255,255,255,.65); }
+    .ptar-specs-strip {
+      background: var(--green2); padding: 3rem 2rem;
+      margin-top: 4rem; border-radius: 16px;
+    }
+    .ptar-specs-strip h3 {
+      font-family: var(--ff-head); font-size: 1.3rem; font-weight: 700;
+      color: #fff; text-align: center; margin-bottom: 2rem;
+    }
+    .ptar-specs-row {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+    }
+    .ptar-spec-item { text-align: center; }
+    .ptar-spec-item strong {
+      display: block; font-family: var(--ff-head);
+      font-size: 1.6rem; font-weight: 800; color: var(--accent);
+      margin-bottom: .25rem;
+    }
+    .ptar-spec-item span { font-size: .8rem; color: rgba(255,255,255,.75); }
+
+    /* ─── TRATAMIENTO DE LODO ─── */
     #tratamientolodo { background: var(--gray); }
     .apps-header {
       display: grid; grid-template-columns: 1fr 1fr;
@@ -302,15 +409,13 @@
       transition: background .25s;
     }
     .result-item:hover { background: rgba(45,209,123,.12); }
-    .result-item .icon {
-      font-size: 2rem; margin-bottom: .7rem;
-    }
+    .result-item .icon { font-size: 2rem; margin-bottom: .7rem; }
     .result-item p {
       font-family: var(--ff-head); font-size: .88rem; font-weight: 600;
       color: rgba(255,255,255,.85); line-height: 1.35;
     }
 
-    /* ─── FOOTER ────────────────────────────────────────────── */
+    /* ─── FOOTER ─── */
     footer {
       background: var(--dark); color: rgba(255,255,255,.7);
       padding: 4rem 2rem 2rem;
@@ -354,7 +459,7 @@
       font-size: .8rem; flex-wrap: wrap; gap: .5rem;
     }
 
-    /* ─── WHATSAPP FLOAT ────────────────────────────────────── */
+    /* ─── WHATSAPP FLOAT ─── */
     .wa-float {
       position: fixed; bottom: 2rem; right: 2rem; z-index: 200;
       width: 56px; height: 56px; border-radius: 50%;
@@ -365,19 +470,19 @@
     .wa-float:hover { transform: scale(1.1); }
     .wa-float svg { width: 28px; height: 28px; fill: #fff; }
 
-    /* ─── ANIMATIONS ────────────────────────────────────────── */
+    /* ─── ANIMATIONS ─── */
     @keyframes fadeUp   { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
     @keyframes fadeLeft { from { opacity:0; transform:translateX(40px); } to { opacity:1; transform:translateX(0); } }
     @keyframes fadeIn   { from { opacity:0; } to { opacity:1; } }
-
-    /* scroll reveal */
     .reveal { opacity:0; transform:translateY(28px); transition: opacity .65s ease, transform .65s ease; }
     .reveal.visible { opacity:1; transform:none; }
 
-    /* ─── RESPONSIVE ────────────────────────────────────────── */
+    /* ─── RESPONSIVE ─── */
     @media(max-width:900px){
       .hero-stats { display:none; }
-      .tlr-grid, .quienes-grid, .apps-header { grid-template-columns:1fr; gap:2.5rem; }
+      .quienes-grid, .floc-intro, .apps-header, .ptar-intro { grid-template-columns:1fr; gap:2.5rem; }
+      .ptar-types-grid { grid-template-columns: 1fr 1fr; }
+      .ptar-specs-row { grid-template-columns: repeat(2,1fr); }
       .results-inner { grid-template-columns:repeat(2,1fr); }
       .footer-grid { grid-template-columns:1fr 1fr; }
     }
@@ -392,6 +497,9 @@
       }
       nav { flex-wrap:wrap; position:relative; }
       .apps-cards { grid-template-columns:1fr; }
+      .ptar-types-grid { grid-template-columns: 1fr; }
+      .ptar-features { grid-template-columns: 1fr; }
+      .ptar-specs-row { grid-template-columns: 1fr 1fr; }
       .results-inner { grid-template-columns:1fr 1fr; }
       .footer-grid { grid-template-columns:1fr; }
       .topbar { font-size:.72rem; }
@@ -403,8 +511,8 @@
 <!-- TOP BAR -->
 <div class="topbar">
   <div class="topbar-left">
-    <span>📧 ecofluidsystemec.gmail.com</span>
-    <span>📞 +593 96 320 0034 </span>
+    <span>📧 ecofluidsystemec@gmail.com</span>
+    <span>📞 +593 96-320-0034</span>
   </div>
   <div class="topbar-right">
     <a href="https://facebook.com" aria-label="Facebook" target="_blank">f</a>
@@ -426,6 +534,7 @@
     <li><a href="#">Inicio</a></li>
     <li><a href="#PTAR">Nuestras Plantas PTAR</a></li>
     <li><a href="#quienessomos">Quiénes Somos</a></li>
+    <li><a href="#floculantes">Floculantes</a></li>
     <li><a href="#tratamientolodo">Tratamiento de Lodo</a></li>
   </ul>
 
@@ -439,7 +548,7 @@
 <section class="hero" id="inicio">
   <div class="hero-content">
     <div class="hero-badge">Tecnología Sostenible</div>
-    <h1>Tecnología Sostenible<br>para el <em>Medio abiente</em></h1>
+    <h1>Tecnología Sostenible<br>para el <em>Medio Ambiente</em></h1>
     <p>Soluciones compactas y adaptables para el tratamiento y deshidratación de relaves, lodos y concentrados con recuperación de agua cristalina.</p>
     <div class="hero-btns">
       <a class="btn-primary" href="https://api.whatsapp.com/send/?phone=593963200034&text=Ecofluid" target="_blank">Solicita una Asesoría</a>
@@ -463,65 +572,7 @@
   </div>
 </section>
 
-<!-- SOLUCIÓN TLR -->
-<section id="solucionTLR">
-  <div class="container">
-    <p class="section-label reveal">Nuestra Solución</p>
-    <h2 class="section-title reveal">Tratamiento Rápido de Lodo — TLR</h2>
-    <p class="section-sub reveal">Una solución compacta, potente y adaptable. Nuestro equipo TRL permite deshidratar relaves ultra finos y concentrados de forma directa e inmediata, recuperando agua cristalina con menos de 8 ppm de sólidos.</p>
-
-    <div class="tlr-grid">
-      <div class="tlr-image reveal">
-        <img src="https://images.unsplash.com/photo-1581093806997-124204d9fa9d?w=800&q=80"
-             alt="Equipo TLR Ecofluid en operación" loading="lazy" />
-        <div class="tlr-image-badge">Equipo TLR</div>
-      </div>
-
-      <div class="reveal">
-        <div class="tabs">
-          <button class="tab-btn active" onclick="switchTab('beneficios',this)">Beneficios Clave</button>
-          <button class="tab-btn" onclick="switchTab('aplicaciones',this)">Aplicaciones</button>
-          <button class="tab-btn" onclick="switchTab('tecnologia',this)">Tecnología</button>
-        </div>
-
-        <div id="tab-beneficios" class="tab-panel active">
-          <ul class="check-list">
-            <li>Agua tratada con sólidos suspendidos &lt; 8 ppm</li>
-            <li>Sólidos densos con más del 83% de concentración</li>
-            <li>No requiere filtros prensa ni de disco</li>
-            <li>Reducción del consumo energético</li>
-            <li>Deshidratación en menos de 2 horas</li>
-            <li>Montaje fácil y operación silenciosa (0 decibeles)</li>
-            <li>Aumenta la vida útil de las relaveras</li>
-          </ul>
-        </div>
-
-        <div id="tab-aplicaciones" class="tab-panel">
-          <ul class="check-list">
-            <li>Tratamiento de relaves ultra finos</li>
-            <li>Estabilidad y reducción de volumen de relaveras</li>
-            <li>Deshidratación directa de concentrados</li>
-            <li>Tratamiento de aguas de mina y aguas residuales</li>
-            <li>Recuperación de agua tratada para recirculación</li>
-            <li>Aceleración de tiempos logísticos y de producción</li>
-          </ul>
-        </div>
-
-        <div id="tab-tecnologia" class="tab-panel">
-          <ul class="check-list">
-            <li>Base científica en mecánica de fluidos y fenómenos de transporte</li>
-            <li>Súper floculantes de alta eficiencia seleccionados por laboratorio</li>
-            <li>Sistema modular que se ajusta a cada mina o planta</li>
-            <li>Resultados inmediatos, beneficios sostenibles a largo plazo</li>
-            <li>Compatibilidad con procesos de flotación y lixiviación</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- QUIÉNES SOMOS -->
+<!-- QUIÉNES SOMOS (después del inicio, antes de floculantes) -->
 <section id="quienessomos">
   <div class="container">
     <p class="section-label reveal">¿Quiénes Somos?</p>
@@ -540,14 +591,274 @@
   </div>
 </section>
 
+<!-- FLOCULANTES -->
+<section id="floculantes">
+  <div class="container">
+    <div class="floc-intro">
+      <div>
+        <p class="section-label reveal">Nuestros Productos</p>
+        <h2 class="section-title reveal">Floculantes de<br>Alta Eficiencia</h2>
+        <p class="section-sub reveal">Seleccionados mediante análisis de laboratorio para cada tipo de proceso, nuestros floculantes garantizan la máxima eficiencia en la separación de sólidos y recuperación de agua. Cada producto está formulado para condiciones específicas de pH, temperatura y granulometría.</p>
+      </div>
+      <div class="reveal">
+        <ul class="check-list">
+          <li>Selección personalizada según el tipo de mineral</li>
+          <li>Compatibles con procesos de flotación y lixiviación</li>
+          <li>Dosis optimizada para reducir costos operativos</li>
+          <li>Alta eficiencia en relaves ultra finos</li>
+          <li>Disponibles en presentaciones líquida y en polvo</li>
+          <li>Soporte técnico en campo incluido</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="floc-grid">
+
+      <!-- Floculante 1 -->
+      <div class="floc-card reveal">
+        <div class="floc-number">1</div>
+        <div class="floc-card-img">
+          <!-- Reemplaza con: <img src="tu-imagen-floculante-1.jpg" alt="Floculante Aniónico de Alta Densidad" /> -->
+          🧪
+        </div>
+        <div class="floc-card-body">
+          <span class="floc-badge">Aniónico</span>
+          <h3>Floculante A — Alta Densidad</h3>
+          <p>Ideal para la clarificación de aguas con alto contenido de sólidos finos. Actúa rápidamente formando flóculos densos y estables que sedimentan con facilidad.</p>
+          <div class="floc-specs">
+            <span class="floc-spec">pH 6–9</span>
+            <span class="floc-spec">Alta turbidez</span>
+            <span class="floc-spec">Presentación polvo</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Floculante 2 -->
+      <div class="floc-card reveal">
+        <div class="floc-number">2</div>
+        <div class="floc-card-img">
+          <!-- Reemplaza con: <img src="tu-imagen-floculante-2.jpg" alt="Floculante Catiónico de Baja Dosis" /> -->
+          ⚗️
+        </div>
+        <div class="floc-card-body">
+          <span class="floc-badge">Catiónico</span>
+          <h3>Floculante B — Baja Dosis</h3>
+          <p>Formulado para operar con dosis mínimas en procesos de aguas residuales industriales. Maximiza la eficiencia de separación y reduce costos de reactivos.</p>
+          <div class="floc-specs">
+            <span class="floc-spec">pH 4–7</span>
+            <span class="floc-spec">Baja dosis</span>
+            <span class="floc-spec">Presentación líquida</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Floculante 3 -->
+      <div class="floc-card reveal">
+        <div class="floc-number">3</div>
+        <div class="floc-card-img">
+          <!-- Reemplaza con: <img src="tu-imagen-floculante-3.jpg" alt="Floculante No Iónico para Relaves" /> -->
+          🔬
+        </div>
+        <div class="floc-card-body">
+          <span class="floc-badge">No iónico</span>
+          <h3>Floculante C — Para Relaves</h3>
+          <p>Especialmente diseñado para el tratamiento de relaves mineros ultra finos. Compatible con una amplia gama de minerales y condiciones de proceso.</p>
+          <div class="floc-specs">
+            <span class="floc-spec">pH 5–10</span>
+            <span class="floc-spec">Relaves finos</span>
+            <span class="floc-spec">Polvo / Emulsión</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Floculante 4 -->
+      <div class="floc-card reveal">
+        <div class="floc-number">4</div>
+        <div class="floc-card-img">
+          <!-- Reemplaza con: <img src="tu-imagen-floculante-4.jpg" alt="Floculante Súper Aniónico Concentrado" /> -->
+          💧
+        </div>
+        <div class="floc-card-body">
+          <span class="floc-badge">Súper Aniónico</span>
+          <h3>Floculante D — Concentrado</h3>
+          <p>De alto peso molecular para procesos que requieren máxima velocidad de sedimentación. Indicado en espesadores de pasta y sistemas de deshidratación rápida.</p>
+          <div class="floc-specs">
+            <span class="floc-spec">pH 7–11</span>
+            <span class="floc-spec">Alto peso molecular</span>
+            <span class="floc-spec">Pasta y espesadores</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Floculante 5 -->
+      <div class="floc-card reveal">
+        <div class="floc-number">5</div>
+        <div class="floc-card-img">
+          <!-- Reemplaza con: <img src="tu-imagen-floculante-5.jpg" alt="Floculante para Aguas Ácidas" /> -->
+          🌿
+        </div>
+        <div class="floc-card-body">
+          <span class="floc-badge">Ácido-Resistente</span>
+          <h3>Floculante E — Aguas Ácidas</h3>
+          <p>Diseñado para condiciones de bajo pH típicas en drenaje ácido de mina (DAM). Mantiene su eficiencia floculante en entornos altamente ácidos.</p>
+          <div class="floc-specs">
+            <span class="floc-spec">pH 2–5</span>
+            <span class="floc-spec">Drenaje ácido</span>
+            <span class="floc-spec">Alta resistencia</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Floculante 6 -->
+      <div class="floc-card reveal">
+        <div class="floc-number">6</div>
+        <div class="floc-card-img">
+          <!-- Reemplaza con: <img src="tu-imagen-floculante-6.jpg" alt="Floculante para Concentrados" /> -->
+          ⚡
+        </div>
+        <div class="floc-card-body">
+          <span class="floc-badge">Alta Velocidad</span>
+          <h3>Floculante F — Concentrados</h3>
+          <p>Optimizado para la deshidratación directa de concentrados de cobre, zinc y plomo. Reduce tiempos de proceso y mejora la densidad final del producto.</p>
+          <div class="floc-specs">
+            <span class="floc-spec">pH 6–9</span>
+            <span class="floc-spec">Concentrados</span>
+            <span class="floc-spec">Alta velocidad</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Floculante 7 -->
+      <div class="floc-card reveal">
+        <div class="floc-number">7</div>
+        <div class="floc-card-img">
+          <!-- Reemplaza con: <img src="tu-imagen-floculante-7.jpg" alt="Floculante Biodegradable Premium" /> -->
+          🌱
+        </div>
+        <div class="floc-card-body">
+          <span class="floc-badge">Eco-Premium</span>
+          <h3>Floculante G — Biodegradable</h3>
+          <p>Formulación biodegradable de última generación. Ofrece alto rendimiento con mínimo impacto ambiental, ideal para operaciones con estrictos compromisos de sostenibilidad.</p>
+          <div class="floc-specs">
+            <span class="floc-spec">pH 5–10</span>
+            <span class="floc-spec">Biodegradable</span>
+            <span class="floc-spec">Certificado verde</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <!-- CTA BANNER -->
 <div class="cta-banner">
   <div class="container">
-    <h2 class="reveal">TRANSFORMA TU PROCESO DE TLR</h2>
-    <p class="reveal">Habla con nuestros especialistas y descubre cómo el sistema Ecofluid puede optimizar tu operación hoy mismo.</p>
-    <a class="btn-primary reveal" href="https://api.whatsapp.com/send/?phone=593963188601&text=Ecofluid" target="_blank">Escríbenos por WhatsApp</a>
+    <h2 class="reveal">OPTIMIZA TU PROCESO HOY</h2>
+    <p class="reveal">Habla con nuestros especialistas y descubre cómo el sistema Ecofluid puede transformar tu operación.</p>
+    <a class="btn-primary reveal" href="https://api.whatsapp.com/send/?phone=593963200034&text=Ecofluid" target="_blank">Escríbenos por WhatsApp</a>
   </div>
 </div>
+
+<!-- PLANTAS PTAR -->
+<section id="PTAR">
+  <div class="container">
+    <p class="section-label reveal">Infraestructura</p>
+    <h2 class="section-title reveal">Nuestras Plantas PTAR</h2>
+    <p class="section-sub reveal">Las Plantas de Tratamiento de Aguas Residuales (PTAR) de Ecofluid combinan tecnología avanzada con diseño modular para ofrecer soluciones escalables, eficientes y adaptadas a las exigencias de cada proyecto minero e industrial.</p>
+
+    <div class="ptar-intro">
+      <div class="ptar-image reveal">
+        <img src="https://images.unsplash.com/photo-1581093806997-124204d9fa9d?w=800&q=80"
+             alt="Planta PTAR Ecofluid" loading="lazy" />
+        <div class="ptar-image-badge">Planta PTAR Ecofluid</div>
+      </div>
+      <div class="reveal">
+        <p class="section-label">¿Qué es una PTAR?</p>
+        <p style="font-size:1rem; line-height:1.75; color:var(--muted); margin-bottom:1.5rem;">Una Planta de Tratamiento de Aguas Residuales (PTAR) es una instalación diseñada para remover contaminantes del agua procedente de procesos industriales, mineros o municipales, permitiendo su reutilización o disposición segura conforme a la normativa ambiental vigente.</p>
+        <ul class="check-list">
+          <li>Diseño modular y escalable según caudal requerido</li>
+          <li>Cumplimiento de normativas ambientales nacionales e internacionales</li>
+          <li>Recuperación de agua para recirculación en planta</li>
+          <li>Reducción significativa de la huella hídrica</li>
+          <li>Operación continua 24/7 con bajo mantenimiento</li>
+          <li>Monitoreo en tiempo real de parámetros de calidad</li>
+          <li>Instalación rápida con mínima intervención civil</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Características técnicas -->
+    <div class="ptar-features reveal">
+      <div class="ptar-feature">
+        <div class="feat-icon">🏗️</div>
+        <h4>Diseño Modular</h4>
+        <p>Sistemas prefabricados que permiten instalación en campo sin grandes obras civiles. Capacidad de ampliación progresiva.</p>
+      </div>
+      <div class="ptar-feature">
+        <div class="feat-icon">🔄</div>
+        <h4>Tratamiento en Múltiples Etapas</h4>
+        <p>Procesos de pretratamiento, tratamiento primario, secundario y terciario integrados en una sola planta compacta.</p>
+      </div>
+      <div class="ptar-feature">
+        <div class="feat-icon">📊</div>
+        <h4>Monitoreo Inteligente</h4>
+        <p>Panel de control con sensores de pH, turbidez, conductividad y caudal. Alertas automáticas ante desviaciones de parámetros.</p>
+      </div>
+      <div class="ptar-feature">
+        <div class="feat-icon">⚙️</div>
+        <h4>Bajo Consumo Energético</h4>
+        <p>Equipos de alta eficiencia eléctrica diseñados para minimizar el consumo. Compatibles con generación solar y sistemas híbridos.</p>
+      </div>
+    </div>
+
+    <!-- Tipos de plantas -->
+    <div class="ptar-types reveal">
+      <h3>Tipos de Plantas Disponibles</h3>
+      <div class="ptar-types-grid">
+        <div class="ptar-type-card">
+          <div class="type-icon">🏭</div>
+          <h4>PTAR Industrial</h4>
+          <p>Para efluentes con alta carga orgánica e inorgánica de procesos metalúrgicos, petroquímicos y de manufactura. Incluye sistemas de neutralización y oxidación avanzada.</p>
+        </div>
+        <div class="ptar-type-card">
+          <div class="type-icon">⛏️</div>
+          <h4>PTAR Minera</h4>
+          <p>Especializada en tratamiento de aguas de mina, drenaje ácido y aguas de proceso con metales pesados. Sistemas de precipitación química y filtración avanzada integrados.</p>
+        </div>
+        <div class="ptar-type-card">
+          <div class="type-icon">🌊</div>
+          <h4>PTAR Compacta Modular</h4>
+          <p>Solución portátil para operaciones remotas o proyectos de exploración. Diseño de contenedor, fácil transporte e instalación en menos de 48 horas.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Especificaciones técnicas destacadas -->
+    <div class="ptar-specs-strip reveal">
+      <h3>Especificaciones Técnicas Destacadas</h3>
+      <div class="ptar-specs-row">
+        <div class="ptar-spec-item">
+          <strong>5–500 m³/h</strong>
+          <span>Rango de caudal<br>de tratamiento</span>
+        </div>
+        <div class="ptar-spec-item">
+          <strong>&lt;5 NTU</strong>
+          <span>Turbidez en agua<br>tratada de salida</span>
+        </div>
+        <div class="ptar-spec-item">
+          <strong>95%+</strong>
+          <span>Eficiencia de<br>remoción de sólidos</span>
+        </div>
+        <div class="ptar-spec-item">
+          <strong>48 h</strong>
+          <span>Tiempo máximo<br>de instalación</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
 
 <!-- TRATAMIENTO DE LODO -->
 <section id="tratamientolodo">
@@ -622,7 +933,6 @@
         <a class="social-icon" href="https://facebook.com" target="_blank" aria-label="Facebook">f</a>
         <a class="social-icon" href="https://twitter.com" target="_blank" aria-label="Twitter">𝕏</a>
         <a class="social-icon" href="https://instagram.com" target="_blank" aria-label="Instagram">◎</a>
-        <a class="social-icon" href="https://linkedin.com" target="_blank" aria-label="LinkedIn">in</a>
       </div>
     </div>
 
@@ -630,8 +940,9 @@
       <h4>Menú</h4>
       <ul>
         <li><a href="#">Inicio</a></li>
-        <li><a href="#solucionTLR">Nuestra Solución TLR</a></li>
         <li><a href="#quienessomos">Quiénes Somos</a></li>
+        <li><a href="#floculantes">Floculantes</a></li>
+        <li><a href="#PTAR">Plantas PTAR</a></li>
         <li><a href="#tratamientolodo">Tratamiento de Lodo</a></li>
       </ul>
     </div>
@@ -639,8 +950,8 @@
     <div class="footer-contact">
       <h4>Contáctanos</h4>
       <p>📍 <span>Calle José Granda 280, Dpto 1101<br>San Isidro, Ecuador</span></p>
-      <p>📧 <span>info@ecofluid.pe</span></p>
-      <p>📞 <span>+593 935 596 148</span></p>
+      <p>📧 <span>ecofluidsystemec@gmail.com</span></p>
+      <p>📞 <span>+593 96-320-0034</span></p>
     </div>
   </div>
 
@@ -651,25 +962,15 @@
 </footer>
 
 <!-- WHATSAPP FLOAT -->
-<a class="wa-float" href="https://api.whatsapp.com/send/?phone=593963188601&text=Ecofluid" target="_blank" aria-label="WhatsApp">
+<a class="wa-float" href="https://api.whatsapp.com/send/?phone=593963200034&text=Ecofluid" target="_blank" aria-label="WhatsApp">
   <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.122 1.534 5.852L.057 23.535a.5.5 0 00.608.608l5.683-1.477A11.952 11.952 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.9 0-3.68-.523-5.203-1.432l-.374-.222-3.875 1.007 1.029-3.763-.244-.387A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
 </a>
 
 <script>
-  /* ── Mobile menu ── */
   function toggleMenu(){
     document.getElementById('navbar').classList.toggle('open');
   }
 
-  /* ── Tab switcher ── */
-  function switchTab(id, btn){
-    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    document.getElementById('tab-' + id).classList.add('active');
-    btn.classList.add('active');
-  }
-
-  /* ── Scroll reveal ── */
   const reveals = document.querySelectorAll('.reveal');
   const io = new IntersectionObserver((entries) => {
     entries.forEach((e, i) => {
@@ -681,7 +982,6 @@
   }, { threshold: 0.12 });
   reveals.forEach(r => io.observe(r));
 
-  /* ── Close menu on link click ── */
   document.querySelectorAll('.nav-links a').forEach(a => {
     a.addEventListener('click', () => document.getElementById('navbar').classList.remove('open'));
   });
