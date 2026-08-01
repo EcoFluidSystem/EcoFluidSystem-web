@@ -4,11 +4,18 @@
 <meta name="google-site-verification" content="Y3FMqn9XIpCsiy7sWQ5uuN_Entx6fM404tFAjoz1_cw" />
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
-<title data-es="New Technology EcoFluidSystem S.A. | Tratamiento de Aguas" data-en="New Technology EcoFluidSystem S.A. | Water Treatment">New Technology EcoFluidSystem S.A. | Tratamiento de Aguas</title>
+<meta name="description" content="Tratamiento y deshidratación de fluidos para minería, petróleo e industria. Tecnología TRL y EFS con agua cristalina y sólidos compactos.">
+<meta name="theme-color" content="#1d4891">
+<meta property="og:title" content="Tratamiento de Aguas | New Technology EcoFluidSystem">
+<meta property="og:description" content="Soluciones integrales de tratamiento de aguas para minería, PTAR y camales. 25+ años de experiencia.">
+<meta property="og:image" content="https://ecofluidsystem.com/og-default.jpg">
+<meta property="og:type" content="website">
+<title>Tratamiento y Deshidratación de Fluidos | EcoFluidSystem</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
+
 <script id="tailwind-config">
   tailwind.config = {
     darkMode: "class",
@@ -44,10 +51,11 @@
     }
   }
 </script>
+
 <style>
   *, *::before, *::after { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
-  body { font-family: 'Montserrat', sans-serif; background: #f2f7f3; color: #15395E; }
+  body { font-family: 'Montserrat', sans-serif; background: #f2f7f3; color: #15395E; overflow-x: hidden; }
   .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; vertical-align: middle; }
 
   @keyframes floatUp { 
@@ -62,21 +70,20 @@
     0% { opacity: 0; transform: translateX(60px); }
     100% { opacity: 1; transform: translateX(0); }
   }
-  @keyframes pulse-soft {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.8; }
+  @keyframes glow {
+    0%, 100% { box-shadow: 0 0 20px rgba(52, 168, 83, 0.3); }
+    50% { box-shadow: 0 0 30px rgba(52, 168, 83, 0.5); }
   }
-  @keyframes bounce-subtle {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-8px); }
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(60px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 
   .animate-float { animation: floatUp 0.8s ease-out; }
   .animate-slide-right { animation: slideInRight 0.8s ease-out; }
-  .animate-pulse-soft { animation: pulse-soft 2s ease-in-out infinite; }
-  .animate-bounce-subtle { animation: bounce-subtle 2s ease-in-out infinite; }
+  .animate-glow { animation: glow 3s ease-in-out infinite; }
+  .animate-slide-up { animation: slideUp 0.6s ease-out forwards; }
 
-  /* LANGUAGE SELECTOR */
   .lang-selector {
     display: flex;
     gap: 0.5rem;
@@ -96,7 +103,7 @@
     border: none;
     cursor: pointer;
     border-radius: 4px;
-    transition: all 0.2s;
+    transition: all 0.3s;
     text-transform: uppercase;
     letter-spacing: 0.05em;
   }
@@ -104,14 +111,16 @@
   .lang-btn.active {
     background: #34A853;
     color: #fff;
+    box-shadow: 0 4px 12px rgba(52, 168, 83, 0.4);
   }
 
   .lang-btn:hover:not(.active) {
     color: #fff;
+    background: rgba(52, 168, 83, 0.2);
   }
 
   .topbar {
-    background: #15395E;
+    background: linear-gradient(90deg, #15395E 0%, #134F8C 100%);
     color: #BFE0F5;
     font-size: .78rem;
     letter-spacing: .04em;
@@ -121,429 +130,460 @@
     align-items: center;
     flex-wrap: wrap;
     gap: .5rem;
+    position: relative;
+    border-bottom: 1px solid rgba(52, 168, 83, 0.2);
   }
-  .topbar a { color: #BFE0F5; text-decoration: none; }
+
+  .topbar a { color: #BFE0F5; text-decoration: none; transition: all 0.3s; }
+  .topbar a:hover { color: #6FE6A0; }
   .topbar-left { display: flex; gap: 1.5rem; flex-wrap: wrap; }
   .topbar-left span { display: inline-flex; align-items: center; gap: .4rem; }
   .topbar-right { display: flex; gap: .6rem; align-items: center; }
-  .topbar-right a {
-    width: 26px; height: 26px; border-radius: 50%;
-    background: rgba(255,255,255,.08);
-    display: grid; place-items: center; font-size: .72rem;
-    transition: all .2s;
-  }
-  .topbar-right a:hover { background: #34A853; color: #fff; }
 
   nav.main-nav {
     position: sticky; top: 0; z-index: 100;
     background: rgba(255,255,255,.97);
     backdrop-filter: blur(14px);
     border-bottom: 1px solid #D7EAF7;
-    box-shadow: 0 1px 12px rgba(21,57,94,.08);
+    box-shadow: 0 2px 20px rgba(21,57,94,.12);
+    transition: all 0.3s ease;
   }
+
   .nav-inner {
     max-width: 1200px; margin: 0 auto;
     display: flex; align-items: center; justify-content: space-between;
     padding: 0 2rem; height: 72px;
   }
-  .nav-logo { display: flex; align-items: center; gap: .65rem; text-decoration: none; }
+
+  .nav-logo { display: flex; align-items: center; gap: .65rem; text-decoration: none; transition: all 0.3s; }
+  .nav-logo:hover { transform: translateY(-2px); }
+  
   .nav-logo-icon {
     width: 42px; height: 42px; border-radius: 10px;
     background: linear-gradient(135deg, #34A853 0%, #1561ad 100%);
     display: grid; place-items: center; overflow: hidden;
     flex-shrink: 0; border: 1px solid #D7EAF7;
-    transition: all .3s;
     color: white;
     font-weight: 800;
-    font-size: 1.2rem;
+    font-size: 1rem;
+    box-shadow: 0 4px 16px rgba(52, 168, 83, 0.2);
   }
-  .nav-brand { font-size: 1.15rem; font-weight: 800; color: #15395E; line-height: 1.1; }
+  
+  .nav-brand { font-size: 1.1rem; font-weight: 800; color: #15395E; }
   .nav-brand span { color: #34A853; }
   .nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; margin: 0; padding: 0; }
   .nav-links a {
     font-size: .82rem; font-weight: 600; color: #2E5475;
     text-decoration: none; position: relative; padding-bottom: 3px;
-    transition: color .2s;
+    transition: all .3s;
   }
   .nav-links a::after {
     content: ''; position: absolute; bottom: 0; left: 0;
-    width: 0; height: 2px; background: #34A853; transition: width .25s;
+    width: 0; height: 2px; background: linear-gradient(90deg, #34A853, #1561ad);
+    transition: width .3s;
   }
-  .nav-links a:hover { color: #34A853; }
+  .nav-links a:hover { 
+    color: #34A853;
+  }
   .nav-links a:hover::after { width: 100%; }
+  
   .nav-cta {
-    background: #1561ad; color: #fff;
+    background: linear-gradient(135deg, #1561ad, #34A853);
+    color: #fff;
     font-size: .82rem; font-weight: 700;
     padding: .6rem 1.4rem; border-radius: 6px;
-    text-decoration: none; transition: all .2s;
+    text-decoration: none; transition: all .3s;
     white-space: nowrap;
+    box-shadow: 0 4px 16px rgba(52, 168, 83, 0.25);
   }
-  .nav-cta:hover { background: #134F8C; transform: translateY(-2px); }
 
-  /* LOGO SECTION CON SLOGAN */
-  .logo-section {
-    background: linear-gradient(135deg, #f2f7f3 0%, #fff 100%);
-    padding: 2.5rem 2rem;
-    border-bottom: 1px solid #D7EAF7;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 1.5rem;
+  .nav-cta:hover { 
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px rgba(52, 168, 83, 0.4);
   }
-  .logo-container {
+
+  #hero {
+    min-height: 85vh;
+    background: linear-gradient(140deg, rgba(15,75,138,.85) 0%, rgba(46,189,114,.55) 100%);
+    display: flex; align-items: center;
+    padding: 3rem 2rem; position: relative; overflow: visible;
+  }
+  
+  #hero::before {
+    content: ''; position: absolute; top: -50%; right: -10%;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(52, 168, 83, 0.2) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: floatUp 4s ease-in-out infinite;
+    pointer-events: none;
+  }
+  
+  .hero-content { 
+    max-width: 680px; position: relative; z-index: 3; 
+    animation: floatUp .8s ease both;
+    width: 100%; 
+  }
+
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: .5rem;
+    background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.28);
+    color: #fff !important; font-size: .72rem; font-weight: 700;
+    text-transform: uppercase; padding: .3rem .85rem; border-radius: 20px;
+    margin-bottom: 1.4rem;
+    transition: all 0.3s;
+    backdrop-filter: blur(10px);
+  }
+
+  #hero h1 {
+    font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 800; line-height: 1.1;
+    color: #ffffff !important; margin-bottom: 1.3rem;
+    animation: slideInLeft 0.8s ease-out 0.1s both;
+  }
+  
+  #hero h1 em { font-style: normal; color: #6FE6A0 !important; }
+
+  #hero p {
+    font-size: 1.05rem; line-height: 1.7; color: rgba(255,255,255,.95) !important;
+    max-width: 540px; margin-bottom: 2.2rem;
+    animation: slideInLeft 0.8s ease-out 0.2s both;
+  }
+
+  .hero-btns { 
+    display: flex; gap: 1rem; flex-wrap: wrap;
+    animation: slideInLeft 0.8s ease-out 0.3s both;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, #34A853, #2E9E4C);
+    color: #fff !important;
+    font-size: .88rem; font-weight: 700;
+    padding: .9rem 2rem; border-radius: 7px; text-decoration: none;
+    box-shadow: 0 8px 24px rgba(52, 168, 83, 0.4);
+    transition: all .3s;
+    display: inline-flex; align-items: center; gap: .5rem;
+    cursor: pointer;
+    border: none;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(52, 168, 83, 0.6);
+  }
+
+  .btn-outline {
+    border: 2px solid rgba(255,255,255,.6); color: #fff !important;
+    font-size: .88rem; font-weight: 600;
+    padding: .9rem 2rem; border-radius: 7px; text-decoration: none;
+    transition: all .3s;
+    backdrop-filter: blur(10px);
+  }
+
+  .btn-outline:hover { 
+    border-color: #fff;
+    background: rgba(255,255,255,.15);
+    transform: translateY(-3px);
+  }
+
+  .hero-stats {
+    position: relative; z-index: 3;
     display: flex;
     flex-direction: column;
-    align-items: center;
     gap: 1rem;
+    margin-top: 2rem;
     width: 100%;
   }
-  .logo-upload-box {
-    width: 220px; height: 160px;
-    background: #fff;
-    border: 2px dashed #8FB8DC;
-    border-radius: 16px;
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    gap: .6rem; cursor: pointer; position: relative; overflow: hidden;
-    transition: border-color .2s, box-shadow .2s;
-  }
-  .logo-upload-box:hover { border-color: #34A853; box-shadow: 0 4px 20px rgba(52,168,83,.12); }
-  .logo-upload-box input[type="file"] {
-    position: absolute; width: 100%; height: 100%; opacity: 0; cursor: pointer; top: 0; left: 0;
-  }
-  .logo-upload-box img { width: 100%; height: 100%; object-fit: contain; border-radius: 14px; }
-  .logo-upload-text { font-size: .78rem; color: #8FB8DC; font-weight: 600; text-align: center; pointer-events: none; }
 
-  /* SLOGAN STYLING */
-  .company-slogan {
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: #34A853;
-    text-align: center;
-    font-style: italic;
-    letter-spacing: 0.3px;
-    line-height: 1.6;
-    max-width: 600px;
-    animation: floatUp 0.8s ease-out 0.3s both;
+  .stat-card {
+    background: rgba(255,255,255,.14);
+    backdrop-filter: blur(20px);
+    border: 1.5px solid rgba(255,255,255,.25);
+    border-radius: 14px;
+    padding: 1.1rem 1.4rem; text-align: center;
+    transition: all .3s;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
   }
 
-  /* HERO - MEJORADO RESPONSIVE */
-#hero, .hero {
-  min-height: 85vh;
-  background:
-    linear-gradient(140deg, rgba(15,75,138,.85) 0%, rgba(46,189,114,.55) 100%),
-    url('') center/cover no-repeat;
-  display: flex; align-items: center;
-  padding: 3rem 2rem; position: relative; overflow: visible;
-}
-.hero-bg-img {
-  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0;
-}
-.hero-overlay {
-  position: absolute; inset: 0;
-  background: linear-gradient(140deg, rgba(15,75,138,.85) 0%, rgba(46,189,114,.55) 100%);
-  z-index: 1;
-}
-.hero-content { max-width: 680px; position: relative; z-index: 3; animation: floatUp .8s ease both; width: 100%; }
-
-.hero-badge {
-  display: inline-flex; align-items: center; gap: .5rem;
-  background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.28);
-  color: #fff !important; font-size: .72rem; font-weight: 700; letter-spacing: .1em;
-  text-transform: uppercase; padding: .3rem .85rem; border-radius: 20px;
-  margin-bottom: 1.4rem;
-}
-
-#hero h1, .hero h1 {
-  font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 800; line-height: 1.1;
-  color: #ffffff !important; margin-bottom: 1.3rem;
-}
-#hero h1 em, .hero h1 em { font-style: normal; color: #6FE6A0 !important; }
-
-#hero p, .hero p {
-  font-size: 1.05rem; line-height: 1.7; color: rgba(255,255,255,.95) !important;
-  max-width: 540px; margin-bottom: 2.2rem;
-}
-
-.hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
-.btn-hero-primary {
-  background: #34A853; color: #fff !important;
-  font-size: .88rem; font-weight: 700;
-  padding: .9rem 2rem; border-radius: 7px; text-decoration: none;
-  box-shadow: 0 4px 20px rgba(52,168,83,.4);
-  transition: all .2s; display: inline-flex; align-items: center; gap: .5rem;
-}
-.btn-hero-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(52,168,83,.6); }
-.btn-hero-outline {
-  border: 1.5px solid rgba(255,255,255,.5); color: #fff !important;
-  font-size: .88rem; font-weight: 600;
-  padding: .9rem 2rem; border-radius: 7px; text-decoration: none;
-  transition: all .2s;
-}
-.btn-hero-outline:hover { border-color: #fff; background: rgba(255,255,255,.12); transform: translateY(-2px); }
-
-/* HERO STATS - MEJORADO PARA NO SUPERPONERSE */
-.hero-stats {
-  position: static !important;
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 1rem !important;
-  z-index: 3 !important;
-  margin-top: 2rem !important;
-  width: 100% !important;
-  align-self: flex-start;
-}
-
-.stat-card {
-  background: rgba(255,255,255,.16); backdrop-filter: blur(16px);
-  border: 1px solid rgba(255,255,255,.25); border-radius: 14px;
-  padding: 1.1rem 1.4rem; text-align: center; min-width: unset;
-  transition: all .3s;
-}
-.stat-card strong {
-  display: block; font-size: 1.8rem; font-weight: 800; color: #fff !important; line-height: 1;
-  margin-bottom: .3rem;
-}
-.stat-card span { font-size: .72rem; color: rgba(255,255,255,.85) !important; line-height: 1.3; display: block; }
-
-  .hero-img-upload-btn {
-    position: absolute; bottom: 1.5rem; right: 1.5rem; z-index: 10;
-    background: rgba(255,255,255,.18); border: 1.5px solid rgba(255,255,255,.4);
-    color: #fff; font-size: .75rem; font-weight: 700; padding: .5rem 1rem;
-    border-radius: 20px; cursor: pointer; display: flex; align-items: center; gap: .4rem;
-    transition: all .2s; backdrop-filter: blur(8px);
+  .stat-card:hover {
+    transform: translateY(-6px);
+    background: rgba(52, 168, 83, 0.2);
+    box-shadow: 0 12px 48px rgba(52, 168, 83, 0.3);
   }
-  .hero-img-upload-btn:hover { background: rgba(255,255,255,.28); }
-  .hero-img-upload-btn input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
 
-  .section-pad { padding: 5rem 2rem; }
+  .stat-card strong {
+    display: block; font-size: 1.8rem; font-weight: 800; color: #fff !important;
+    margin-bottom: .3rem;
+  }
+
+  .stat-card span { font-size: .72rem; color: rgba(255,255,255,.85) !important; }
+
+  .section-pad { padding: 5rem 2rem; position: relative; }
+  .section-pad::before {
+    content: ''; position: absolute; top: 0; right: -5%;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(52, 168, 83, 0.08) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  
   .container { max-width: 1200px; margin: 0 auto; }
-  .section-eyebrow {
-    font-size: .72rem; font-weight: 700; letter-spacing: .16em;
-    text-transform: uppercase; color: #34A853; margin-bottom: .5rem;
-  }
+
   .section-title {
     font-size: clamp(1.7rem, 3.5vw, 2.6rem); font-weight: 800; line-height: 1.12;
     color: #15395E; margin-bottom: .9rem;
   }
+
   .section-sub {
     font-size: .97rem; line-height: 1.72; color: #2E5475; max-width: 600px;
   }
 
-  /* MISSION */
-  #mission { background: #f2f7f3; }
-  .mv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-  .mv-card {
-    background: #fff; border-radius: 16px;
-    padding: 2rem; 
-    box-shadow: 0 4px 24px rgba(52,168,83,.1);
-    transition: all .25s;
-    cursor: pointer;
-  }
-  .mv-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(52,168,83,.18); }
-  .mv-card-icon {
-    width: 48px; height: 48px; border-radius: 12px;
-    background: #EAF8EF; display: grid; place-items: center;
-    color: #34A853; transition: all .3s; flex-shrink: 0;
-  }
-  .mv-card:hover .mv-card-icon { transform: scale(1.1); background: #34A853; color: #fff; }
-  .mv-card h2 { font-size: 1.2rem; font-weight: 800; color: #15395E; margin: 0; }
-  .mv-card p { font-size: .93rem; line-height: 1.75; color: #2E5475; margin: 0; }
-
-  /* PRODUCTS */
-  #products { background: #fff; }
-  .products-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
-  .product-card {
-    background: #f2f7f3; border-radius: 16px;
-    border: 1px solid #D7EAF7;
-    overflow: hidden; transition: all .3s;
-  }
-  .product-card:hover { transform: translateY(-8px); box-shadow: 0 20px 48px rgba(52,168,83,.14); border-color: #34A853; }
-  .product-media {
-    width: 100%; aspect-ratio: 16/9;
-    background: linear-gradient(135deg, #E1F5E8 0%, #D2EAFB 100%);
-    display: flex; align-items: center; justify-content: center;
-    color: #3FAE6B; flex-direction: column; gap: .4rem; font-size: .72rem;
-    font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
-  }
-  .product-media .material-symbols-outlined { font-size: 2.2rem; opacity: .5; }
-  .product-body { padding: 1.4rem; }
-  .product-body h3 { font-size: 1.15rem; font-weight: 800; color: #15395E; margin-bottom: .3rem; }
-  .product-body p { font-size: .84rem; color: #2E5475; margin: 0; line-height: 1.55; }
-
-  .ficha-tecnica-link {
-    font-size: .8rem; color: #34A853; text-decoration: none;
-    font-weight: 600; display: inline-flex; align-items: center; gap: .3rem;
-    margin-top: .5rem; transition: all .2s;
-  }
-  .ficha-tecnica-link:hover { color: #1C9F52; }
-
-  /* STATS BAR */
   .stats-bar {
-    background: #15395E; padding: 3rem 2rem;
+    background: linear-gradient(135deg, #15395E 0%, #134F8C 100%);
+    padding: 3rem 2rem;
     position: relative; overflow: hidden;
   }
-  .stats-bar-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; position: relative; z-index: 1; }
-  .stat-item { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); border-radius: 14px; padding: 1.8rem 1.2rem; text-align: center; transition: all .25s; }
-  .stat-item:hover { background: rgba(52,168,83,.18); transform: translateY(-4px); }
-  .stat-item .icon { font-size: 1.8rem; margin-bottom: .6rem; color: #6FE6A0; }
+
+  .stats-bar-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+  .stat-item { 
+    background: rgba(255,255,255,.06);
+    border: 1px solid rgba(255,255,255,.12); 
+    border-radius: 14px; 
+    padding: 1.8rem 1.2rem; 
+    text-align: center; 
+    transition: all .3s;
+  }
+
+  .stat-item:hover { 
+    background: rgba(52, 168, 83, 0.2);
+    transform: translateY(-6px);
+  }
+
   .stat-item strong { display: block; font-size: 1.7rem; font-weight: 800; color: #fff; margin-bottom: .3rem; }
-  .stat-item span { font-size: .78rem; color: rgba(255,255,255,.75); line-height: 1.4; display: block; }
+  .stat-item span { font-size: .78rem; color: rgba(255,255,255,.75); }
 
-  /* RESULTS */
-  #results { background: #f2f7f3; }
-  .accordion-item {
-    background: #fff; border-radius: 16px;
+  .comparison-table {
+    background: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 16px 48px rgba(21, 57, 94, 0.1);
+    margin-top: 2rem;
+  }
+
+  .comparison-table table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+  }
+
+  .comparison-table th {
+    background: linear-gradient(135deg, #1561ad 0%, #34A853 100%);
+    color: #fff;
+    padding: 1.2rem;
+    text-align: left;
+    font-weight: 700;
+  }
+
+  .comparison-table td {
+    padding: 1rem 1.2rem;
+    border-bottom: 1px solid #D7EAF7;
+    color: #2E5475;
+  }
+
+  .comparison-table tr:hover {
+    background: #f9fbfd;
+  }
+
+  .comparison-table .highlight {
+    background: rgba(52, 168, 83, 0.1);
+    color: #1C9F52;
+    font-weight: 700;
+  }
+
+  .tech-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .tech-card {
+    background: linear-gradient(135deg, #ffffff 0%, #f9fbfd 100%);
     border: 1px solid #D7EAF7;
-    overflow: hidden; transition: all .3s;
-    margin-bottom: 1.5rem;
-  }
-  .accordion-header {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 1.5rem 2rem; cursor: pointer; user-select: none;
-    transition: all .2s;
-  }
-  .accordion-item.active .accordion-header {
-    background: linear-gradient(135deg, #f0f7ff 0%, #f0fff4 100%);
-    border-bottom: 1px solid #34A853;
-  }
-  .accordion-header:hover { background: #f9fbfd; }
-  .accordion-title {
-    font-size: 1.1rem; font-weight: 800; color: #15395E;
-    display: flex; align-items: center; gap: .8rem;
-  }
-  .accordion-icon { font-size: 1.5rem; color: #34A853; transition: transform .3s; }
-  .accordion-item.active .accordion-icon { transform: rotate(180deg); }
-  .accordion-content { max-height: 0; overflow: hidden; transition: max-height .4s ease; }
-  .accordion-item.active .accordion-content { max-height: 2000px; }
-  .accordion-body { padding: 2rem; }
-
-  .video-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; margin-top: .8rem; }
-  .video-card {
-    position: relative; overflow: hidden; border-radius: 12px;
-    aspect-ratio: 16/9; cursor: pointer; transition: all .3s;
-    background: linear-gradient(135deg, #D2EAFB 0%, #E1F5E8 100%);
-  }
-  .video-card:hover { transform: translateY(-4px); box-shadow: 0 16px 32px rgba(52,168,83,.2); }
-  .video-placeholder {
-    width: 100%; height: 100%;
-    display: flex; align-items: center; justify-content: center;
-    flex-direction: column; gap: .8rem; color: #34A853; position: relative;
-  }
-  .video-placeholder .material-symbols-outlined { font-size: 3rem; opacity: .6; }
-  .video-placeholder p { font-size: .82rem; font-weight: 600; text-align: center; margin: 0; color: #2E5475; }
-  .video-placeholder span.sub { font-size: .68rem; opacity: .65; }
-  .video-file-input {
-    position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%;
+    border-radius: 16px;
+    padding: 2rem;
+    transition: all 0.3s;
   }
 
-  /* MAP */
-  #map-section { background: #fff; }
-  .map-container { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: center; margin-top: 2rem; }
-  #map { height: 450px; border-radius: 16px; box-shadow: 0 12px 48px rgba(21,57,94,.16); }
-  .map-info h3 { font-size: 1.3rem; font-weight: 800; color: #15395E; margin-bottom: 1.2rem; }
-  .map-info p { font-size: .95rem; color: #2E5475; line-height: 1.8; margin-bottom: 1.5rem; }
+  .tech-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 60px rgba(52, 168, 83, 0.15);
+    border-color: #34A853;
+  }
 
-  /* CONTACT */
-  #contact { background: #fff; }
+  .tech-card h3 {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: #15395E;
+    margin-bottom: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .tech-card .icon {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, #34A853, #1561ad);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.4rem;
+  }
+
+  .tech-card p {
+    color: #2E5475;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+  }
+
+  .benefit-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .benefit-list li {
+    padding: 0.6rem 0;
+    padding-left: 1.8rem;
+    position: relative;
+    color: #2E5475;
+    line-height: 1.6;
+  }
+
+  .benefit-list li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: #34A853;
+    font-weight: 800;
+    font-size: 1.2rem;
+  }
+
   .contact-box {
     background: linear-gradient(135deg, #34A853 0%, #1E9E7A 50%, #1561ad 100%);
     border-radius: 24px; padding: 4rem;
     display: grid; grid-template-columns: 1fr 1fr; gap: 3.5rem;
     position: relative; overflow: hidden;
-    box-shadow: 0 20px 60px rgba(21,86,173,.25);
+    box-shadow: 0 24px 72px rgba(21, 86, 173, 0.3);
   }
-  .contact-info { position: relative; z-index: 1; }
-  .contact-info h2 { font-size: clamp(1.6rem, 3.5vw, 2.5rem); font-weight: 800; color: #fff; margin-bottom: 1rem; line-height: 1.15; }
+
+  .contact-info h2 { font-size: clamp(1.6rem, 3.5vw, 2.5rem); font-weight: 800; color: #fff; margin-bottom: 1rem; }
   .contact-info p { font-size: .97rem; color: rgba(255,255,255,.88); line-height: 1.7; margin-bottom: 2rem; }
-  .contact-detail { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; color: white; }
-  .contact-detail .label { font-size: .7rem; opacity: .75; text-transform: uppercase; letter-spacing: .08em; }
+
+  .contact-detail { 
+    display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; color: white;
+  }
+
   .contact-detail a { color: white; text-decoration: none; font-weight: 600; }
+  .contact-detail .label { font-size: .7rem; opacity: .75; text-transform: uppercase; }
+
+  .contact-form-box {
+    background: rgba(255,255,255, 0.95);
+    border-radius: 16px; padding: 2rem; position: relative;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+  }
+
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .form-group { display: flex; flex-direction: column; gap: .35rem; }
+  .form-group.full { grid-column: 1 / -1; }
+  .form-label { font-size: .7rem; font-weight: 700; color: #2E5475; text-transform: uppercase; }
+
+  .form-input {
+    width: 100%; border: 2px solid #D7EAF7; border-radius: 7px;
+    padding: .65rem .85rem; font-family: 'Montserrat', sans-serif;
+    font-size: .88rem; color: #15395E; background: #F7FBF9; outline: none;
+    transition: all .3s;
+  }
+
+  .form-input:focus { 
+    border-color: #34A853;
+    box-shadow: 0 0 0 3px rgba(52, 168, 83, 0.1);
+  }
+
+  textarea.form-input { resize: vertical; min-height: 100px; }
+
+  .btn-submit {
+    width: 100%; background: linear-gradient(135deg, #1561ad, #34A853);
+    color: #fff;
+    font-family: 'Montserrat', sans-serif; font-size: .9rem; font-weight: 700;
+    padding: .9rem; border: none; border-radius: 7px; cursor: pointer;
+    transition: all .3s;
+    grid-column: 1 / -1;
+    box-shadow: 0 8px 24px rgba(52, 168, 83, 0.3);
+  }
+
+  .btn-submit:hover { 
+    transform: translateY(-3px);
+    box-shadow: 0 16px 40px rgba(52, 168, 83, 0.5);
+  }
+
+  #map { 
+    height: 450px; border-radius: 16px; 
+    box-shadow: 0 16px 48px rgba(21, 57, 94, 0.15);
+  }
+
   .social-links { display: flex; gap: 1rem; margin-top: 1.5rem; }
   .social-link {
     width: 40px; height: 40px; border-radius: 50%;
     background: rgba(255,255,255,.18); display: flex; align-items: center; justify-content: center;
-    color: #fff; text-decoration: none; transition: all .2s; font-weight: 700; font-size: .8rem;
+    color: #fff; text-decoration: none; transition: all .3s;
+    border: 1px solid rgba(255, 255, 255, 0.2);
   }
-  .social-link:hover { background: rgba(255,255,255,.35); transform: translateY(-2px); }
 
-  /* CONTACT FORM */
-  .contact-form-box {
-    background: #fff; border-radius: 16px; padding: 2rem; position: relative; z-index: 1;
+  .social-link:hover { 
+    background: rgba(255,255,255,.35);
+    transform: translateY(-4px) scale(1.1);
   }
-  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-  .form-group { display: flex; flex-direction: column; gap: .35rem; }
-  .form-group.full { grid-column: 1 / -1; }
-  .form-label { font-size: .7rem; font-weight: 700; color: #2E5475; text-transform: uppercase; letter-spacing: .08em; }
-  .form-input {
-    width: 100%; border: 1.5px solid #D7EAF7; border-radius: 7px;
-    padding: .65rem .85rem; font-family: 'Montserrat', sans-serif;
-    font-size: .88rem; color: #15395E; background: #F7FBF9; outline: none;
-    transition: border-color .2s;
-  }
-  .form-input:focus { border-color: #34A853; }
-  textarea.form-input { resize: vertical; min-height: 100px; }
 
-  /* PHONE WITH COUNTRY CODE */
-  .phone-row { display: flex; gap: .5rem; align-items: stretch; }
-  .country-select-wrap { position: relative; flex-shrink: 0; }
-  .country-select-wrap select {
-    appearance: none; -webkit-appearance: none;
-    border: 1.5px solid #D7EAF7; border-radius: 7px;
-    padding: .65rem 1.8rem .65rem .75rem;
-    font-family: 'Montserrat', sans-serif; font-size: .82rem;
-    color: #15395E; background: #F7FBF9; outline: none; cursor: pointer;
-    height: 100%; transition: border-color .2s;
+  footer { 
+    background: linear-gradient(180deg, #15395E 0%, #0F2A45 100%);
+    padding: 4rem 2rem 2rem;
+    position: relative;
   }
-  .country-select-wrap select:focus { border-color: #34A853; }
-  .country-select-wrap::after {
-    content: '▾'; position: absolute; right: .5rem; top: 50%; transform: translateY(-50%);
-    font-size: .7rem; color: #8FB8DC; pointer-events: none;
-  }
-  .phone-input-wrap { flex: 1; }
 
-  /* SUBMIT BUTTON */
-  .btn-submit {
-    width: 100%; background: #1561ad; color: #fff;
-    font-family: 'Montserrat', sans-serif; font-size: .9rem; font-weight: 700;
-    padding: .9rem; border: none; border-radius: 7px; cursor: pointer;
-    transition: all .2s; display: flex; align-items: center; justify-content: center; gap: .5rem;
-    grid-column: 1 / -1;
+  .footer-grid { 
+    max-width: 1200px; margin: 0 auto; 
+    display: grid; grid-template-columns: 1.8fr 1fr 1.2fr; gap: 3rem; 
+    margin-bottom: 3rem;
   }
-  .btn-submit:hover { background: #134F8C; transform: translateY(-2px); }
-  .form-success {
-    display: none; background: #EAF8EF; border: 1.5px solid #34A853;
-    border-radius: 10px; padding: 1rem 1.2rem; margin-top: 1rem;
-    font-size: .88rem; font-weight: 600; color: #1C9F52;
-    align-items: center; gap: .6rem; grid-column: 1 / -1;
-  }
-  .form-success.show { display: flex; }
 
-  /* WHATSAPP FLOAT */
-  .wa-float {
-    position: fixed; bottom: 1.8rem; right: 1.8rem; z-index: 200;
-    width: 56px; height: 56px; border-radius: 50%;
-    background: #25D366; display: grid; place-items: center;
-    box-shadow: 0 4px 20px rgba(37,211,102,.55);
-    transition: all .2s; text-decoration: none;
-    animation: bounce-subtle 3s ease-in-out infinite;
-  }
-  .wa-float:hover { transform: scale(1.15); box-shadow: 0 12px 36px rgba(37,211,102,.75); animation: none; }
-  .wa-float svg { width: 30px; height: 30px; fill: white; }
-
-  /* FOOTER */
-  footer { background: #15395E; padding: 4rem 2rem 2rem; }
-  .footer-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1.8fr 1fr 1.2fr; gap: 3rem; margin-bottom: 3rem; }
   .footer-brand { font-size: 1.4rem; font-weight: 800; color: #fff; margin-bottom: .7rem; }
   .footer-brand span { color: #6FE6A0; }
   .footer-desc { font-size: .85rem; line-height: 1.7; color: rgba(255,255,255,.65); margin-bottom: 1.2rem; }
-  footer h4 { font-size: .8rem; font-weight: 700; color: #fff; text-transform: uppercase; letter-spacing: .1em; margin-bottom: 1rem; }
+
+  footer h4 { font-size: .8rem; font-weight: 700; color: #6FE6A0; text-transform: uppercase; margin-bottom: 1rem; }
   footer ul { list-style: none; display: flex; flex-direction: column; gap: .55rem; padding: 0; margin: 0; }
-  footer ul li a { font-size: .85rem; color: rgba(255,255,255,.65); text-decoration: none; transition: color .2s; }
-  footer ul li a:hover { color: #6FE6A0; }
-  .footer-contact-item { display: flex; align-items: flex-start; gap: .7rem; font-size: .84rem; color: rgba(255,255,255,.65); line-height: 1.4; margin-bottom: .7rem; }
-  .footer-contact-item a { color: rgba(255,255,255,.65); text-decoration: none; transition: color .2s; }
+  footer ul li a { 
+    font-size: .85rem; color: rgba(255,255,255,.65); text-decoration: none; 
+    transition: all .3s;
+  }
+
+  footer ul li a:hover { 
+    color: #6FE6A0;
+    transform: translateX(4px);
+  }
+
+  .footer-contact-item { 
+    display: flex; align-items: flex-start; gap: .7rem; font-size: .84rem; 
+    color: rgba(255,255,255,.65); line-height: 1.4; margin-bottom: .7rem;
+  }
+
+  .footer-contact-item a { color: rgba(255,255,255,.65); text-decoration: none; }
   .footer-contact-item a:hover { color: #6FE6A0; }
+
   .footer-bottom {
     max-width: 1200px; margin: 0 auto;
     border-top: 1px solid rgba(255,255,255,.1);
@@ -553,667 +593,573 @@
     font-size: .76rem; color: rgba(255,255,255,.5);
   }
 
-  .leaflet-container { border-radius: 16px; }
-
-  /* SUBSECTION LABELS */
-  .sub-section-label {
-    font-size: .9rem; font-weight: 700; color: #34A853;
-    margin-bottom: .8rem; margin-top: 1.5rem;
-    display: flex; align-items: center; gap: .5rem;
-  }
-  .sub-section-label::before { content: ''; width: 12px; height: 3px; background: #34A853; border-radius: 2px; display: inline-block; }
-
-  /* CARRUSEL APPLE STYLE */
-  .carousel-wrapper {
-    position: relative;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-
-  .products-carousel {
-    display: flex;
-    gap: 1.5rem;
-    overflow-x: auto;
-    scroll-behavior: smooth;
-    flex: 1;
-    padding: 1rem 0;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .products-carousel::-webkit-scrollbar {
-    height: 6px;
-  }
-
-  .products-carousel::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-radius: 10px;
-  }
-
-  .products-carousel::-webkit-scrollbar-thumb {
-    background: #34A853;
-    border-radius: 10px;
-  }
-
-  .carousel-arrow {
-    flex-shrink: 0;
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    border: none;
-    background: #F5F5F7;
-    color: #1d1d1f;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.2rem;
-    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  }
-
-  .carousel-arrow:hover {
-    background: #E8E8ED;
-    transform: scale(1.1);
-  }
-
-  .carousel-arrow:active {
-    background: #D5D5D7;
-    transform: scale(0.95);
-  }
-
-  .apple-style {
-    flex: 0 0 calc(33.333% - 1rem);
-    min-width: 280px;
-    cursor: pointer;
-    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    transform-origin: center;
-    position: relative;
-  }
-
-  .apple-style:hover {
-    transform: scale(1.05) translateY(-8px);
-    z-index: 10;
-  }
-
-  .apple-style:hover .product-media {
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
-  }
-
-  .product-card {
-    border-radius: 16px;
-    overflow: hidden;
-    background: white;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  }
-
-  .product-media {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 1;
-    overflow: hidden;
-    background: linear-gradient(135deg, #f5f5f7 0%, #e8e8ed 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  }
-
-  .product-media img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  }
-
-  .apple-style:hover .product-media img {
-    transform: scale(1.08);
-  }
-
-  .product-badge {
-    font-size: 0.65rem;
-    position: absolute;
-    bottom: 8px;
-    left: 8px;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    padding: 4px 8px;
-    border-radius: 6px;
-    color: #15395e;
-    font-weight: 600;
-    transition: all 0.3s ease;
-  }
-
-  .apple-style:hover .product-badge {
-    background: rgba(255, 255, 255, 1);
-  }
-
-  .product-body {
-    padding: 1.2rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  .product-body h3 {
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: #1d1d1f;
-    margin: 0;
-    transition: color 0.3s ease;
-  }
-
-  .apple-style:hover .product-body h3 {
-    color: #34a853;
-  }
-
-  .product-body p {
-    font-size: 0.85rem;
-    color: #6f6f77;
-    margin: 0;
-    line-height: 1.4;
-  }
-
-  .product-links {
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
-    margin-top: 0.8rem;
-  }
-
-  .ficha-tecnica-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 0.8rem;
-    color: #34a853;
+  .phone-float {
+    position: fixed; bottom: 6.2rem; right: 1.8rem; z-index: 200;
+    width: 56px; height: 56px; border-radius: 50%;
+    background: linear-gradient(135deg, #1561ad, #134F8C);
+    display: grid; place-items: center;
+    box-shadow: 0 8px 32px rgba(21, 97, 173, 0.6);
+    transition: all .3s;
     text-decoration: none;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    padding: 6px 0;
-    border-bottom: 2px solid transparent;
+    color: white;
+    font-size: 1.3rem;
   }
 
-  .ficha-tecnica-link:hover {
-    gap: 10px;
-    border-bottom-color: #34a853;
-    transform: translateX(2px);
+  .phone-float:hover { 
+    transform: scale(1.2);
+    box-shadow: 0 16px 48px rgba(21, 97, 173, 0.85);
   }
 
-  .ficha-tecnica-link span {
-    font-size: 1rem;
+  .wa-float {
+    position: fixed; bottom: 1.8rem; right: 1.8rem; z-index: 200;
+    width: 56px; height: 56px; border-radius: 50%;
+    background: linear-gradient(135deg, #25D366, #20BA5A);
+    display: grid; place-items: center;
+    box-shadow: 0 8px 32px rgba(37, 211, 102, 0.6);
+    transition: all .3s;
+    text-decoration: none;
   }
 
-  /* ════════════════════════════════════════════════════════════════════════════════ */
-  /* RESPONSIVE - TABLET (iPad y similares) - max-width: 1024px */
-  /* ════════════════════════════════════════════════════════════════════════════════ */
+  .wa-float:hover { 
+    transform: scale(1.2);
+    box-shadow: 0 16px 48px rgba(37, 211, 102, 0.85);
+  }
+
+  .wa-float svg { width: 30px; height: 30px; fill: white; }
+
+  /* Responsive */
   @media(max-width: 1024px) {
-    .hero-stats { 
-      flex-direction: row !important;
-      flex-wrap: wrap;
-      width: 100% !important;
-    }
-    
-    .stat-card {
-      flex: 1;
-      min-width: 200px;
-    }
-
-    .products-grid { grid-template-columns: 1fr 1fr; }
-    .video-grid { grid-template-columns: 1fr; }
-    .map-container { grid-template-columns: 1fr; }
-    .contact-box { grid-template-columns: 1fr; padding: 2.5rem; gap: 2rem; }
+    .tech-grid { grid-template-columns: 1fr; }
+    .contact-box { grid-template-columns: 1fr; }
     .footer-grid { grid-template-columns: 1fr 1fr; }
-    .mv-grid { grid-template-columns: 1fr; }
-    .section-pad { padding: 4rem 1.5rem; }
-    .nav-inner { padding: 0 1.5rem; }
-    .topbar { padding: .35rem 1.5rem; }
-
-    .apple-style {
-      flex: 0 0 calc(50% - 0.75rem);
-      min-width: 240px;
-    }
+    .stats-bar-inner { grid-template-columns: 1fr; }
   }
 
-  /* ════════════════════════════════════════════════════════════════════════════════ */
-  /* RESPONSIVE - MOBILE (Smartphones - max-width: 768px) */
-  /* ════════════════════════════════════════════════════════════════════════════════ */
   @media(max-width: 768px) {
-    html { font-size: 14px; }
+    .nav-links { display: none; }
     .section-pad { padding: 3rem 1rem; }
     .container { padding: 0 1rem; }
     
-    /* Top Bar */
-    .topbar { 
+    #hero { 
+      min-height: auto; 
+      min-height: 70vh; 
+      padding: 2rem 1rem; 
+    }
+
+    #hero h1 { font-size: clamp(1.5rem, 5vw, 2.2rem); }
+    #hero p { font-size: 0.95rem; }
+
+    .hero-stats { 
       flex-direction: column;
-      padding: .35rem 1rem;
-      gap: 0.8rem;
-      font-size: .7rem;
-    }
-    .topbar-left { gap: 1rem; width: 100%; }
-    .topbar-left span { font-size: .7rem; }
-    .topbar-right { gap: .5rem; width: 100%; justify-content: space-between; }
-    
-    /* Language Selector Mobile */
-    .lang-selector {
-      order: -1;
       width: 100%;
-      justify-content: center;
-      margin-bottom: 0.5rem;
     }
-    
-    /* Navigation */
-    .nav-inner { 
-      padding: 0 1rem; 
-      height: 60px;
-      gap: 0.5rem;
-    }
-    .nav-logo-icon { 
-      width: 36px; 
-      height: 36px; 
-      font-size: 1rem;
-    }
-    .nav-brand { font-size: 1rem; }
-    .nav-links { display: none; }
-    .nav-cta { 
-      font-size: .75rem; 
-      padding: .5rem 1rem;
-    }
-    
-    /* Logo Section */
-    .logo-section { 
-      padding: 1.5rem 1rem; 
-      gap: 1rem;
-    }
-    .logo-container {
-      gap: 0.8rem;
-    }
-    .logo-upload-box { 
-      width: 160px; 
-      height: 120px; 
-    }
-    .logo-upload-text { font-size: .65rem; }
-    
-    /* Slogan */
-    .company-slogan {
-      font-size: 0.95rem;
-      max-width: 90%;
-    }
-    
-    /* Hero Section */
-    #hero, .hero {
-      min-height: auto;
-      min-height: 70vh;
-      padding: 2rem 1rem;
-    }
-    .hero-content { max-width: 100%; }
-    .hero-badge { 
-      font-size: .65rem; 
-      padding: .25rem .75rem;
-      margin-bottom: 1rem;
-    }
-    #hero h1, .hero h1 {
-      font-size: clamp(1.5rem, 5vw, 2.2rem);
-      margin-bottom: 1rem;
-      line-height: 1.2;
-    }
-    #hero p, .hero p {
-      font-size: 0.95rem;
-      line-height: 1.6;
-      margin-bottom: 1.5rem;
-      max-width: 100%;
-    }
-    
-    /* Hero Stats Mobile */
-    .hero-stats {
-      flex-direction: column !important;
-      width: 100% !important;
-      margin-top: 1.5rem !important;
-    }
-    
-    .stat-card {
-      min-width: unset !important;
-      width: 100% !important;
-    }
-    
+
     .hero-btns { 
       gap: .75rem; 
       flex-direction: column;
     }
-    .btn-hero-primary, .btn-hero-outline {
+
+    .btn-primary, .btn-outline {
       font-size: .8rem;
       padding: .75rem 1.5rem;
       width: 100%;
       justify-content: center;
     }
-    
-    /* Sections */
-    .section-eyebrow { font-size: .65rem; margin-bottom: .4rem; }
-    .section-title { 
-      font-size: clamp(1.4rem, 4vw, 2rem);
-      margin-bottom: .7rem;
-    }
-    .section-sub { 
-      font-size: .9rem; 
-      max-width: 100%;
-    }
-    
-    /* Mission */
-    .mv-grid { grid-template-columns: 1fr; gap: 1rem; }
-    .mv-card { padding: 1.5rem; }
-    .mv-card-icon { width: 40px; height: 40px; }
-    .mv-card h2 { font-size: 1rem; }
-    .mv-card p { font-size: .85rem; }
-    
-    /* Products */
-    .products-grid { grid-template-columns: 1fr; }
-    .product-card { border-radius: 12px; }
-    .product-body { padding: 1rem; }
-    .product-body h3 { font-size: 1rem; }
-    .product-body p { font-size: .8rem; }
-    
-    /* Carruselas */
-    .carousel-wrapper { gap: .75rem; }
-    .products-carousel { gap: 1rem; }
-    .apple-style { 
-      flex: 0 0 calc(90% - 0.5rem);
-      min-width: 200px;
-    }
-    .carousel-arrow { 
-      width: 36px; 
-      height: 36px;
-      flex-shrink: 0;
-    }
-    
-    /* Video Grid */
-    .video-grid { grid-template-columns: 1fr; gap: 1rem; }
-    .video-card { aspect-ratio: 16/9; }
-    
-    /* Stats Bar */
-    .stats-bar { padding: 2rem 1rem; }
-    .stats-bar-inner { 
-      grid-template-columns: 1fr; 
-      gap: .75rem;
-    }
-    .stat-item { 
-      padding: 1.2rem .8rem;
-      border-radius: 10px;
-    }
-    .stat-item .icon { font-size: 1.5rem; }
-    .stat-item strong { font-size: 1.4rem; }
-    .stat-item span { font-size: .7rem; }
-    
-    /* Accordion */
-    .accordion-item { border-radius: 12px; margin-bottom: 1rem; }
-    .accordion-header { 
-      padding: 1.2rem 1rem;
-      gap: .5rem;
-    }
-    .accordion-title { font-size: 1rem; gap: .6rem; }
-    .accordion-icon { font-size: 1.3rem; }
-    .accordion-body { padding: 1.5rem 1rem; }
-    .sub-section-label { 
-      font-size: .85rem; 
-      margin-bottom: .6rem;
-      margin-top: 1rem;
-    }
-    
-    /* Map */
-    .map-container { gap: 1.5rem; }
-    #map { 
-      height: 280px; 
-      border-radius: 12px;
-    }
-    .map-info h3 { 
-      font-size: 1.1rem; 
-      margin-bottom: .8rem;
-    }
-    .map-info p { 
-      font-size: .9rem; 
-      margin-bottom: 1rem;
-    }
-    
-    /* Contact */
+
+    .comparison-table table { font-size: 0.8rem; }
+    .comparison-table th, .comparison-table td { padding: 0.8rem; }
+
     .contact-box { 
-      grid-template-columns: 1fr; 
-      padding: 1.5rem 1rem;
-      gap: 1.5rem;
-      border-radius: 16px;
-    }
-    .contact-info h2 { 
-      font-size: clamp(1.4rem, 4vw, 1.8rem);
-      margin-bottom: .8rem;
-    }
-    .contact-info p { 
-      font-size: .9rem;
-      margin-bottom: 1.5rem;
-    }
-    .contact-detail { gap: .75rem; margin-bottom: 1.2rem; }
-    .contact-detail .label { font-size: .65rem; }
-    .contact-detail a { font-size: .9rem; }
-    .social-links { gap: .75rem; margin-top: 1rem; }
-    .social-link { 
-      width: 36px; 
-      height: 36px;
-      font-size: .7rem;
-    }
-    
-    /* Form */
-    .contact-form-box { 
-      border-radius: 12px; 
-      padding: 1.5rem;
-    }
-    .form-grid { 
-      grid-template-columns: 1fr; 
-      gap: .8rem;
-    }
-    .form-group { gap: .25rem; }
-    .form-label { font-size: .65rem; }
-    .form-input { 
-      padding: .55rem .7rem;
-      font-size: .85rem;
-      border-radius: 6px;
-    }
-    textarea.form-input { min-height: 80px; }
-    .phone-row { flex-direction: column; gap: .5rem; }
-    .country-select-wrap select { 
-      padding: .55rem 1.5rem .55rem .65rem;
-      font-size: .8rem;
-    }
-    .btn-submit { 
-      padding: .8rem;
-      font-size: .85rem;
-    }
-    .form-success { 
-      font-size: .8rem;
-      padding: .75rem 1rem;
-    }
-    
-    /* Footer */
-    footer { padding: 2.5rem 1rem 1.5rem; }
-    .footer-grid { 
-      grid-template-columns: 1fr; 
+      padding: 2.5rem 1.5rem;
       gap: 2rem;
-      margin-bottom: 2rem;
     }
-    .footer-brand { font-size: 1.2rem; }
-    .footer-desc { font-size: .8rem; }
-    footer h4 { font-size: .75rem; margin-bottom: .75rem; }
-    footer ul { gap: .4rem; }
-    footer ul li a { font-size: .8rem; }
-    .footer-contact-item { 
-      font-size: .8rem;
-      margin-bottom: .6rem;
-    }
-    .footer-bottom { 
-      flex-direction: column;
-      text-align: center;
-      font-size: .7rem;
-      gap: .75rem;
-    }
-    
-    /* WhatsApp Float */
-    .wa-float { 
-      width: 50px; 
-      height: 50px;
-      bottom: 1.2rem;
-      right: 1.2rem;
-    }
-    .wa-float svg { width: 26px; height: 26px; }
+
+    .form-grid { grid-template-columns: 1fr; }
+    .contact-form-box { padding: 1.5rem; }
+
+    footer { padding: 2.5rem 1rem 1.5rem; }
+    .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .footer-bottom { flex-direction: column; text-align: center; }
   }
 
-  /* ════════════════════════════════════════════════════════════════════════════════ */
-  /* RESPONSIVE - SMALL MOBILE (max-width: 480px) */
-  /* ════════════════════════════════════════════════════════════════════════════════ */
   @media(max-width: 480px) {
-    html { font-size: 13px; }
+    .topbar { padding: .3rem .75rem; }
+    .nav-inner { padding: 0 .75rem; height: 56px; }
     .section-pad { padding: 2.5rem .75rem; }
     .container { padding: 0 .75rem; }
-    
-    /* Top Bar */
-    .topbar { padding: .3rem .75rem; }
-    .topbar-left span { font-size: .65rem; }
-    .topbar-right { width: 100%; }
-    
-    /* Nav */
-    .nav-inner { 
-      padding: 0 .75rem;
-      height: 56px;
-      gap: .5rem;
-    }
-    .nav-logo-icon { 
-      width: 32px; 
-      height: 32px;
-      font-size: .9rem;
-      border-radius: 8px;
-    }
-    .nav-brand { font-size: .9rem; }
-    .nav-cta { 
-      font-size: .7rem; 
-      padding: .45rem .9rem;
-      border-radius: 5px;
-    }
-    
-    /* Logo */
-    .logo-section { 
-      padding: 1.2rem .75rem; 
-      gap: 0.8rem;
-    }
-    .logo-container { gap: 0.6rem; }
-    .logo-upload-box { width: 140px; height: 100px; }
-    
-    /* Slogan */
-    .company-slogan {
-      font-size: 0.85rem;
-      max-width: 95%;
-    }
-    
-    /* Hero */
-    #hero, .hero { 
-      min-height: 65vh;
-      padding: 2.5rem .75rem;
-    }
-    #hero h1, .hero h1 {
-      font-size: clamp(1.3rem, 6vw, 1.9rem);
-      margin-bottom: .8rem;
-    }
-    #hero p, .hero p {
-      font-size: .9rem;
-      margin-bottom: 1.3rem;
-    }
-    .hero-btns { 
-      flex-direction: column;
-      gap: .6rem;
-    }
-    .btn-hero-primary, .btn-hero-outline {
-      font-size: .75rem;
-      padding: .7rem 1.3rem;
-    }
-    
-    /* Sections */
-    .section-eyebrow { font-size: .6rem; }
-    .section-title { font-size: clamp(1.2rem, 5vw, 1.8rem); }
-    .section-sub { font-size: .85rem; }
-    
-    /* Cards */
-    .mv-card { 
-      padding: 1.2rem;
-      border-radius: 12px;
-    }
-    .mv-card-icon { 
-      width: 36px; 
-      height: 36px;
-    }
-    
-    /* Accordion */
-    .accordion-header { padding: 1rem .75rem; }
-    .accordion-title { font-size: .95rem; }
-    .accordion-body { padding: 1.2rem .75rem; }
-    
-    /* Map */
-    #map { height: 250px; }
-    .map-info h3 { font-size: 1rem; }
-    
-    /* Contact */
-    .contact-box { 
-      padding: 1.2rem .75rem;
-      gap: 1.2rem;
-    }
-    .contact-info h2 { font-size: clamp(1.2rem, 5vw, 1.6rem); }
-    .contact-form-box { padding: 1.2rem .75rem; }
-    
-    /* Footer */
-    footer { padding: 2rem .75rem 1rem; }
-    .footer-grid { gap: 1.5rem; }
-    .footer-brand { font-size: 1.1rem; }
 
-    /* Carousel Mobile */
-    .carousel-arrow {
-      display: none;
+    #hero { padding: 2.5rem .75rem; }
+    #hero h1 { font-size: clamp(1.3rem, 6vw, 1.9rem); }
+
+    .tech-grid { grid-template-columns: 1fr; }
+    
+    .phone-float { 
+      bottom: 6rem;
+      width: 50px;
+      height: 50px;
     }
 
-    .apple-style {
-      flex: 0 0 calc(100% - 0);
-      min-width: auto;
+    .wa-float { 
+      width: 50px;
+      height: 50px;
     }
 
-    .carousel-wrapper {
-      gap: 0;
-    }
-
-    .products-carousel {
-      gap: 1rem;
-      padding: 0.5rem 0;
-    }
-  }
-
-  /* ════════════════════════════════════════════════════════════════════════════════ */
-  /* RESPONSIVE - EXTRA SMALL (max-width: 380px) */
-  /* ════════════════════════════════════════════════════════════════════════════════ */
-  @media(max-width: 380px) {
-    html { font-size: 12px; }
-    
-    .nav-inner { 
-      height: 52px;
-      padding: 0 .6rem;
-    }
-    .nav-logo-icon { 
-      width: 28px; 
-      height: 28px;
-    }
-    
-    #hero h1, .hero h1 { font-size: clamp(1.1rem, 7vw, 1.7rem); }
-    #hero p, .hero p { font-size: .85rem; }
-    
-    .btn-hero-primary, .btn-hero-outline {
-      font-size: .7rem;
-      padding: .6rem 1.1rem;
-    }
-    
-    .section-title { font-size: clamp(1rem, 5vw, 1.6rem); }
-    .form-input { font-size: .8rem; }
-    .company-slogan { font-size: 0.8rem; }
+    .wa-float svg { width: 26px; height: 26px; }
   }
 </style>
 </head>
-<document_content> Perfecto. Ya agregué el título **"Resultados"** al inicio de esa sección. El título ahora está como un encabezado limpio, sin cambiar nada más del contenido de los accordions.
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="topbar-left">
+    <a href="mailto:ecofluidsystemec@gmail.com"><span class="material-symbols-outlined">mail</span> <span data-es="ecofluidsystemec@gmail.com" data-en="ecofluidsystemec@gmail.com">ecofluidsystemec@gmail.com</span></a>
+    <span><span class="material-symbols-outlined">call</span> +593 963 188 601</span>
+  </div>
+  <div class="topbar-right">
+    <div class="lang-selector">
+      <button class="lang-btn active" data-lang="es" onclick="changeLanguage('es')">ES</button>
+      <button class="lang-btn" data-lang="en" onclick="changeLanguage('en')">EN</button>
+    </div>
+    <a href="https://www.instagram.com/ecofluidsystem/" target="_blank">IG</a>
+    <a href="tel:+593963188601" style="color: #BFE0F5;"><span class="material-symbols-outlined" style="font-size:1rem;">call</span></a>
+    <a href="https://wa.me/593963188601" target="_blank" style="color: #fff; background: #25D366; padding: 4px 8px; border-radius: 4px;">WA</a>
+  </div>
+</div>
+
+<!-- NAVBAR -->
+<nav class="main-nav" id="navbar">
+  <div class="nav-inner">
+    <a class="nav-logo" href="#hero">
+      <div class="nav-logo-icon">EFS</div>
+      <div class="nav-brand">Eco<span>Fluid</span>System</div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#hero" data-es="Inicio" data-en="Home">Inicio</a></li>
+      <li><a href="#tecnologia" data-es="Tecnología" data-en="Technology">Tecnología</a></li>
+      <li><a href="#beneficios" data-es="Beneficios" data-en="Benefits">Beneficios</a></li>
+      <li><a href="#ubicacion" data-es="Ubicación" data-en="Location">Ubicación</a></li>
+      <li><a href="#contact" data-es="Contacto" data-en="Contact">Contacto</a></li>
+    </ul>
+    <a class="nav-cta" href="#contact" data-es="Cotizar Ahora" data-en="Quote Now">Cotizar Ahora</a>
+  </div>
+</nav>
+
+<!-- HERO SECTION -->
+<section id="hero">
+  <div class="hero-content">
+    <div class="hero-badge" data-es="Soluciones Sostenibles" data-en="Sustainable Solutions">Soluciones Sostenibles</div>
+    <h1 data-es="Tratamiento y Deshidratación de <em>Fluidos</em> para Minería" data-en="<em>Fluid</em> Treatment and Dehydration for Mining">Tratamiento y Deshidratación de <em>Fluidos</em> para Minería</h1>
+    <p data-es="Tecnología innovadora TRL y EFS con agua cristalina, sólidos compactos y cero descargas al medio ambiente. 25+ años de experiencia." data-en="Innovative TRL and EFS technology with crystal clear water, compact solids and zero discharge to the environment. 25+ years of experience.">Tecnología innovadora TRL y EFS con agua cristalina, sólidos compactos y cero descargas al medio ambiente. 25+ años de experiencia.</p>
+    <div class="hero-btns">
+      <a class="btn-primary" href="#contact">
+        <span class="material-symbols-outlined">arrow_forward</span> <span data-es="Solicitar Asesoría" data-en="Request Consultation">Solicitar Asesoría</span>
+      </a>
+      <a class="btn-outline" href="#tecnologia" data-es="Conocer Tecnología" data-en="Discover Technology">Conocer Tecnología</a>
+    </div>
+  </div>
+  
+  <div class="hero-stats">
+    <div class="stat-card">
+      <strong>25+</strong>
+      <span data-es="Años de Experiencia" data-en="Years of Experience">Años de Experiencia</span>
+    </div>
+    <div class="stat-card">
+      <strong>$0.55/Tn</strong>
+      <span data-es="Costo de Tratamiento" data-en="Treatment Cost">Costo de Tratamiento</span>
+    </div>
+    <div class="stat-card">
+      <strong>0%</strong>
+      <span data-es="Descargas Contaminadas" data-en="Contaminated Discharge">Descargas Contaminadas</span>
+    </div>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<section class="stats-bar">
+  <div class="stats-bar-inner">
+    <div class="stat-item">
+      <div style="color: #6FE6A0; font-size: 2rem; margin-bottom: 0.5rem;">⚙️</div>
+      <strong>45.83%</strong>
+      <span data-es="Menos Costo que Método Convencional" data-en="Less Cost Than Conventional Method">Menos Costo que Método Convencional</span>
+    </div>
+    <div class="stat-item">
+      <div style="color: #6FE6A0; font-size: 2rem; margin-bottom: 0.5rem;">💧</div>
+      <strong>2,248 m³/día</strong>
+      <span data-es="Volumen Diario de Tratamiento" data-en="Daily Treatment Volume">Volumen Diario de Tratamiento</span>
+    </div>
+  </div>
+</section>
+
+<!-- TECHNOLOGY SECTION -->
+<section id="tecnologia" class="section-pad">
+  <div class="container">
+    <div style="margin-bottom: 3rem;">
+      <h2 class="section-title" data-es="Tecnología Avanzada" data-en="Advanced Technology">Tecnología Avanzada</h2>
+      <p class="section-sub" data-es="Laminillas (TRL) y Floculadores Verticales: la solución más eficiente del mercado" data-en="Lamellae (TRL) and Vertical Flocculators: the market's most efficient solution">Laminillas (TRL) y Floculadores Verticales: la solución más eficiente del mercado</p>
+    </div>
+
+    <div class="tech-grid">
+      <div class="tech-card">
+        <h3>
+          <div class="icon">🎯</div>
+          <span data-es="Tecnología TRL" data-en="TRL Technology">Tecnología TRL</span>
+        </h3>
+        <p data-es="Sistema de laminillas inclinadas para clarificación y sedimentación rápida. Los flóculos se precipitan instantáneamente, superando 65% de sólidos al fondo." data-en="System of inclined lamellae for rapid clarification and sedimentation. Floccules precipitate instantly, exceeding 65% solids at the bottom.">Sistema de laminillas inclinadas para clarificación y sedimentación rápida. Los flóculos se precipitan instantáneamente, superando 65% de sólidos al fondo.</p>
+        <ul class="benefit-list">
+          <li data-es="Compacto y móvil" data-en="Compact and mobile">Compacto y móvil</li>
+          <li data-es="2,500 m³/día con 14 kW" data-en="2,500 m³/day with 14 kW">2,500 m³/día con 14 kW</li>
+          <li data-es="Bajo mantenimiento" data-en="Low maintenance">Bajo mantenimiento</li>
+          <li data-es="Cero contaminación acústica" data-en="Zero acoustic pollution">Cero contaminación acústica</li>
+        </ul>
+      </div>
+
+      <div class="tech-card">
+        <h3>
+          <div class="icon">💧</div>
+          <span data-es="Floculadores Verticales" data-en="Vertical Flocculators">Floculadores Verticales</span>
+        </h3>
+        <p data-es="Aglutina microflóculos en flóculos más grandes, obteniendo agua cristalina. En 3 días de precipitación alcanza hasta 82% de sólidos." data-en="Agglomerates microfloccules into larger floccules, obtaining crystal clear water. In 3 days of precipitation it reaches up to 82% solids.">Aglutina microflóculos en flóculos más grandes, obteniendo agua cristalina. En 3 días de precipitación alcanza hasta 82% de sólidos.</p>
+        <ul class="benefit-list">
+          <li data-es="Agua de reuso inmediato" data-en="Immediate reuse water">Agua de reuso inmediato</li>
+          <li data-es="26% menos consumo energético" data-en="26% less energy consumption">26% menos consumo energético</li>
+          <li data-es="Transporte a larga distancia" data-en="Long distance transport">Transporte a larga distancia</li>
+          <li data-es="Proceso continuo sin paradas" data-en="Continuous process without stops">Proceso continuo sin paradas</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="margin-top: 4rem; padding-top: 4rem; border-top: 1px solid #D7EAF7;">
+      <h2 class="section-title" data-es="Análisis de Costos" data-en="Cost Analysis">Análisis de Costos</h2>
+      <p class="section-sub" data-es="Comparativa de tecnologías de disposición de relaves a nivel mundial" data-en="Comparison of tailings disposal technologies worldwide">Comparativa de tecnologías de disposición de relaves a nivel mundial</p>
+
+      <div class="comparison-table">
+        <table>
+          <thead>
+            <tr>
+              <th data-es="Tecnología" data-en="Technology">Tecnología</th>
+              <th data-es="Proceso (USD/Tn)" data-en="Process (USD/Tn)">Proceso</th>
+              <th data-es="Presa (USD/Tn)" data-en="Dam (USD/Tn)">Presa</th>
+              <th data-es="Total (USD/Tn)" data-en="Total (USD/Tn)">Total</th>
+              <th data-es="Rel. Convencional" data-en="vs Conventional">Rel. Convencional</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td data-es="Convencional sin espesador" data-en="Conventional without thickener">Convencional sin espesador</td>
+              <td>$0.20</td>
+              <td>$1.00</td>
+              <td>$1.20</td>
+              <td>100%</td>
+            </tr>
+            <tr>
+              <td data-es="Espesado de alta densidad" data-en="High density thickening">Espesado de alta densidad</td>
+              <td>$0.50</td>
+              <td>$1.00</td>
+              <td>$1.50</td>
+              <td>125%</td>
+            </tr>
+            <tr>
+              <td data-es="Pasta" data-en="Paste">Pasta</td>
+              <td>$1.50</td>
+              <td>$0.50</td>
+              <td>$2.00</td>
+              <td>167%</td>
+            </tr>
+            <tr>
+              <td data-es="Filtrado" data-en="Filtered">Filtrado</td>
+              <td>$5.00</td>
+              <td>$0.20</td>
+              <td>$5.20</td>
+              <td>433%</td>
+            </tr>
+            <tr class="highlight">
+              <td><strong data-es="EcoFluid System (EFS)" data-en="EcoFluid System (EFS)">EcoFluid System (EFS)</strong></td>
+              <td><strong>$0.42</strong></td>
+              <td><strong>$0.13</strong></td>
+              <td><strong>$0.55</strong></td>
+              <td><strong>45.83%</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFITS SECTION -->
+<section id="beneficios" class="section-pad" style="background: linear-gradient(180deg, #f2f7f3 0%, #fff 100%);">
+  <div class="container">
+    <h2 class="section-title" data-es="Impacto Económico" data-en="Economic Impact">Impacto Económico</h2>
+    <p class="section-sub" data-es="Un proyecto sostenible no tiene por qué costar más. Con EFS baja casi todo lo que pesa en la operación." data-en="A sustainable project doesn't have to cost more. With EFS, almost everything that weighs on the operation goes down.">Un proyecto sostenible no tiene por qué costar más. Con EFS baja casi todo lo que pesa en la operación.</p>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: 2rem;">
+      <div>
+        <h3 style="color: #15395E; font-weight: 800; margin-bottom: 1.5rem; font-size: 1.2rem;" data-es="↓ Baja con EFS" data-en="↓ Decreases with EFS">↓ Baja con EFS</h3>
+        <ul class="benefit-list">
+          <li data-es="Disposición final de relaves" data-en="Final tailings disposal">Disposición final de relaves</li>
+          <li data-es="Personal requerido" data-en="Required personnel">Personal requerido</li>
+          <li data-es="Bombas y tuberías" data-en="Pumps and pipes">Bombas y tuberías</li>
+          <li data-es="Consumo de químicos" data-en="Chemical consumption">Consumo de químicos</li>
+          <li data-es="Energía eléctrica" data-en="Electrical energy">Energía eléctrica</li>
+          <li data-es="Agua fresca consumida" data-en="Fresh water consumed">Agua fresca consumida</li>
+          <li data-es="Área para disposición" data-en="Area for disposal">Área para disposición</li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 style="color: #34A853; font-weight: 800; margin-bottom: 1.5rem; font-size: 1.2rem;" data-es="↑ Sube con EFS" data-en="↑ Increases with EFS">↑ Sube con EFS</h3>
+        <ul class="benefit-list">
+          <li data-es="Rentabilidad en big bags" data-en="Profitability in big bags">Rentabilidad en big bags</li>
+          <li data-es="Recuperación de agua" data-en="Water recovery">Recuperación de agua</li>
+          <li data-es="Densidad de sólidos" data-en="Solids density">Densidad de sólidos</li>
+          <li data-es="Vida útil de relaveras" data-en="Tailings dam lifespan">Vida útil de relaveras</li>
+          <li data-es="Eficiencia operacional" data-en="Operational efficiency">Eficiencia operacional</li>
+          <li data-es="Certificaciones ambientales" data-en="Environmental certifications">Certificaciones ambientales</li>
+          <li data-es="Reputación corporativa" data-en="Corporate reputation">Reputación corporativa</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MAP SECTION -->
+<section id="ubicacion" class="section-pad">
+  <div class="container">
+    <h2 class="section-title" data-es="Ubicación Regional" data-en="Regional Location">Ubicación Regional</h2>
+    <p class="section-sub" data-es="Presencia activa en Ecuador, Perú y Costa Rica con servicios especializados" data-en="Active presence in Ecuador, Peru and Costa Rica with specialized services">Presencia activa en Ecuador, Perú y Costa Rica con servicios especializados</p>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem; align-items: center;">
+      <div id="map"></div>
+      <div>
+        <h3 style="font-size: 1.3rem; font-weight: 800; color: #15395E; margin-bottom: 1rem;" data-es="Disponible en Toda la Región" data-en="Available Throughout the Region">Disponible en Toda la Región</h3>
+        <p style="color: #2E5475; line-height: 1.8; margin-bottom: 1.5rem;" data-es="EcoFluid System proporciona soporte técnico especializado, consultoría en proyectos y suministro de productos con presencia activa en múltiples países." data-en="EcoFluid System provides specialized technical support, project consulting and product supply with active presence in multiple countries.">EcoFluid System proporciona soporte técnico especializado, consultoría en proyectos y suministro de productos con presencia activa en múltiples países.</p>
+        
+        <div style="background: linear-gradient(135deg, #E1F5E8 0%, #D2EAFB 100%); border-radius: 12px; padding: 1.5rem; border-left: 4px solid #34A853;">
+          <p style="color: #15395E; font-weight: 700; margin-bottom: 0.8rem; font-size: 0.9rem;">📍 <span data-es="Oficinas Principales" data-en="Main Offices">Oficinas Principales</span></p>
+          <p style="color: #2E5475; font-size: 0.9rem; margin: 0;">James Colnet N41-110 y Alonso de Torres, Quito, Ecuador</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT SECTION -->
+<section id="contact" class="section-pad">
+  <div class="container">
+    <div class="contact-box">
+      <div class="contact-info">
+        <h2 data-es="¿Listo para Mejorar tu Tratamiento de Aguas?" data-en="Ready to Improve Your Water Treatment?">¿Listo para Mejorar tu Tratamiento de Aguas?</h2>
+        <p data-es="Nuestro equipo de expertos está disponible para asesorarte en la solución más adecuada para tu proyecto." data-en="Our team of experts is available to advise you on the most suitable solution for your project.">Nuestro equipo de expertos está disponible para asesorarte en la solución más adecuada para tu proyecto.</p>
+        
+        <div class="contact-detail">
+          <span class="material-symbols-outlined" style="color:#6FE6A0;">mail</span>
+          <div>
+            <div class="label" data-es="Correo" data-en="Email">Correo</div>
+            <a href="mailto:ecofluidsystemec@gmail.com">ecofluidsystemec@gmail.com</a>
+          </div>
+        </div>
+
+        <div class="contact-detail">
+          <span class="material-symbols-outlined" style="color:#6FE6A0;">phone</span>
+          <div>
+            <div class="label" data-es="Teléfono / WhatsApp" data-en="Phone / WhatsApp">Teléfono / WhatsApp</div>
+            <a href="tel:+593963188601">+593 963 188 601</a>
+          </div>
+        </div>
+
+        <div class="social-links">
+          <a href="https://wa.me/593963188601" target="_blank" class="social-link" title="WhatsApp">
+            <svg viewBox="0 0 24 24" style="width:20px;height:20px;fill:white;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          </a>
+          <a href="https://www.instagram.com/ecofluidsystem/" target="_blank" class="social-link" title="Instagram">IG</a>
+          <a href="https://www.facebook.com/ecofluidsystem" target="_blank" class="social-link" title="Facebook">FB</a>
+        </div>
+      </div>
+
+      <div class="contact-form-box">
+        <form onsubmit="sendForm(event)">
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label" data-es="Nombre Completo" data-en="Full Name">Nombre Completo</label>
+              <input type="text" class="form-input" id="name" required placeholder="Tu nombre">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" data-es="Empresa" data-en="Company">Empresa</label>
+              <input type="text" class="form-input" id="empresa" placeholder="Nombre empresa">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" data-es="Email" data-en="Email">Email</label>
+              <input type="email" class="form-input" id="email" required placeholder="tu@email.com">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" data-es="Teléfono" data-en="Phone">Teléfono</label>
+              <input type="tel" class="form-input" id="phone" placeholder="+593 9XXXXXXXX">
+            </div>
+
+            <div class="form-group full">
+              <label class="form-label" data-es="Mensaje" data-en="Message">Mensaje</label>
+              <textarea class="form-input" id="message" required placeholder="Cuéntanos sobre tu proyecto..."></textarea>
+            </div>
+
+            <button type="submit" class="btn-submit">
+              <span class="material-symbols-outlined">send</span>
+              <span data-es="Enviar por WhatsApp" data-en="Send via WhatsApp">Enviar por WhatsApp</span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand">Eco<span>Fluid</span>System</div>
+      <p class="footer-desc" data-es="Soluciones de tratamiento de aguas para minería, petróleo e industria. 25+ años de innovación sostenible." data-en="Water treatment solutions for mining, oil and industry. 25+ years of sustainable innovation.">Soluciones de tratamiento de aguas para minería, petróleo e industria. 25+ años de innovación sostenible.</p>
+    </div>
+
+    <div>
+      <h4 data-es="Navegación" data-en="Navigation">Navegación</h4>
+      <ul>
+        <li><a href="#hero" data-es="Inicio" data-en="Home">Inicio</a></li>
+        <li><a href="#tecnologia" data-es="Tecnología" data-en="Technology">Tecnología</a></li>
+        <li><a href="#beneficios" data-es="Beneficios" data-en="Benefits">Beneficios</a></li>
+        <li><a href="#ubicacion" data-es="Ubicación" data-en="Location">Ubicación</a></li>
+        <li><a href="#contact" data-es="Contacto" data-en="Contact">Contacto</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h4 data-es="Contacto" data-en="Contact">Contacto</h4>
+      <div class="footer-contact-item">
+        <span class="material-symbols-outlined">mail</span>
+        <a href="mailto:ecofluidsystemec@gmail.com">ecofluidsystemec@gmail.com</a>
+      </div>
+      <div class="footer-contact-item">
+        <span class="material-symbols-outlined">phone</span>
+        <a href="tel:+593963188601">+593 963 188 601</a>
+      </div>
+      <div class="footer-contact-item">
+        <span class="material-symbols-outlined">location_on</span>
+        <span>Quito, Ecuador</span>
+      </div>
+      <div class="footer-contact-item">
+        <span class="material-symbols-outlined">chat</span>
+        <a href="https://wa.me/593963188601">WhatsApp disponible</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p data-es="© 2026 EcoFluid System S.A. Todos los derechos reservados." data-en="© 2026 EcoFluid System S.A. All rights reserved.">© 2026 EcoFluid System S.A. Todos los derechos reservados.</p>
+    <p data-es="Hecho con ♻️ para el medio ambiente" data-en="Made with ♻️ for the environment">Hecho con ♻️ para el medio ambiente</p>
+  </div>
+</footer>
+
+<!-- FLOATING BUTTONS -->
+<a href="tel:+593963188601" class="phone-float" aria-label="Llamar" title="Llamar">
+  <span class="material-symbols-outlined">call</span>
+</a>
+
+<a href="https://wa.me/593963188601" class="wa-float" target="_blank" title="WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>
+let currentLang = 'es';
+
+function changeLanguage(lang) {
+  currentLang = lang;
+  document.documentElement.lang = lang;
+  
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.remove('active');
+  });
+  document.querySelector(`[data-lang="${lang}"]`).classList.add('active');
+  
+  document.querySelectorAll('[data-es][data-en]').forEach(element => {
+    const text = element.getAttribute(`data-${lang}`);
+    if (element.children.length === 0) {
+      element.textContent = text;
+    } else {
+      element.innerHTML = text;
+    }
+  });
+  
+  localStorage.setItem('preferredLang', lang);
+}
+
+function sendForm(event) {
+  event.preventDefault();
+  
+  const name = document.getElementById('name').value;
+  const empresa = document.getElementById('empresa').value;
+  const email = document.getElementById('email').value;
+  const phone = document.getElementById('phone').value;
+  const message = document.getElementById('message').value;
+
+  const text = encodeURIComponent(
+    `*Consulta desde EcoFluidSystem.com*\n\n` +
+    `👤 *Nombre:* ${name}\n` +
+    (empresa ? `🏢 *Empresa:* ${empresa}\n` : '') +
+    (email ? `📧 *Email:* ${email}\n` : '') +
+    (phone ? `📞 *Teléfono:* ${phone}\n` : '') +
+    `\n💬 *Mensaje:*\n${message}`
+  );
+
+  window.open(`https://wa.me/593963188601?text=${text}`, '_blank');
+  
+  event.target.reset();
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  const savedLang = localStorage.getItem('preferredLang') || 'es';
+  changeLanguage(savedLang);
+  
+  // Initialize map
+  if (document.getElementById('map')) {
+    const map = L.map('map').setView([2, -77], 5);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors',
+      maxZoom: 19
+    }).addTo(map);
+
+    const locations = [
+      { lat: -0.2202, lng: -78.5124, name: 'Quito, Ecuador', type: 'Oficinas Principales' },
+      { lat: 9.7489, lng: -85.5069, name: 'Costa Rica', type: 'Presencia Regional' },
+      { lat: -12.0462, lng: -77.0369, name: 'Lima, Perú', type: 'Presencia Regional' },
+    ];
+
+    locations.forEach(loc => {
+      L.circleMarker([loc.lat, loc.lng], {
+        radius: 12,
+        fillColor: '#34A853',
+        color: '#1561ad',
+        weight: 2,
+        opacity: 1,
+        fillOpacity: 0.8
+      }).bindPopup(`<strong>${loc.name}</strong><br>${loc.type}`).addTo(map);
+    });
+  }
+});
+
+// Scroll event para navbar
+window.addEventListener('scroll', () => {
+  const navbar = document.getElementById('navbar');
+  if (window.scrollY > 100) {
+    navbar.style.boxShadow = '0 8px 32px rgba(21,57,94,.18)';
+  } else {
+    navbar.style.boxShadow = '0 2px 20px rgba(21,57,94,.12)';
+  }
+});
+</script>
+
+</body>
+</html>
