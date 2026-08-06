@@ -1,514 +1,856 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="EcoFluidSystem - Soluciones innovadoras de tratamiento de aguas residuales para minería, industria y plantas PTAR">
-    <meta name="keywords" content="tratamiento de aguas, minería, floculantes, coagulantes, PTAR, sostenibilidad">
-    <meta name="author" content="New Technology EcoFluidSystem S.A.">
-    <meta name="theme-color" content="#1561ad">
-    
-    <!-- OpenGraph -->
-    <meta property="og:title" content="New Technology EcoFluidSystem S.A.">
-    <meta property="og:description" content="Tecnología avanzada para tratamiento de aguas residuales">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://ecofluidsystem.com">
-    
-    <title>EcoFluidSystem - Tratamiento Avanzado de Aguas | Soluciones Sostenibles</title>
-    
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
-    
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --primary: #1561ad;
-            --primary-dark: #0d3f7a;
-            --primary-light: #4a8ce7;
-            --secondary: #34A853;
-            --secondary-dark: #1C9F52;
-            --accent: #ff6b35;
-            --dark-bg: #0f1419;
-            --light-bg: #f5f7fa;
-            --text-dark: #1a2332;
-            --text-light: #6c7a8f;
-            --border-color: #e1e8f0;
-            --success: #10b981;
-            --warning: #f59e0b;
-            --danger: #ef4444;
-        }
-
-        html {
-            scroll-behavior: smooth;
-            font-size: 16px;
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            line-height: 1.6;
-            color: var(--text-dark);
-            background: #ffffff;
-            overflow-x: hidden;
-        }
-
-        /* ============ UTILIDADES ============ */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .section-padding {
-            padding: 80px 20px;
-        }
-
-        .section-title {
-            font-size: 3rem;
-            font-weight: 800;
-            margin-bottom: 20px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .section-subtitle {
-            font-size: 1.1rem;
-            color: var(--text-light);
-            max-width: 600px;
-            margin-bottom: 50px;
-            line-height: 1.8;
-        }
-
-        /* ============ NAVBAR ============ */
-        nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        nav.scrolled {
-            background: rgba(255, 255, 255, 0.98);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
-        }
-
-        nav .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 20px;
-            height: 70px;
-        }
-
-        .nav-brand {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 1.3rem;
-            color: var(--primary);
-        }
-
-        .nav-brand img {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-        }
-
-        .nav-menu {
-            display: flex;
-            gap: 30px;
-            list-style: none;
-            align-items: center;
-        }
-
-        .nav-menu a {
-            text-decoration: none;
-            color: var(--text-dark);
-            font-weight: 500;
-            position: relative;
-            transition: color 0.3s ease;
-        }
-
-        .nav-menu a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 3px;
-            background: var(--secondary);
-            transition: width 0.3s ease;
-        }
-
-        .nav-menu a:hover {
-            color: var(--secondary);
-        }
-
-        .nav-menu a:hover::after {
-            width: 100%;
-        }
-
-        .nav-cta {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white !important;
-            padding: 12px 24px;
-            border-radius: 25px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(21, 97, 173, 0.3);
-        }
-
-        .nav-cta:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(21, 97, 173, 0.5);
-        }
-
-        .nav-cta::after {
-            display: none;
-        }
-
-        .mobile-menu-toggle {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--primary);
-        }
-
-        /* ============ HERO SECTION ============ */
-        .hero {
-            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 50%, var(--secondary) 100%);
-            color: white;
-            padding: 150px 20px 100px;
-            margin-top: 70px;
-            position: relative;
-            overflow: hidden;
-            min-height: 90vh;
-            display: flex;
-            align-items: center;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -10%;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
-            border-radius: 50%;
-            animation: float 6s ease-in-out infinite;
-        }
-
-        .hero::after {
-            content: '';
-            position: absolute;
-            bottom: -20%;
-            left: -5%;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(52, 168, 83, 0.15) 0%, transparent 70%);
-            border-radius: 50%;
-            animation: float 8s ease-in-out infinite reverse;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            max-width: 700px;
-            animation: slideInUp 1s ease;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            font-weight: 900;
-            margin-bottom: 20px;
-            line-height: 1.2;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-            opacity: 0.95;
-            line-height: 1.8;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-
-        .btn-primary, .btn-secondary {
-            padding: 14px 32px;
-            border: none;
-            border-radius: 25px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 1rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            text-decoration: none;
-        }
-
-        .btn-primary {
-            background: white;
-            color: var(--primary);
-            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(255, 255, 255, 0.5);
-        }
-
-        .btn-secondary {
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            border: 2px solid white;
-            backdrop-filter: blur(10px);
-        }
-
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: translateY(-3px);
-        }
-
-        /* ============ STATS SECTION ============ */
-        .stats-section {
-            background: var(--light-bg);
-            padding: 60px 20px;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-        }
-
-        .stat-card {
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            text-align: center;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s ease;
-            border-left: 5px solid var(--secondary);
-        }
-
-        .stat-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
-        }
-
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: var(--primary);
-            margin-bottom: 10px;
-        }
-
-        .stat-label {
-            color: var(--text-light);
-            font-weight: 500;
-        }
-
-        /* ============ SERVICIOS SECTION ============ */
-        .servicios-section {
-            padding: 80px 20px;
-            background: white;
-        }
-
-        .servicios-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 60px;
-        }
-
-        .service-card {
-            background: var(--light-bg);
-            padding: 40px;
-            border-radius: 15px;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .service-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .service-card:hover::before {
-            left: 100%;
-        }
-
-        .service-card:hover {
-            border-color: var(--secondary);
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(52, 168, 83, 0.2);
-        }
-
-        .service-icon {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 2rem;
-            margin-bottom: 20px;
-            transition: all 0.3s ease;
-        }
-
-        .service-card:hover .service-icon {
-            transform: scale(1.15) rotate(5deg);
-        }
-
-        .service-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-            color: var(--text-dark);
-        }
-
-        .service-card p {
-            color: var(--text-light);
-            line-height: 1.8;
-            margin-bottom: 20px;
-        }
-
-        .service-link {
-            color: var(--secondary);
-            text-decoration: none;
-            font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.3s ease;
-        }
-
-        .service-link:hover {
-            gap: 15px;
-            color: var(--secondary-dark);
-        }
-
-        /* ============ RESULTADOS SECTION ============ */
-        .resultados-section {
-            padding: 80px 20px;
-            background: linear-gradient(180deg, var(--light-bg) 0%, white 100%);
-        }
-
-        .resultados-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
-            margin-top: 60px;
-        }
-
-        .resultado-card {
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .resultado-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
-        }
-
-        .resultado-image {
-            width: 100%;
-            height: 250px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            overflow: hidden;
-            position: relative;
-        }
-
-        .resultado-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-
-        .resultado-card:hover .resultado-image img {
-            transform: scale(1.1);
-        }
-
-        .resultado-content {
-            padding: 30px;
-        }
-
-        .resultado-tag {
-            display: inline-block;
-            background: var(--secondary);
-            color: white;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 15px;
-        }
-
-        .resultado-card h3 {
-            font-size: 1.4rem;
-            margin-bottom: 10px;
-            color: var(--text-dark);
-        }
-
-        .resultado-card p {
-            color: var(--text-light);
-            line-height: 1.8;
-            margin-bottom: 15px;
-            font-size: 0.95rem;
-        }
-
-        .read-more {
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.3s ease;
-        }
-
-        .read-more:hover {
-            gap: 15px;
-            color: var(--secondary);
-        }
-
-        /* ============ RESPONSABILIDAD SOCIAL ============ */
+<meta name="google-site-verification" content="Y3FMqn9XIpCsiy7sWQ5uuN_Entx6fM404tFAjoz1_cw" />
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title data-es="New Technology EcoFluidSystem S.A. | Tratamiento de Aguas" data-en="New Technology EcoFluidSystem S.A. | Water Treatment">New Technology EcoFluidSystem S.A. | Tratamiento de Aguas</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "primary":    "#34A853",
+          "primary-dark": "#1C9F52",
+          "primary-light": "#f2f7f3",
+          "secondary":  "#1561ad",
+          "secondary-dark": "#134F8C",
+          "secondary-light": "#d6e8ff",
+          "surface":    "#f2f7f3",
+          "surface-dim":"#E9F6EF",
+          "on-surface": "#15395E",
+          "on-surface-variant": "#2E5475",
+          "outline":    "#8FB8DC",
+          "outline-variant": "#D7EAF7",
+          "accent":     "#34A853",
+        },
+        fontFamily: {
+          sans: ["Montserrat", "sans-serif"],
+          mono: ["IBM Plex Mono", "monospace"],
+        },
+        borderRadius: {
+          DEFAULT: "4px",
+          lg: "8px",
+          xl: "16px",
+          "2xl": "24px",
+          full: "9999px",
+        },
+      }
+    }
+  }
+</script>
+<style>
+  :root {
+    --primary: #34A853;
+    --primary-dark: #1C9F52;
+    --secondary: #1561ad;
+    --secondary-dark: #134F8C;
+    --text-dark: #15395E;
+    --text-light: #2E5475;
+    --light-bg: #f2f7f3;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Montserrat', sans-serif; background: #f2f7f3; color: #15395E; overflow-x: hidden; }
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; vertical-align: middle; }
+
+  @keyframes floatUp { 
+    0% { opacity: 0; transform: translateY(40px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes slideInLeft { 
+    0% { opacity: 0; transform: translateX(-60px); }
+    100% { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes slideInRight { 
+    0% { opacity: 0; transform: translateX(60px); }
+    100% { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes pulse-soft {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.8; }
+  }
+  @keyframes bounce-subtle {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+  @keyframes shimmer {
+    0% { background-position: -1000px 0; }
+    100% { background-position: 1000px 0; }
+  }
+  @keyframes glow {
+    0%, 100% { box-shadow: 0 0 20px rgba(52, 168, 83, 0.3); }
+    50% { box-shadow: 0 0 30px rgba(52, 168, 83, 0.5); }
+  }
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(60px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeInScale {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  @keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+  @keyframes topGlowPulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.8; }
+  }
+
+  .animate-float { animation: floatUp 0.8s ease-out; }
+  .animate-slide-right { animation: slideInRight 0.8s ease-out; }
+  .animate-pulse-soft { animation: pulse-soft 2s ease-in-out infinite; }
+  .animate-bounce-subtle { animation: bounce-subtle 2s ease-in-out infinite; }
+  .animate-slide-up { animation: slideUp 0.6s ease-out forwards; }
+  .animate-fade-scale { animation: fadeInScale 0.6s ease-out forwards; }
+  .animate-glow { animation: glow 3s ease-in-out infinite; }
+
+  /* ═══════════════ SCROLL-REVEAL (Intersection Observer driven) ═══════════════ */
+  .reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(36px);
+    transition: opacity .7s cubic-bezier(0.4,0,0.2,1), transform .7s cubic-bezier(0.4,0,0.2,1);
+  }
+  .reveal-on-scroll.in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .reveal-on-scroll.delay-1.in-view { transition-delay: .1s; }
+  .reveal-on-scroll.delay-2.in-view { transition-delay: .2s; }
+  .reveal-on-scroll.delay-3.in-view { transition-delay: .3s; }
+  .reveal-on-scroll.delay-4.in-view { transition-delay: .4s; }
+  .reveal-on-scroll.delay-5.in-view { transition-delay: .5s; }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal-on-scroll { opacity: 1; transform: none; transition: none; }
+  }
+
+  .lang-selector {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    padding: 0.4rem;
+    background: rgba(255,255,255,.1);
+    border-radius: 6px;
+    border: 1px solid rgba(255,255,255,.2);
+  }
+
+  .lang-btn {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #BFE0F5;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .lang-btn.active {
+    background: #34A853;
+    color: #fff;
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(52, 168, 83, 0.4);
+  }
+
+  .lang-btn:hover:not(.active) {
+    color: #fff;
+    background: rgba(52, 168, 83, 0.2);
+    transform: translateY(-2px);
+  }
+
+  .topbar {
+    background: linear-gradient(90deg, #15395E 0%, #134F8C 100%);
+    color: #BFE0F5;
+    font-size: .78rem;
+    letter-spacing: .04em;
+    padding: .45rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: .5rem;
+    position: relative;
+    border-bottom: 1px solid rgba(52, 168, 83, 0.2);
+  }
+  .topbar a { color: #BFE0F5; text-decoration: none; transition: all 0.3s; }
+  .topbar a:hover { color: #6FE6A0; }
+  .topbar-left { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+  .topbar-left span { display: inline-flex; align-items: center; gap: .4rem; }
+  .topbar-left a.topbar-mail-link { display: inline-flex; align-items: center; gap: .4rem; }
+  .topbar-right { display: flex; gap: .6rem; align-items: center; }
+  .topbar-right a {
+    width: 26px; height: 26px; border-radius: 50%;
+    background: rgba(255,255,255,.08);
+    display: grid; place-items: center; font-size: .72rem;
+    transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .topbar-right a:hover { 
+    background: #34A853; 
+    color: #fff;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 16px rgba(52, 168, 83, 0.3);
+  }
+  .topbar-right a.topbar-call-btn {
+    background: #1561ad;
+    color: #fff;
+  }
+  .topbar-right a.topbar-call-btn:hover {
+    background: #134F8C;
+    box-shadow: 0 8px 16px rgba(21, 97, 173, 0.4);
+  }
+  .topbar-right a.topbar-wa-btn {
+    background: #25D366;
+    color: #fff;
+  }
+  .topbar-right a.topbar-wa-btn:hover {
+    background: #20BA5A;
+    box-shadow: 0 8px 16px rgba(37, 211, 102, 0.4);
+  }
+
+  nav.main-nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(255,255,255,.97);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid #D7EAF7;
+    box-shadow: 0 2px 20px rgba(21,57,94,.12);
+    transition: all 0.3s ease;
+  }
+  nav.main-nav.scrolled {
+    box-shadow: 0 8px 32px rgba(21,57,94,.18);
+    background: rgba(255,255,255,.99);
+  }
+  
+  .nav-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2rem; height: 72px;
+  }
+  .nav-logo { display: flex; align-items: center; gap: .65rem; text-decoration: none; transition: all 0.3s; }
+  .nav-logo:hover { transform: translateY(-2px); }
+  
+  .nav-logo-icon {
+    width: 42px; height: 42px; border-radius: 10px;
+    background: linear-gradient(135deg, #34A853 0%, #1561ad 100%);
+    display: grid; place-items: center; overflow: hidden;
+    flex-shrink: 0; border: 1px solid #D7EAF7;
+    transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
+    color: white;
+    font-weight: 800;
+    font-size: 1.2rem;
+    box-shadow: 0 4px 16px rgba(52, 168, 83, 0.2);
+  }
+  .nav-logo-icon:hover {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 8px 24px rgba(52, 168, 83, 0.35);
+  }
+  
+  .nav-brand { font-size: 1.15rem; font-weight: 800; color: #15395E; line-height: 1.1; }
+  .nav-brand span { color: #34A853; }
+  .nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; margin: 0; padding: 0; }
+  .nav-links a {
+    font-size: .82rem; font-weight: 600; color: #2E5475;
+    text-decoration: none; position: relative; padding-bottom: 3px;
+    transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .nav-links a::after {
+    content: ''; position: absolute; bottom: 0; left: 0;
+    width: 0; height: 2px; background: linear-gradient(90deg, #34A853, #1561ad);
+    transition: width .3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .nav-links a:hover { 
+    color: #34A853;
+    transform: translateY(-2px);
+  }
+  .nav-links a:hover::after { width: 100%; }
+  
+  .nav-cta {
+    background: linear-gradient(135deg, #1561ad, #34A853);
+    color: #fff;
+    font-size: .82rem; font-weight: 700;
+    padding: .6rem 1.4rem; border-radius: 6px;
+    text-decoration: none; transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
+    white-space: nowrap;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(52, 168, 83, 0.25);
+  }
+  .nav-cta::before {
+    content: ''; position: absolute; top: 0; left: -100%;
+    width: 100%; height: 100%; background: rgba(255,255,255,.2);
+    transition: left 0.4s;
+  }
+  .nav-cta:hover { 
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px rgba(52, 168, 83, 0.4);
+  }
+  .nav-cta:hover::before { left: 100%; }
+
+  .logo-section {
+    background: linear-gradient(135deg, #f2f7f3 0%, #fff 100%);
+    padding: 2.5rem 2rem;
+    border-bottom: 1px solid #D7EAF7;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .logo-section::before {
+    content: ''; position: absolute; top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: radial-gradient(circle at 20% 50%, rgba(52, 168, 83, 0.05) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  
+  .logo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+  }
+  .logo-upload-box {
+    width: 220px; height: 160px;
+    background: #fff;
+    border: 2px dashed #8FB8DC;
+    border-radius: 16px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: .6rem; cursor: pointer; position: relative; overflow: hidden;
+    transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 12px rgba(21, 57, 94, 0.08);
+  }
+  .logo-upload-box:hover { 
+    border-color: #34A853;
+    box-shadow: 0 8px 24px rgba(52, 168, 83, 0.15);
+    transform: translateY(-4px);
+  }
+  .logo-upload-box input[type="file"] {
+    position: absolute; width: 100%; height: 100%; opacity: 0; cursor: pointer; top: 0; left: 0;
+  }
+  .logo-upload-box img { width: 100%; height: 100%; object-fit: contain; border-radius: 14px; }
+  .logo-upload-text { font-size: .78rem; color: #8FB8DC; font-weight: 600; text-align: center; pointer-events: none; }
+
+  .company-slogan {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #34A853;
+    text-align: center;
+    font-style: italic;
+    letter-spacing: 0.3px;
+    line-height: 1.6;
+    max-width: 600px;
+    animation: floatUp 0.8s ease-out 0.3s both;
+    text-shadow: 0 2px 8px rgba(52, 168, 83, 0.1);
+  }
+
+  #hero, .hero {
+    min-height: 85vh;
+    background: linear-gradient(140deg, rgba(15,75,138,.85) 0%, rgba(46,189,114,.55) 100%);
+    display: flex; align-items: center;
+    padding: 3rem 2rem; position: relative; overflow: visible;
+  }
+  
+  #hero::before {
+    content: ''; position: absolute; top: -50%; right: -10%;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(52, 168, 83, 0.2) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: topGlowPulse 4s ease-in-out infinite;
+    pointer-events: none;
+  }
+  
+  .hero-bg-img {
+    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0;
+  }
+  .hero-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(140deg, rgba(15,75,138,.85) 0%, rgba(46,189,114,.55) 100%);
+    z-index: 1;
+  }
+  .hero-content { 
+    max-width: 680px; position: relative; z-index: 3; 
+    animation: floatUp .8s ease both;
+    width: 100%; 
+  }
+
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: .5rem;
+    background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.28);
+    color: #fff !important; font-size: .72rem; font-weight: 700; letter-spacing: .1em;
+    text-transform: uppercase; padding: .3rem .85rem; border-radius: 20px;
+    margin-bottom: 1.4rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  }
+  .hero-badge:hover {
+    background: rgba(52, 168, 83, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  }
+
+  #hero h1, .hero h1 {
+    font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 800; line-height: 1.1;
+    color: #ffffff !important; margin-bottom: 1.3rem;
+    animation: slideInLeft 0.8s ease-out 0.1s both;
+  }
+  #hero h1 em, .hero h1 em { font-style: normal; color: #6FE6A0 !important; }
+
+  #hero p, .hero p {
+    font-size: 1.05rem; line-height: 1.7; color: rgba(255,255,255,.95) !important;
+    max-width: 540px; margin-bottom: 2.2rem;
+    animation: slideInLeft 0.8s ease-out 0.2s both;
+  }
+
+  .hero-btns { 
+    display: flex; gap: 1rem; flex-wrap: wrap;
+    animation: slideInLeft 0.8s ease-out 0.3s both;
+  }
+  .btn-hero-primary {
+    background: linear-gradient(135deg, #34A853, #2E9E4C);
+    color: #fff !important;
+    font-size: .88rem; font-weight: 700;
+    padding: .9rem 2rem; border-radius: 7px; text-decoration: none;
+    box-shadow: 0 8px 24px rgba(52, 168, 83, 0.4);
+    transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: inline-flex; align-items: center; gap: .5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .btn-hero-primary::before {
+    content: ''; position: absolute;
+    top: 50%; left: 50%;
+    width: 0; height: 0;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+  }
+  .btn-hero-primary:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(52, 168, 83, 0.6);
+  }
+  .btn-hero-primary:hover::before {
+    width: 300px;
+    height: 300px;
+  }
+  
+  .btn-hero-outline {
+    border: 2px solid rgba(255,255,255,.6); color: #fff !important;
+    font-size: .88rem; font-weight: 600;
+    padding: .9rem 2rem; border-radius: 7px; text-decoration: none;
+    transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(10px);
+  }
+  .btn-hero-outline:hover { 
+    border-color: #fff;
+    background: rgba(255,255,255,.15);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(255, 255, 255, 0.2);
+  }
+
+  .hero-stats {
+    position: static !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 1rem !important;
+    z-index: 3 !important;
+    margin-top: 2rem !important;
+    width: 100% !important;
+    align-self: flex-start;
+  }
+
+  .stat-card {
+    background: rgba(255,255,255,.14);
+    backdrop-filter: blur(20px);
+    border: 1.5px solid rgba(255,255,255,.25);
+    border-radius: 14px;
+    padding: 1.1rem 1.4rem; text-align: center; min-width: unset;
+    transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  }
+  .stat-card:hover {
+    transform: translateY(-6px);
+    background: rgba(52, 168, 83, 0.2);
+    box-shadow: 0 12px 48px rgba(52, 168, 83, 0.3);
+    border-color: rgba(255,255,255,.4);
+  }
+  .stat-card strong {
+    display: block; font-size: 1.8rem; font-weight: 800; color: #fff !important; line-height: 1;
+    margin-bottom: .3rem;
+  }
+  .stat-card span { font-size: .72rem; color: rgba(255,255,255,.85) !important; line-height: 1.3; display: block; }
+
+  .hero-img-upload-btn {
+    position: absolute; bottom: 1.5rem; right: 1.5rem; z-index: 10;
+    background: rgba(255,255,255,.18); border: 1.5px solid rgba(255,255,255,.4);
+    color: #fff; font-size: .75rem; font-weight: 700; padding: .5rem 1rem;
+    border-radius: 20px; cursor: pointer; display: flex; align-items: center; gap: .4rem;
+    transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(8px);
+  }
+  .hero-img-upload-btn:hover { 
+    background: rgba(255,255,255,.28);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  }
+  .hero-img-upload-btn input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+
+  .section-pad { padding: 5rem 2rem; position: relative; }
+  .section-pad::before {
+    content: ''; position: absolute; top: 0; right: -5%;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(52, 168, 83, 0.08) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  
+  .container { max-width: 1200px; margin: 0 auto; }
+  .section-eyebrow {
+    font-size: .72rem; font-weight: 700; letter-spacing: .16em;
+    text-transform: uppercase; color: #34A853; margin-bottom: .5rem;
+    opacity: 0;
+    animation: slideUp 0.6s ease-out forwards;
+  }
+  .section-title {
+    font-size: clamp(1.7rem, 3.5vw, 2.6rem); font-weight: 800; line-height: 1.12;
+    color: #15395E; margin-bottom: .9rem;
+    opacity: 0;
+    animation: slideUp 0.6s ease-out 0.1s forwards;
+  }
+  .section-sub, .section-subtitle {
+    font-size: .97rem; line-height: 1.72; color: #2E5475; max-width: 600px;
+    opacity: 0;
+    animation: slideUp 0.6s ease-out 0.2s forwards;
+  }
+
+  #mission { 
+    position: relative;
+    overflow: hidden;
+  }
+  #mission-bg-img {
+    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0;
+  }
+  #mission .mission-overlay {
+    position: absolute; inset: 0; z-index: 1;
+    background: linear-gradient(180deg, rgba(242,247,243,.94) 0%, rgba(255,255,255,.96) 100%);
+  }
+  #mission .container { position: relative; z-index: 2; }
+  .mv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .mv-card {
+    background: #fff; border-radius: 16px;
+    padding: 2rem; 
+    box-shadow: 0 4px 24px rgba(52, 168, 83, 0.08);
+    transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    border: 1px solid rgba(52, 168, 83, 0.1);
+    position: relative;
+    overflow: hidden;
+  }
+  .mv-card::before {
+    content: ''; position: absolute; top: 0; left: 0;
+    width: 100%; height: 4px;
+    background: linear-gradient(90deg, #34A853, #1561ad);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .mv-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 60px rgba(52, 168, 83, 0.2);
+    border-color: #34A853;
+  }
+  .mv-card:hover::before {
+    transform: scaleX(1);
+  }
+  .mv-card-icon {
+    width: 48px; height: 48px; border-radius: 12px;
+    background: #EAF8EF; display: grid; place-items: center;
+    color: #34A853; transition: all .3s cubic-bezier(0.4, 0, 0.2, 1); flex-shrink: 0;
+  }
+  .mv-card:hover .mv-card-icon { 
+    transform: scale(1.15) rotate(-10deg);
+    background: linear-gradient(135deg, #34A853, #2E9E4C);
+    color: #fff;
+    box-shadow: 0 8px 24px rgba(52, 168, 83, 0.35);
+  }
+  .mv-card h2 { font-size: 1.2rem; font-weight: 800; color: #15395E; margin: 0; }
+  .mv-card p { font-size: .93rem; line-height: 1.75; color: #2E5475; margin: 0; }
+
+  #products { background: #fff; position: relative; }
+
+  /* ═══════════════════════════════════════════════════════════════ */
+  /* PRODUCT SHOWCASE - single large product with arrow navigation */
+  /* ═══════════════════════════════════════════════════════════════ */
+  .product-showcase {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    margin-top: 1.5rem;
+  }
+  .showcase-arrow {
+    flex-shrink: 0;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    border: none;
+    background: linear-gradient(135deg, #F5F5F7, #E8E8ED);
+    color: #15395E;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  }
+  .showcase-arrow:hover {
+    background: linear-gradient(135deg, #34A853, #1561ad);
+    color: #fff;
+    transform: scale(1.1);
+    box-shadow: 0 8px 24px rgba(52, 168, 83, 0.3);
+  }
+  .showcase-arrow:active { transform: scale(0.95); }
+
+  .showcase-stage {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px;
+    background: #f2f7f3;
+    border: 1px solid #D7EAF7;
+    box-shadow: 0 12px 40px rgba(21, 57, 94, 0.1);
+  }
+  .showcase-track {
+    display: flex;
+    transition: transform .5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .showcase-slide {
+    flex: 0 0 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: stretch;
+    min-height: 340px;
+  }
+  .showcase-media {
+    position: relative;
+    background: linear-gradient(135deg, #E1F5E8 0%, #D2EAFB 100%);
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+  .showcase-media img {
+    width: 100%; height: 100%; object-fit: cover;
+  }
+  .showcase-media .product-badge {
+    position: absolute; bottom: 1rem; left: 1rem;
+  }
+  .showcase-info {
+    padding: 2.4rem 2.2rem;
+    display: flex; flex-direction: column; justify-content: center; gap: .8rem;
+  }
+  .showcase-info h3 { font-size: 1.6rem; font-weight: 800; color: #15395E; margin: 0; }
+  .showcase-info p { font-size: .95rem; color: #2E5475; line-height: 1.65; margin: 0; }
+  .showcase-info .product-links { margin-top: .6rem; display: flex; flex-direction: column; gap: .5rem; }
+
+  .showcase-dots {
+    display: flex; justify-content: center; gap: .5rem; margin-top: 1.1rem;
+  }
+  .showcase-dot {
+    width: 9px; height: 9px; border-radius: 50%;
+    background: #D7EAF7; border: none; cursor: pointer; padding: 0;
+    transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .showcase-dot.active { background: linear-gradient(135deg, #34A853, #1561ad); width: 26px; border-radius: 5px; }
+
+  .products-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .product-card {
+    background: #f2f7f3; border-radius: 16px;
+    border: 1px solid #D7EAF7;
+    overflow: hidden; transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 16px rgba(21, 57, 94, 0.08);
+  }
+  .product-card:hover { 
+    transform: translateY(-12px);
+    box-shadow: 0 24px 56px rgba(52, 168, 83, 0.18);
+    border-color: #34A853;
+  }
+  .product-media {
+    width: 100%; aspect-ratio: 16/9;
+    background: linear-gradient(135deg, #E1F5E8 0%, #D2EAFB 100%);
+    display: flex; align-items: center; justify-content: center;
+    color: #3FAE6B; flex-direction: column; gap: .4rem; font-size: .72rem;
+    font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+  }
+  .product-card:hover .product-media {
+    background: linear-gradient(135deg, #D2EAFB 0%, #E1F5E8 100%);
+  }
+  .product-media .material-symbols-outlined { font-size: 2.2rem; opacity: .5; }
+  .product-body { padding: 1.4rem; }
+  .product-body h3 { font-size: 1.15rem; font-weight: 800; color: #15395E; margin-bottom: .3rem; }
+  .product-body p { font-size: .84rem; color: #2E5475; margin: 0; line-height: 1.55; }
+
+  .ficha-tecnica-link {
+    font-size: .8rem; color: #34A853; text-decoration: none;
+    font-weight: 600; display: inline-flex; align-items: center; gap: .3rem;
+    margin-top: .5rem; transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .ficha-tecnica-link:hover { 
+    color: #1C9F52;
+    transform: translateX(4px);
+    gap: 0.6rem;
+  }
+
+  .stats-bar {
+    background: linear-gradient(135deg, #15395E 0%, #134F8C 100%);
+    padding: 3rem 2rem;
+    position: relative; overflow: hidden;
+  }
+  .stats-bar::before {
+    content: ''; position: absolute; top: 0; right: 0;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(52, 168, 83, 0.15) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  
+  .stats-bar-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; position: relative; z-index: 1; }
+  .stat-item { 
+    background: rgba(255,255,255,.06);
+    border: 1px solid rgba(255,255,255,.12); 
+    border-radius: 14px; 
+    padding: 1.8rem 1.2rem; 
+    text-align: center; 
+    transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(10px);
+  }
+  .stat-item:hover { 
+    background: rgba(52, 168, 83, 0.2);
+    transform: translateY(-6px);
+    box-shadow: 0 12px 40px rgba(52, 168, 83, 0.25);
+    border-color: rgba(52, 168, 83, 0.4);
+  }
+  .stat-item .icon { font-size: 1.8rem; margin-bottom: .6rem; color: #6FE6A0; transition: all 0.3s; }
+  .stat-item:hover .icon { transform: scale(1.2) rotate(-10deg); }
+  .stat-item strong { display: block; font-size: 1.7rem; font-weight: 800; color: #fff; margin-bottom: .3rem; }
+  .stat-item span { font-size: .78rem; color: rgba(255,255,255,.75); line-height: 1.4; display: block; }
+
+  #results { 
+    background: linear-gradient(180deg, #f2f7f3 0%, #fff 50%, #f2f7f3 100%);
+    position: relative;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════ */
+  /* RESULT CARDS - visual expandable cards (estilo Synertech) */
+  /* ═══════════════════════════════════════════════════════════════ */
+  .results-cards { display: flex; flex-direction: column; gap: 1.75rem; margin-top: 2.5rem; }
+
+  .result-card {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    min-height: 400px;
+    box-shadow: 0 16px 48px rgba(21, 57, 94, 0.16);
+    isolation: isolate;
+  }
+
+  .result-card-media {
+    position: absolute; inset: 0;
+    background-size: cover; background-position: center;
+    transition: transform .6s cubic-bezier(0.4,0,0.2,1);
+  }
+  .result-card:hover .result-card-media { transform: scale(1.04); }
+
+  .result-card-media img {
+    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  }
+
+  .result-card-media.tone-mining { background: linear-gradient(135deg, #3C2A1E 0%, #7A5230 45%, #B98450 100%); }
+  .result-card-media.tone-ptar { background: linear-gradient(135deg, #0F2A45 0%, #134F8C 50%, #1F8FDB 100%); }
+  .result-card-media.tone-camales { background: linear-gradient(135deg, #4A1620 0%, #8C2E3A 50%, #C4525E 100%); }
+
+  .result-card-scrim {
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(15,42,69,.05) 0%, rgba(15,42,69,.15) 45%, rgba(15,42,69,.82) 100%);
+  }
+
+  .result-card-panel {
+    position: absolute; left: 1.75rem; right: 1.75rem; bottom: 1.75rem;
+    max-width: 620px;
+    background: rgba(255,255,255,.92);
+    backdrop-filter: blur(8px);
+    border-left: 5px solid #1561ad;
+    border-radius: 4px 16px 16px 4px;
+    padding: 1.6rem 1.9rem;
+    cursor: pointer;
+    transition: all .3s cubic-bezier(0.4,0,0.2,1);
+  }
+  .result-card-panel:hover {
+    background: rgba(255,255,255,.98);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0,0,0,.2);
+  }
+
+  .result-card-eyebrow {
+    font-size: .68rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase;
+    color: #34A853; margin-bottom: .35rem; display: flex; align-items: center; gap: .5rem;
+  }
+  .result-card-title { font-size: 1.5rem; font-weight: 800; color: #15395E; margin-bottom: .5rem; line-height: 1.15; }
+  .result-card-desc { font-size: .9rem; line-height: 1.6; color: #2E5475; margin-bottom: 1.1rem; max-width: 52ch; }
+
+  .result-card-btn {
+    display: inline-flex; align-items: center; gap: .6rem;
+    background: linear-gradient(135deg, #1561ad, #34A853);
+    color: #fff; border: none; font-family: 'Montserrat', sans-serif;
+    font-size: .8rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+    padding: .7rem 1.3rem; border-radius: 7px; cursor: pointer;
+    transition: all .3s cubic-bezier(0.4,0,0.2,1);
+    box-shadow: 0 6px 18px rgba(52,168,83,.3);
+  }
+  .result-card-panel:hover .result-card-btn { box-shadow: 0 10px 28px rgba(52,168,83,.45); }
+  .result-card-btn .material-symbols-outlined { transition: transform .35s cubic-bezier(0.4,0,0.2,1); font-size: 1.2rem; }
+  .result-card.open .result-card-btn .material-symbols-outlined { transform: rotate(180deg); }
+  .result-card.open .result-card-panel { border-left-color: #34A853; }
+
+  .result-detail {
+    max-height: 0; overflow: hidden;
+    background: #fff; border-radius: 0 0 20px 20px;
+    margin-top: -1.75rem;
+    box-shadow: 0 16px 40px rgba(21,57,94,.1);
+    transition: max-height .5s cubic-bezier(0.4,0,0.2,1);
+  }
+  .result-detail-inner { padding: 3.25rem 2rem 2rem; }
+
+  /* PTAR / Camales media grid inside detail */
+  .results-media-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1.5rem;
+  }
+  .results-media-item {
+    position: relative; border-radius: 12px; overflow: hidden; aspect-ratio: 4/3;
+    background-size: cover; background-position: center;
+    box-shadow: 0 8px 20px rgba(21,57,94,.12);
+    transition: all .3s cubic-bezier(0.4,0,0.2,1);
+  }
+  .results-media-item:hover { transform: translateY(-6px); box-shadow: 0 16px 32px rgba(52,168,83,.2); }
+  .results-media-item img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+
+        /* ============ RESPONSABILIDAD SOCIAL / COMPROMISO ============ */
         .responsabilidad-section {
             padding: 80px 20px;
             background: white;
@@ -541,6 +883,7 @@
             font-size: 2rem;
             margin-bottom: 20px;
             color: var(--text-dark);
+            font-weight: 800;
         }
 
         .responsabilidad-text p {
@@ -551,6 +894,8 @@
 
         .responsabilidad-list {
             list-style: none;
+            padding: 0;
+            margin: 0;
         }
 
         .responsabilidad-list li {
@@ -568,11 +913,14 @@
             background: white;
             border-left: 5px solid var(--secondary);
             padding-left: 20px;
+            box-shadow: 0 8px 20px rgba(21,57,94,.08);
         }
 
         .responsabilidad-list i {
             color: var(--secondary);
             font-size: 1.3rem;
+            width: 24px;
+            text-align: center;
         }
 
         .responsabilidad-image {
@@ -585,1203 +933,890 @@
             justify-content: center;
             font-size: 3rem;
             color: white;
-        }
-
-        /* ============ FAQ SECTION ============ */
-        .faq-section {
-            padding: 80px 20px;
-            background: linear-gradient(180deg, white 0%, var(--light-bg) 100%);
-        }
-
-        .faq-container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .faq-item {
-            background: white;
-            border-radius: 15px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-            transition: all 0.3s ease;
-            border: 2px solid var(--border-color);
-        }
-
-        .faq-item.active {
-            border-color: var(--secondary);
-            box-shadow: 0 10px 30px rgba(52, 168, 83, 0.2);
-        }
-
-        .faq-header {
-            padding: 20px;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            user-select: none;
-            transition: all 0.3s ease;
-        }
-
-        .faq-item.active .faq-header {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-        }
-
-        .faq-header:hover {
-            background: var(--light-bg);
-        }
-
-        .faq-item.active .faq-header:hover {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-        }
-
-        .faq-title {
-            font-weight: 600;
-            font-size: 1.1rem;
-        }
-
-        .faq-icon {
-            font-size: 1.5rem;
-            transition: transform 0.3s ease;
-        }
-
-        .faq-item.active .faq-icon {
-            transform: rotate(180deg);
-        }
-
-        .faq-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
-            padding: 0 20px;
-        }
-
-        .faq-item.active .faq-content {
-            max-height: 500px;
-            padding: 20px;
-        }
-
-        .faq-text {
-            color: var(--text-light);
-            line-height: 1.8;
-        }
-
-        /* ============ PRODUCTOS/TECNOLOGIA ============ */
-        .productos-section {
-            padding: 80px 20px;
-            background: white;
-        }
-
-        .productos-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            margin-top: 60px;
-        }
-
-        .producto-card {
-            background: linear-gradient(135deg, var(--light-bg), white);
-            border-radius: 15px;
-            padding: 30px;
-            text-align: center;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-            position: relative;
-        }
-
-        .producto-card:hover {
-            border-color: var(--secondary);
-            transform: translateY(-15px);
-            box-shadow: 0 20px 40px rgba(52, 168, 83, 0.2);
-        }
-
-        .producto-icon {
-            width: 100px;
-            height: 100px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.5rem;
-            color: white;
-            margin: 0 auto 20px;
-            transition: all 0.3s ease;
-        }
-
-        .producto-card:hover .producto-icon {
-            transform: scale(1.1) rotate(10deg);
-        }
-
-        .producto-card h3 {
-            font-size: 1.3rem;
-            margin-bottom: 15px;
-            color: var(--text-dark);
-        }
-
-        .producto-card p {
-            color: var(--text-light);
-            line-height: 1.8;
-        }
-
-        /* ============ MAPA SECTION ============ */
-        .mapa-section {
-            padding: 80px 20px;
-            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
-            color: white;
-        }
-
-        .mapa-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-            align-items: center;
-            margin-top: 60px;
-        }
-
-        #map {
-            height: 500px;
-            border-radius: 15px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-        }
-
-        .mapa-info h3 {
-            font-size: 2rem;
-            margin-bottom: 20px;
-        }
-
-        .mapa-info p {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            margin-bottom: 20px;
-            opacity: 0.95;
-        }
-
-        .mapa-info ul {
-            list-style: none;
-        }
-
-        .mapa-info li {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 15px;
-            font-size: 1.05rem;
-        }
-
-        .mapa-info i {
-            color: var(--secondary);
-            font-size: 1.3rem;
-        }
-
-        /* ============ CONTACTO SECTION ============ */
-        .contacto-section {
-            padding: 80px 20px;
-            background: white;
-        }
-
-        .contacto-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            margin-top: 60px;
-            align-items: start;
-        }
-
-        .contacto-info h3 {
-            font-size: 2rem;
-            margin-bottom: 30px;
-            color: var(--text-dark);
-        }
-
-        .contacto-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-
-        .contacto-icon {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.5rem;
-            flex-shrink: 0;
-        }
-
-        .contacto-text h4 {
-            font-size: 1.1rem;
-            margin-bottom: 5px;
-            color: var(--text-dark);
-        }
-
-        .contacto-text p, .contacto-text a {
-            color: var(--text-light);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .contacto-text a:hover {
-            color: var(--secondary);
-        }
-
-        /* FORMULARIO */
-        .contacto-form {
-            background: var(--light-bg);
-            padding: 40px;
-            border-radius: 15px;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-label {
-            display: block;
-            font-weight: 600;
-            margin-bottom: 8px;
-            color: var(--text-dark);
-        }
-
-        .form-input, .form-textarea {
-            width: 100%;
-            padding: 12px 15px;
-            border: 2px solid var(--border-color);
-            border-radius: 10px;
-            font-family: 'Poppins', sans-serif;
-            transition: all 0.3s ease;
-            font-size: 1rem;
-        }
-
-        .form-input:focus, .form-textarea:focus {
-            outline: none;
-            border-color: var(--secondary);
-            box-shadow: 0 0 0 3px rgba(52, 168, 83, 0.1);
-        }
-
-        .form-textarea {
-            resize: vertical;
-            min-height: 120px;
-        }
-
-        .form-submit {
-            width: 100%;
-            padding: 14px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-weight: 600;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 10px;
-        }
-
-        .form-submit:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(52, 168, 83, 0.4);
-        }
-
-        .form-submit:active {
-            transform: translateY(-1px);
-        }
-
-        /* ============ FOOTER ============ */
-        footer {
-            background: var(--dark-bg);
-            color: white;
-            padding: 60px 20px 20px;
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-
-        .footer-column h4 {
-            font-size: 1.2rem;
-            margin-bottom: 20px;
-            color: var(--secondary);
-        }
-
-        .footer-column p {
-            color: rgba(255, 255, 255, 0.7);
-            line-height: 1.8;
-            margin-bottom: 10px;
-        }
-
-        .footer-column ul {
-            list-style: none;
-        }
-
-        .footer-column ul li {
-            margin-bottom: 10px;
-        }
-
-        .footer-column ul li a {
-            color: rgba(255, 255, 255, 0.7);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .footer-column ul li a:hover {
-            color: var(--secondary);
-        }
-
-        .social-links {
-            display: flex;
-            gap: 15px;
-            margin-top: 15px;
-        }
-
-        .social-links a {
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-        }
-
-        .social-links a:hover {
-            background: var(--secondary);
-            border-color: var(--secondary);
-            transform: translateY(-3px);
-        }
-
-        .footer-bottom {
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            padding-top: 20px;
-            text-align: center;
-            color: rgba(255, 255, 255, 0.6);
-            font-size: 0.95rem;
-        }
-
-        /* ============ FLOATING BUTTONS ============ */
-        .floating-buttons {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            z-index: 999;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .float-btn {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            color: white;
-            font-size: 1.5rem;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-        }
-
-        .float-btn.whatsapp {
-            background: linear-gradient(135deg, #25D366, #20BA5A);
-        }
-
-        .float-btn.phone {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-        }
-
-        .float-btn:hover {
-            transform: scale(1.15);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
-        }
-
-        /* ============ ANIMACIONES ============ */
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-        }
-
-        @keyframes slideInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes slideInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-
-        .animate-on-scroll {
-            opacity: 0;
-            animation: slideInUp 0.8s ease forwards;
-        }
-
-        /* ============ RESPONSIVE ============ */
-        @media (max-width: 768px) {
-            .section-title {
-                font-size: 2rem;
-            }
-
-            .hero h1 {
-                font-size: 2.2rem;
-            }
-
-            .hero p {
-                font-size: 1rem;
-            }
-
-            .hero-buttons {
-                flex-direction: column;
-            }
-
-            .btn-primary, .btn-secondary {
-                width: 100%;
-                justify-content: center;
-            }
-
-            .nav-menu {
-                display: none;
-                position: absolute;
-                top: 70px;
-                left: 0;
-                right: 0;
-                flex-direction: column;
-                background: white;
-                padding: 20px;
-                gap: 10px;
-                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            }
-
-            .nav-menu.active {
-                display: flex;
-            }
-
-            .mobile-menu-toggle {
-                display: block;
-            }
-
-            .responsabilidad-content {
-                grid-template-columns: 1fr;
-            }
-
-            .mapa-content {
-                grid-template-columns: 1fr;
-            }
-
-            #map {
-                height: 300px;
-            }
-
-            .contacto-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .servicios-grid, .resultados-grid, .productos-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .section-padding {
-                padding: 50px 20px;
-            }
-
-            .stat-card {
-                padding: 20px;
-            }
-
-            .service-card, .producto-card, .contacto-form {
-                padding: 25px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .hero {
-                padding: 100px 15px 80px;
-                min-height: 100vh;
-            }
-
-            .hero h1 {
-                font-size: 1.8rem;
-            }
-
-            .section-title {
-                font-size: 1.5rem;
-            }
-
-            .section-subtitle {
-                font-size: 1rem;
-            }
-
-            .floating-buttons {
-                bottom: 20px;
-                right: 20px;
-            }
-
-            .float-btn {
-                width: 50px;
-                height: 50px;
-                font-size: 1.2rem;
-            }
-
-            .contacto-item {
-                flex-direction: column;
-            }
-        }
-    </style>
+            box-shadow: 0 20px 50px rgba(21,57,94,.18);
+        }
+
+  /* ═══════════════════════════════════════════════════════════════ */
+  /* GALERÍA DE RESULTADOS (más fotos) */
+  /* ═══════════════════════════════════════════════════════════════ */
+  .results-gallery { margin-top: 4rem; }
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 160px;
+    gap: .9rem;
+    margin-top: 1.5rem;
+  }
+  .gallery-item {
+    position: relative; border-radius: 14px; overflow: hidden;
+    background-size: cover; background-position: center;
+    box-shadow: 0 6px 16px rgba(21,57,94,.1);
+    transition: all .35s cubic-bezier(0.4,0,0.2,1);
+    cursor: pointer;
+  }
+  .gallery-item img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transition: transform .5s; }
+  .gallery-item:hover img { transform: scale(1.08); }
+  .gallery-item:hover { box-shadow: 0 16px 32px rgba(52,168,83,.25); transform: translateY(-4px); }
+  .gallery-item.tall { grid-row: span 2; }
+  .gallery-item.wide { grid-column: span 2; }
+  .gallery-item-label {
+    position: absolute; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(180deg, transparent, rgba(15,42,69,.85));
+    color: #fff; font-size: .72rem; font-weight: 700; padding: 1.5rem .8rem .6rem;
+  }
+
+  .accordion-item {
+    background: #fff; border-radius: 16px;
+    border: 1px solid #D7EAF7;
+    overflow: hidden; transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 16px rgba(21, 57, 94, 0.08);
+  }
+  .accordion-item:hover {
+    border-color: #34A853;
+    box-shadow: 0 8px 32px rgba(52, 168, 83, 0.12);
+  }
+  .accordion-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.5rem 2rem; cursor: pointer; user-select: none;
+    transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .accordion-item.active .accordion-header {
+    background: linear-gradient(135deg, #f0f7ff 0%, #f0fff4 100%);
+    border-bottom: 2px solid #34A853;
+  }
+  .accordion-header:hover { 
+    background: #f9fbfd;
+  }
+  .accordion-title {
+    font-size: 1.1rem; font-weight: 800; color: #15395E;
+    display: flex; align-items: center; gap: .8rem;
+    transition: all 0.3s;
+  }
+  .accordion-header:hover .accordion-title {
+    color: #34A853;
+  }
+  .accordion-icon { 
+    font-size: 1.5rem; color: #34A853; 
+    transition: transform .4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .accordion-item.active .accordion-icon { transform: rotate(180deg); }
+  .accordion-content { max-height: 0; overflow: hidden; transition: max-height .4s ease; }
+  .accordion-item.active .accordion-content { max-height: 4000px; }
+  .accordion-body { padding: 2rem; }
+
+  .video-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; margin-top: .8rem; }
+  .video-card {
+    position: relative; overflow: hidden; border-radius: 12px;
+    aspect-ratio: 16/9; cursor: pointer; transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
+    background: linear-gradient(135deg, #D2EAFB 0%, #E1F5E8 100%);
+    box-shadow: 0 8px 24px rgba(52, 168, 83, 0.12);
+  }
+  .video-card:hover { 
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 16px 48px rgba(52, 168, 83, 0.25);
+  }
+  .video-placeholder {
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column; gap: .8rem; color: #34A853; position: relative;
+  }
+  .video-placeholder .material-symbols-outlined { 
+    font-size: 3rem; opacity: .6;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .video-card:hover .video-placeholder .material-symbols-outlined {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  .video-placeholder p { font-size: .82rem; font-weight: 600; text-align: center; margin: 0; color: #2E5475; }
+  .video-placeholder span.sub { font-size: .68rem; opacity: .65; }
+  .video-file-input {
+    position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════ */
+  /* IMPACTO ECONÓMICO / ANÁLISIS TÉCNICO - stat grid sections */
+  /* ═══════════════════════════════════════════════════════════════ */
+  .value-section { background: #fff; position: relative; overflow: hidden; }
+  .value-section.alt-bg { background: linear-gradient(180deg, #f2f7f3 0%, #fff 100%); }
+  .value-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem; margin-top: 2.5rem;
+  }
+  .value-card {
+    background: #fff; border: 1px solid #D7EAF7; border-radius: 16px;
+    padding: 1.8rem 1.4rem; text-align: center; position: relative; overflow: hidden;
+    box-shadow: 0 4px 16px rgba(21,57,94,.08);
+    transition: all .3s cubic-bezier(0.4,0,0.2,1);
+  }
+  .value-card::before {
+    content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px;
+    background: linear-gradient(90deg, #34A853, #1561ad);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform .4s cubic-bezier(0.4,0,0.2,1);
+  }
+  .value-card:hover { transform: translateY(-8px); box-shadow: 0 20px 48px rgba(52,168,83,.18); border-color: #34A853; }
+  .value-card:hover::before { transform: scaleX(1); }
+  .value-card .value-icon {
+    width: 52px; height: 52px; margin: 0 auto .9rem; border-radius: 14px;
+    background: #EAF8EF; display: grid; place-items: center; color: #34A853; font-size: 1.5rem;
+    transition: all .3s cubic-bezier(0.4,0,0.2,1);
+  }
+  .value-card:hover .value-icon {
+    background: linear-gradient(135deg, #34A853, #1561ad); color: #fff;
+    transform: scale(1.1) rotate(-8deg);
+  }
+  .value-card strong { display: block; font-size: 2rem; font-weight: 800; color: #15395E; line-height: 1; margin-bottom: .4rem; }
+  .value-card span { font-size: .8rem; color: #2E5475; line-height: 1.4; display: block; }
+
+  /* Split feature block (image/icon panel + text) used for TRL / EFS / Rapid sludge */
+  .split-feature {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 3.5rem; align-items: center;
+    margin-bottom: 4rem;
+  }
+  .split-feature.reverse .split-feature-visual { order: 2; }
+  .split-feature.reverse .split-feature-text { order: 1; }
+  .split-feature-visual {
+    height: 340px; border-radius: 20px; position: relative; overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 20px 50px rgba(21,57,94,.16);
+  }
+  .split-feature-visual .material-symbols-outlined { font-size: 5rem; color: rgba(255,255,255,.92); }
+  .split-feature-text h3 { font-size: 1.6rem; font-weight: 800; color: #15395E; margin-bottom: 1rem; }
+  .split-feature-text p { font-size: .95rem; line-height: 1.75; color: #2E5475; margin-bottom: 1rem; }
+  .split-feature-badges { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.2rem; }
+  .split-feature-badge {
+    display: inline-flex; align-items: center; gap: .4rem;
+    background: #EAF8EF; color: #1C9F52; font-size: .78rem; font-weight: 700;
+    padding: .45rem .9rem; border-radius: 20px; border: 1px solid rgba(52,168,83,.25);
+  }
+
+  /* ============ FAQ SECTION ============ */
+  .faq-section { background: #fff; }
+  .faq-container { display: flex; flex-direction: column; gap: 1.2rem; margin-top: 2.5rem; }
+  .faq-item {
+    background: #f2f7f3; border: 1px solid #D7EAF7; border-radius: 14px;
+    overflow: hidden; transition: all .3s cubic-bezier(0.4,0,0.2,1);
+  }
+  .faq-item:hover { border-color: #34A853; box-shadow: 0 8px 24px rgba(52,168,83,.1); }
+  .faq-item.active { background: #fff; box-shadow: 0 8px 32px rgba(52,168,83,.14); }
+  .faq-header {
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    padding: 1.3rem 1.6rem; cursor: pointer; user-select: none;
+  }
+  .faq-title { font-size: .96rem; font-weight: 700; color: #15395E; }
+  .faq-icon { color: #34A853; font-size: .9rem; transition: transform .35s cubic-bezier(0.4,0,0.2,1); flex-shrink: 0; }
+  .faq-item.active .faq-icon { transform: rotate(180deg); }
+  .faq-content { max-height: 0; overflow: hidden; transition: max-height .4s ease; }
+  .faq-item.active .faq-content { max-height: 600px; }
+  .faq-text { padding: 0 1.6rem 1.4rem; font-size: .9rem; line-height: 1.75; color: #2E5475; margin: 0; }
+
+  #map-section { background: #fff; position: relative; }
+  .map-container { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: center; margin-top: 2rem; }
+  #map { 
+    height: 450px; border-radius: 16px; 
+    box-shadow: 0 16px 48px rgba(21, 57, 94, 0.15);
+    transition: all 0.3s;
+  }
+  #map:hover {
+    box-shadow: 0 20px 60px rgba(52, 168, 83, 0.2);
+  }
+  .map-info h3 { font-size: 1.3rem; font-weight: 800; color: #15395E; margin-bottom: 1.2rem; }
+  .map-info p { font-size: .95rem; color: #2E5475; line-height: 1.8; margin-bottom: 1.5rem; }
+
+  #contact { background: #fff; position: relative; }
+  .contact-box {
+    background: linear-gradient(135deg, #34A853 0%, #1E9E7A 50%, #1561ad 100%);
+    border-radius: 24px; padding: 4rem;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 3.5rem;
+    position: relative; overflow: hidden;
+    box-shadow: 0 24px 72px rgba(21, 86, 173, 0.3);
+  }
+  .contact-box::before {
+    content: ''; position: absolute; top: -50%; right: -10%;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .contact-box::after {
+    content: ''; position: absolute; bottom: -30%; left: -10%;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .contact-info { position: relative; z-index: 1; }
+  .contact-info h2 { font-size: clamp(1.6rem, 3.5vw, 2.5rem); font-weight: 800; color: #fff; margin-bottom: 1rem; line-height: 1.15; }
+  .contact-info p { font-size: .97rem; color: rgba(255,255,255,.88); line-height: 1.7; margin-bottom: 2rem; }
+  .contact-detail { 
+    display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; color: white;
+    transition: all 0.3s;
+  }
+  .contact-detail:hover {
+    transform: translateX(8px);
+  }
+  .contact-detail .label { font-size: .7rem; opacity: .75; text-transform: uppercase; letter-spacing: .08em; }
+  .contact-detail a { color: white; text-decoration: none; font-weight: 600; }
+  .social-links { display: flex; gap: 1rem; margin-top: 1.5rem; }
+  .social-link {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: rgba(255,255,255,.18); display: flex; align-items: center; justify-content: center;
+    color: #fff; text-decoration: none; transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-weight: 700; font-size: .8rem;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  .social-link:hover { 
+    background: rgba(255,255,255,.35);
+    transform: translateY(-4px) scale(1.1);
+    box-shadow: 0 8px 24px rgba(255, 255, 255, 0.25);
+  }
+
+  .contact-form-box {
+    background: rgba(255,255,255, 0.95);
+    border-radius: 16px; padding: 2rem; position: relative; z-index: 1;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+  }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .form-group { display: flex; flex-direction: column; gap: .35rem; }
+  .form-group.full { grid-column: 1 / -1; }
+  .form-label { font-size: .7rem; font-weight: 700; color: #2E5475; text-transform: uppercase; letter-spacing: .08em; }
+  .form-input {
+    width: 100%; border: 2px solid #D7EAF7; border-radius: 7px;
+    padding: .65rem .85rem; font-family: 'Montserrat', sans-serif;
+    font-size: .88rem; color: #15395E; background: #F7FBF9; outline: none;
+    transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .form-input:focus { 
+    border-color: #34A853;
+    box-shadow: 0 0 0 3px rgba(52, 168, 83, 0.1);
+    background: #fff;
+  }
+  .form-input:hover {
+    border-color: #8FB8DC;
+  }
+  textarea.form-input { resize: vertical; min-height: 100px; }
+
+  .phone-row { display: flex; gap: .5rem; align-items: stretch; }
+  .country-select-wrap { position: relative; flex-shrink: 0; }
+  .country-select-wrap select {
+    appearance: none; -webkit-appearance: none;
+    border: 2px solid #D7EAF7; border-radius: 7px;
+    padding: .65rem 1.8rem .65rem .75rem;
+    font-family: 'Montserrat', sans-serif; font-size: .82rem;
+    color: #15395E; background: #F7FBF9; outline: none; cursor: pointer;
+    height: 100%; transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .country-select-wrap select:focus { 
+    border-color: #34A853;
+    box-shadow: 0 0 0 3px rgba(52, 168, 83, 0.1);
+  }
+  .country-select-wrap::after {
+    content: '▾'; position: absolute; right: .5rem; top: 50%; transform: translateY(-50%);
+    font-size: .7rem; color: #8FB8DC; pointer-events: none;
+  }
+  .phone-input-wrap { flex: 1; }
+
+  .btn-submit {
+    width: 100%; background: linear-gradient(135deg, #1561ad, #34A853);
+    color: #fff;
+    font-family: 'Montserrat', sans-serif; font-size: .9rem; font-weight: 700;
+    padding: .9rem; border: none; border-radius: 7px; cursor: pointer;
+    transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex; align-items: center; justify-content: center; gap: .5rem;
+    grid-column: 1 / -1;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(52, 168, 83, 0.3);
+  }
+  .btn-submit::before {
+    content: ''; position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .btn-submit:hover { 
+    transform: translateY(-3px);
+    box-shadow: 0 16px 40px rgba(52, 168, 83, 0.5);
+  }
+  .btn-submit:hover::before { left: 100%; }
+  
+  .form-success {
+    display: none; 
+    background: linear-gradient(135deg, #EAF8EF, #D2EAFB);
+    border: 2px solid #34A853;
+    border-radius: 10px; padding: 1rem 1.2rem; margin-top: 1rem;
+    font-size: .88rem; font-weight: 600; color: #1C9F52;
+    align-items: center; gap: .6rem; grid-column: 1 / -1;
+    box-shadow: 0 8px 24px rgba(52, 168, 83, 0.2);
+    animation: slideUp 0.4s ease-out;
+  }
+  .form-success.show { display: flex; }
+
+  .phone-float {
+    position: fixed; bottom: 6.2rem; right: 1.8rem; z-index: 200;
+    width: 56px; height: 56px; border-radius: 50%;
+    background: linear-gradient(135deg, #1561ad, #134F8C);
+    display: grid; place-items: center;
+    box-shadow: 0 8px 32px rgba(21, 97, 173, 0.6);
+    transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-decoration: none;
+    animation: bounce-subtle 3s ease-in-out infinite;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    font-size: 1.3rem;
+  }
+  .phone-float:hover { 
+    transform: scale(1.2);
+    box-shadow: 0 16px 48px rgba(21, 97, 173, 0.85);
+    animation: none;
+  }
+
+  .wa-float {
+    position: fixed; bottom: 1.8rem; right: 1.8rem; z-index: 200;
+    width: 56px; height: 56px; border-radius: 50%;
+    background: linear-gradient(135deg, #25D366, #20BA5A);
+    display: grid; place-items: center;
+    box-shadow: 0 8px 32px rgba(37, 211, 102, 0.6);
+    transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-decoration: none;
+    animation: bounce-subtle 3s ease-in-out infinite;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+  }
+  .wa-float:hover { 
+    transform: scale(1.2);
+    box-shadow: 0 16px 48px rgba(37, 211, 102, 0.85);
+    animation: none;
+  }
+  .wa-float svg { width: 30px; height: 30px; fill: white; }
+
+  footer { 
+    background: linear-gradient(180deg, #15395E 0%, #0F2A45 100%);
+    padding: 4rem 2rem 2rem;
+    position: relative;
+  }
+  footer::before {
+    content: ''; position: absolute; top: 0; right: 0;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(52, 168, 83, 0.1) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  
+  .footer-grid { 
+    max-width: 1200px; margin: 0 auto; 
+    display: grid; grid-template-columns: 1.8fr 1fr 1.2fr; gap: 3rem; 
+    margin-bottom: 3rem;
+    position: relative;
+    z-index: 1;
+  }
+  .footer-brand { font-size: 1.4rem; font-weight: 800; color: #fff; margin-bottom: .7rem; }
+  .footer-brand span { color: #6FE6A0; }
+  .footer-desc { font-size: .85rem; line-height: 1.7; color: rgba(255,255,255,.65); margin-bottom: 1.2rem; }
+  footer h4 { font-size: .8rem; font-weight: 700; color: #fff; text-transform: uppercase; letter-spacing: .1em; margin-bottom: 1rem; color: #6FE6A0; }
+  footer ul { list-style: none; display: flex; flex-direction: column; gap: .55rem; padding: 0; margin: 0; }
+  footer ul li a { 
+    font-size: .85rem; color: rgba(255,255,255,.65); text-decoration: none; 
+    transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  footer ul li a:hover { 
+    color: #6FE6A0;
+    transform: translateX(4px);
+  }
+  .footer-contact-item { 
+    display: flex; align-items: flex-start; gap: .7rem; font-size: .84rem; color: rgba(255,255,255,.65); line-height: 1.4; margin-bottom: .7rem;
+    transition: all 0.3s;
+  }
+  .footer-contact-item:hover {
+    color: #6FE6A0;
+    transform: translateX(4px);
+  }
+  .footer-contact-item a { color: rgba(255,255,255,.65); text-decoration: none; transition: color .2s; }
+  .footer-contact-item a:hover { color: #6FE6A0; }
+  .footer-bottom {
+    max-width: 1200px; margin: 0 auto;
+    border-top: 1px solid rgba(255,255,255,.1);
+    padding-top: 1.5rem;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: .5rem;
+    font-size: .76rem; color: rgba(255,255,255,.5);
+    position: relative;
+    z-index: 1;
+  }
+
+  .leaflet-container { border-radius: 16px; }
+
+  .sub-section-label {
+    font-size: .9rem; font-weight: 700; color: #34A853;
+    margin-bottom: .8rem; margin-top: 1.5rem;
+    display: flex; align-items: center; gap: .5rem;
+  }
+  .sub-section-label::before { 
+    content: ''; width: 12px; height: 3px; background: #34A853; 
+    border-radius: 2px; display: inline-block;
+    animation: slideInLeft 0.4s ease-out;
+  }
+
+  @media(max-width: 1024px) {
+    .hero-stats { 
+      flex-direction: row !important;
+      flex-wrap: wrap;
+      width: 100% !important;
+    }
+    
+    .stat-card {
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .products-grid { grid-template-columns: 1fr 1fr; }
+    .video-grid { grid-template-columns: 1fr; }
+    .map-container { grid-template-columns: 1fr; }
+    .contact-box { grid-template-columns: 1fr; padding: 2.5rem; gap: 2rem; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .mv-grid { grid-template-columns: 1fr; }
+    .section-pad { padding: 4rem 1.5rem; }
+    .nav-inner { padding: 0 1.5rem; }
+    .topbar { padding: .35rem 1.5rem; }
+
+    .showcase-slide { grid-template-columns: 1fr; }
+    .showcase-media { min-height: 220px; }
+
+    .results-media-grid { grid-template-columns: repeat(2, 1fr); }
+    .gallery-grid { grid-template-columns: repeat(3, 1fr); }
+
+    .value-grid { grid-template-columns: repeat(2, 1fr); }
+    .split-feature { grid-template-columns: 1fr; gap: 2rem; }
+    .split-feature.reverse .split-feature-visual { order: 1; }
+    .split-feature.reverse .split-feature-text { order: 2; }
+    .responsabilidad-content { grid-template-columns: 1fr; gap: 2rem; }
+  }
+
+  @media(max-width: 768px) {
+    html { font-size: 14px; }
+    .section-pad { padding: 3rem 1rem; }
+    .container { padding: 0 1rem; }
+    
+    .topbar { 
+      flex-direction: column;
+      padding: .35rem 1rem;
+      gap: 0.8rem;
+      font-size: .7rem;
+    }
+    .topbar-left { gap: 1rem; width: 100%; }
+    .topbar-left span { font-size: .7rem; }
+    .topbar-right { gap: .5rem; width: 100%; justify-content: space-between; }
+    
+    .lang-selector {
+      order: -1;
+      width: 100%;
+      justify-content: center;
+      margin-bottom: 0.5rem;
+    }
+    
+    .nav-inner { 
+      padding: 0 1rem; 
+      height: 60px;
+      gap: 0.5rem;
+    }
+    .nav-logo-icon { 
+      width: 36px; 
+      height: 36px; 
+      font-size: 1rem;
+    }
+    .nav-brand { font-size: 1rem; }
+    .nav-links { display: none; }
+    .nav-cta { 
+      font-size: .75rem; 
+      padding: .5rem 1rem;
+    }
+    
+    .logo-section { 
+      padding: 1.5rem 1rem; 
+      gap: 1rem;
+    }
+    .logo-container {
+      gap: 0.8rem;
+    }
+    .logo-upload-box { 
+      width: 160px; 
+      height: 120px; 
+    }
+    .logo-upload-text { font-size: .65rem; }
+    
+    .company-slogan {
+      font-size: 0.95rem;
+      max-width: 90%;
+    }
+    
+    #hero, .hero {
+      min-height: auto;
+      min-height: 70vh;
+      padding: 2rem 1rem;
+    }
+    .hero-content { max-width: 100%; }
+    .hero-badge { 
+      font-size: .65rem; 
+      padding: .25rem .75rem;
+      margin-bottom: 1rem;
+    }
+    #hero h1, .hero h1 {
+      font-size: clamp(1.5rem, 5vw, 2.2rem);
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+    #hero p, .hero p {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+      max-width: 100%;
+    }
+    
+    .hero-stats {
+      flex-direction: column !important;
+      width: 100% !important;
+      margin-top: 1.5rem !important;
+    }
+    
+    .stat-card {
+      min-width: unset !important;
+      width: 100% !important;
+    }
+    
+    .hero-btns { 
+      gap: .75rem; 
+      flex-direction: column;
+    }
+    .btn-hero-primary, .btn-hero-outline {
+      font-size: .8rem;
+      padding: .75rem 1.5rem;
+      width: 100%;
+      justify-content: center;
+    }
+    
+    .section-eyebrow { font-size: .65rem; margin-bottom: .4rem; }
+    .section-title { 
+      font-size: clamp(1.4rem, 4vw, 2rem);
+      margin-bottom: .7rem;
+    }
+    .section-sub, .section-subtitle { 
+      font-size: .9rem; 
+      max-width: 100%;
+    }
+    
+    .mv-grid { grid-template-columns: 1fr; gap: 1rem; }
+    .mv-card { padding: 1.5rem; }
+    .mv-card-icon { width: 40px; height: 40px; }
+    .mv-card h2 { font-size: 1rem; }
+    .mv-card p { font-size: .85rem; }
+    
+    .products-grid { grid-template-columns: 1fr; }
+    .product-card { border-radius: 12px; }
+    .product-body { padding: 1rem; }
+    .product-body h3 { font-size: 1rem; }
+    .product-body p { font-size: .8rem; }
+    
+    .showcase-slide { min-height: auto; }
+    .showcase-media { min-height: 200px; }
+    .showcase-info { padding: 1.5rem 1.2rem; }
+    .showcase-info h3 { font-size: 1.25rem; }
+    .showcase-arrow { width: 40px; height: 40px; font-size: 1.1rem; }
+    
+    .video-grid { grid-template-columns: 1fr; gap: 1rem; }
+    .video-card { aspect-ratio: 16/9; }
+
+    .result-card { min-height: 320px; border-radius: 16px; }
+    .result-card-panel { left: 1rem; right: 1rem; bottom: 1rem; padding: 1.2rem 1.3rem; max-width: none; }
+    .result-card-title { font-size: 1.15rem; }
+    .result-card-desc { font-size: .82rem; margin-bottom: .85rem; }
+    .result-card-btn { font-size: .72rem; padding: .6rem 1.05rem; }
+    .result-detail-inner { padding: 2rem 1rem 1.5rem; }
+    .results-media-grid { grid-template-columns: 1fr 1fr; gap: .7rem; }
+    .gallery-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 130px; gap: .6rem; }
+    .gallery-item.wide { grid-column: span 2; }
+    
+    .stats-bar { padding: 2rem 1rem; }
+    .stats-bar-inner { 
+      grid-template-columns: 1fr; 
+      gap: .75rem;
+    }
+    .stat-item { 
+      padding: 1.2rem .8rem;
+      border-radius: 10px;
+    }
+    .stat-item .icon { font-size: 1.5rem; }
+    .stat-item strong { font-size: 1.4rem; }
+    .stat-item span { font-size: .7rem; }
+    
+    .accordion-item { border-radius: 12px; margin-bottom: 1rem; }
+    .accordion-header { 
+      padding: 1.2rem 1rem;
+      gap: .5rem;
+    }
+    .accordion-title { font-size: 1rem; gap: .6rem; }
+    .accordion-icon { font-size: 1.3rem; }
+    .accordion-body { padding: 1.5rem 1rem; }
+    .sub-section-label { 
+      font-size: .85rem; 
+      margin-bottom: .6rem;
+      margin-top: 1rem;
+    }
+
+    .value-grid { grid-template-columns: repeat(2, 1fr); gap: .8rem; margin-top: 1.5rem; }
+    .value-card { padding: 1.3rem 1rem; }
+    .value-card strong { font-size: 1.5rem; }
+    .value-card .value-icon { width: 42px; height: 42px; font-size: 1.2rem; }
+    .split-feature { gap: 1.5rem; margin-bottom: 2.5rem; }
+    .split-feature-visual { height: 220px; }
+    .split-feature-visual .material-symbols-outlined { font-size: 3.5rem; }
+    .split-feature-text h3 { font-size: 1.25rem; }
+    .responsabilidad-image { height: 240px; font-size: 2.2rem; }
+    .faq-header { padding: 1.1rem 1.2rem; }
+    .faq-title { font-size: .88rem; }
+    .faq-text { padding: 0 1.2rem 1.2rem; font-size: .85rem; }
+    
+    .map-container { gap: 1.5rem; }
+    #map { 
+      height: 280px; 
+      border-radius: 12px;
+    }
+    .map-info h3 { 
+      font-size: 1.1rem; 
+      margin-bottom: .8rem;
+    }
+    .map-info p { 
+      font-size: .9rem; 
+      margin-bottom: 1rem;
+    }
+    
+    .contact-box { 
+      grid-template-columns: 1fr; 
+      padding: 1.5rem 1rem;
+      gap: 1.5rem;
+      border-radius: 16px;
+    }
+    .contact-info h2 { 
+      font-size: clamp(1.4rem, 4vw, 1.8rem);
+      margin-bottom: .8rem;
+    }
+    .contact-info p { 
+      font-size: .9rem;
+      margin-bottom: 1.5rem;
+    }
+    .contact-detail { gap: .75rem; margin-bottom: 1.2rem; }
+    .contact-detail .label { font-size: .65rem; }
+    .contact-detail a { font-size: .9rem; }
+    .social-links { gap: .75rem; margin-top: 1rem; }
+    .social-link { 
+      width: 36px; 
+      height: 36px;
+      font-size: .7rem;
+    }
+    
+    .contact-form-box { 
+      border-radius: 12px; 
+      padding: 1.5rem;
+    }
+    .form-grid { 
+      grid-template-columns: 1fr; 
+      gap: .8rem;
+    }
+    .form-group { gap: .25rem; }
+    .form-label { font-size: .65rem; }
+    .form-input { 
+      padding: .55rem .7rem;
+      font-size: .85rem;
+      border-radius: 6px;
+    }
+    textarea.form-input { min-height: 80px; }
+    .phone-row { flex-direction: column; gap: .5rem; }
+    .country-select-wrap select { 
+      padding: .55rem 1.5rem .55rem .65rem;
+      font-size: .8rem;
+    }
+    .btn-submit { 
+      padding: .8rem;
+      font-size: .85rem;
+    }
+    .form-success { 
+      font-size: .8rem;
+      padding: .75rem 1rem;
+    }
+    
+    footer { padding: 2.5rem 1rem 1.5rem; }
+    .footer-grid { 
+      grid-template-columns: 1fr; 
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+    .footer-brand { font-size: 1.2rem; }
+    .footer-desc { font-size: .8rem; }
+    footer h4 { font-size: .75rem; margin-bottom: .75rem; }
+    footer ul { gap: .4rem; }
+    footer ul li a { font-size: .8rem; }
+    .footer-contact-item { 
+      font-size: .8rem;
+      margin-bottom: .6rem;
+    }
+    .footer-bottom { 
+      flex-direction: column;
+      text-align: center;
+      font-size: .7rem;
+      gap: .75rem;
+    }
+    
+    .phone-float { 
+      width: 50px; 
+      height: 50px;
+      bottom: 6rem;
+      right: 1.2rem;
+    }
+
+    .wa-float { 
+      width: 50px; 
+      height: 50px;
+      bottom: 1.2rem;
+      right: 1.2rem;
+    }
+    .wa-float svg { width: 26px; height: 26px; }
+  }
+
+  @media(max-width: 480px) {
+    html { font-size: 13px; }
+    .section-pad { padding: 2.5rem .75rem; }
+    .container { padding: 0 .75rem; }
+    
+    .topbar { padding: .3rem .75rem; }
+    .topbar-left span { font-size: .65rem; }
+    .topbar-right { width: 100%; }
+    
+    .nav-inner { 
+      padding: 0 .75rem;
+      height: 56px;
+      gap: .5rem;
+    }
+    .nav-logo-icon { 
+      width: 32px; 
+      height: 32px;
+      font-size: .9rem;
+      border-radius: 8px;
+    }
+    .nav-brand { font-size: .9rem; }
+    .nav-cta { 
+      font-size: .7rem; 
+      padding: .45rem .9rem;
+      border-radius: 5px;
+    }
+    
+    .logo-section { 
+      padding: 1.2rem .75rem; 
+      gap: 0.8rem;
+    }
+    .logo-container { gap: 0.6rem; }
+    .logo-upload-box { width: 140px; height: 100px; }
+    
+    .company-slogan {
+      font-size: 0.85rem;
+      max-width: 95%;
+    }
+    
+    #hero, .hero { 
+      min-height: 65vh;
+      padding: 2.5rem .75rem;
+    }
+    #hero h1, .hero h1 {
+      font-size: clamp(1.3rem, 6vw, 1.9rem);
+      margin-bottom: .8rem;
+    }
+    #hero p, .hero p {
+      font-size: .9rem;
+      margin-bottom: 1.3rem;
+    }
+    .hero-btns { 
+      flex-direction: column;
+      gap: .6rem;
+    }
+    .btn-hero-primary, .btn-hero-outline {
+      font-size: .75rem;
+      padding: .7rem 1.3rem;
+    }
+    
+    .section-eyebrow { font-size: .6rem; }
+    .section-title { font-size: clamp(1.2rem, 5vw, 1.8rem); }
+    .section-sub, .section-subtitle { font-size: .85rem; }
+    
+    .mv-card { 
+      padding: 1.2rem;
+      border-radius: 12px;
+    }
+    .mv-card-icon { 
+      width: 36px; 
+      height: 36px;
+    }
+    
+    .accordion-header { padding: 1rem .75rem; }
+    .accordion-title { font-size: .95rem; }
+    .accordion-body { padding: 1.2rem .75rem; }
+
+    .responsabilidad-content {
+        grid-template-columns: 1fr;
+    }
+
+    .value-grid { grid-template-columns: 1fr 1fr; }
+
+    .gallery-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 110px; }
+    .results-media-grid { grid-template-columns: 1fr; }
+    
+    #map { height: 250px; }
+    .map-info h3 { font-size: 1rem; }
+    
+    .contact-box { 
+      padding: 1.2rem .75rem;
+      gap: 1.2rem;
+    }
+    .contact-info h2 { font-size: clamp(1.2rem, 5vw, 1.6rem); }
+    .contact-form-box { padding: 1.2rem .75rem; }
+    
+    footer { padding: 2rem .75rem 1rem; }
+    .footer-grid { gap: 1.5rem; }
+    .footer-brand { font-size: 1.1rem; }
+
+    .showcase-arrow { display: none; }
+    .product-showcase { gap: 0; }
+
+    .phone-float { 
+      bottom: 6rem;
+    }
+  }
+
+  @media(max-width: 380px) {
+    html { font-size: 12px; }
+    
+    .nav-inner { 
+      height: 52px;
+      padding: 0 .6rem;
+    }
+    .nav-logo-icon { 
+      width: 28px; 
+      height: 28px;
+    }
+    
+    #hero h1, .hero h1 { font-size: clamp(1.1rem, 7vw, 1.7rem); }
+    #hero p, .hero p { font-size: .85rem; }
+    
+    .btn-hero-primary, .btn-hero-outline {
+      font-size: .7rem;
+      padding: .6rem 1.1rem;
+    }
+    
+    .section-title { font-size: clamp(1rem, 5vw, 1.6rem); }
+    .form-input { font-size: .8rem; }
+    .company-slogan { font-size: 0.8rem; }
+  }
+</style>
 </head>
 <body>
-
-    <!-- ========== NAVBAR ========== -->
-    <nav id="navbar">
-        <div class="container">
-            <a href="#" class="nav-brand">
-                <i class="fas fa-droplet"></i> EcoFluidSystem
-            </a>
-            
-            <ul class="nav-menu" id="navMenu">
-                <li><a href="#inicio">Inicio</a></li>
-                <li><a href="#servicios">Servicios</a></li>
-                <li><a href="#resultados">Resultados</a></li>
-                <li><a href="#responsabilidad">Responsabilidad Social</a></li>
-                <li><a href="#faq">Preguntas Frecuentes</a></li>
-                <li><a href="#contacto" class="nav-cta">Contacto</a></li>
-            </ul>
-
-            <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
-                <i class="fas fa-bars"></i>
-            </button>
-        </div>
-    </nav>
-
-    <!-- ========== HERO SECTION ========== -->
-    <section class="hero" id="inicio">
-        <div class="container">
-            <div class="hero-content">
-                <h1>Tecnología Avanzada para el Tratamiento de Aguas</h1>
-                <p>Soluciones sostenibles para minería, industria y plantas de tratamiento. Garantizamos máxima eficiencia con equipos de última generación que transforman residuos en oportunidades.</p>
-                
-                <div class="hero-buttons">
-                    <a href="#contacto" class="btn-primary">
-                        <i class="fas fa-envelope"></i> Solicitar Demo
-                    </a>
-                    <a href="#servicios" class="btn-secondary">
-                        <i class="fas fa-info-circle"></i> Conocer Servicios
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ========== STATS SECTION ========== -->
-    <section class="stats-section">
-        <div class="container">
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-number">30+</div>
-                    <div class="stat-label">Años de Experiencia</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">100%</div>
-                    <div class="stat-label">Asesoramiento Técnico Personalizado</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">90%</div>
-                    <div class="stat-label">Eficiencia de Recuperación de Agua</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">2500+</div>
-                    <div class="stat-label">Proyectos Completados</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ========== SERVICIOS SECTION ========== -->
-    <section class="servicios-section" id="servicios">
-        <div class="container">
-            <h2 class="section-title">Nuestros Servicios</h2>
-            <p class="section-subtitle">Soluciones especializadas en tratamiento de aguas residuales, floculantes y coagulantes para aplicaciones industriales y ambientales</p>
-
-            <div class="servicios-grid">
-                <div class="service-card">
-                    <div class="service-icon"><i class="fas fa-industry"></i></div>
-                    <h3>Industria Minera</h3>
-                    <p>Recuperación de agua en concentrados, molinos chilenos y relaves de lixiviación y flotación con hasta 90% de eficiencia.</p>
-                    <a href="#" class="service-link">Más detalles <i class="fas fa-arrow-right"></i></a>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-icon"><i class="fas fa-water"></i></div>
-                    <h3>Plantas PTAR</h3>
-                    <p>Plantas de Tratamiento de Aguas Residuales con máxima eficiencia de depuración para reuso industrial y descarga segura.</p>
-                    <a href="#" class="service-link">Más detalles <i class="fas fa-arrow-right"></i></a>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-icon"><i class="fas fa-flask"></i></div>
-                    <h3>Floculantes Especializados</h3>
-                    <p>7 soluciones especializadas para clarificación y separación de sólidos en aplicaciones industriales y mineras.</p>
-                    <a href="#" class="service-link">Más detalles <i class="fas fa-arrow-right"></i></a>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-icon"><i class="fas fa-vial"></i></div>
-                    <h3>Coagulantes</h3>
-                    <p>Soluciones especializadas para procesos de coagulación en tratamiento de aguas industriales y mineras.</p>
-                    <a href="#" class="service-link">Más detalles <i class="fas fa-arrow-right"></i></a>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-icon"><i class="fas fa-slaughterhouse"></i></div>
-                    <h3>Camales</h3>
-                    <p>Sistemas especializados de tratamiento para camales, garantizando cumplimiento de normativas ambientales.</p>
-                    <a href="#" class="service-link">Más detalles <i class="fas fa-arrow-right"></i></a>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-icon"><i class="fas fa-cog"></i></div>
-                    <h3>Consultoría Técnica</h3>
-                    <p>Asesoramiento personalizado para optimizar procesos y encontrar la solución más adecuada para tu proyecto.</p>
-                    <a href="#" class="service-link">Más detalles <i class="fas fa-arrow-right"></i></a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ========== RESULTADOS SECTION ========== -->
-    <section class="resultados-section" id="resultados">
-        <div class="container">
-            <h2 class="section-title">Nuestros Resultados</h2>
-            <p class="section-subtitle">Casos de aplicación donde nuestra tecnología ha transformado efluentes complejos en agua reutilizable</p>
-
-            <div class="resultados-grid">
-                <div class="resultado-card">
-                    <div class="resultado-image">
-                        <i class="fas fa-image"></i>
-                    </div>
-                    <div class="resultado-content">
-                        <span class="resultado-tag">Minería</span>
-                        <h3>Recuperación de Relaves</h3>
-                        <p>Proyecto de recuperación de agua en relaves de lixiviación con más del 90% de eficiencia.</p>
-                        <a href="#" class="read-more">Leer más <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-
-                <div class="resultado-card">
-                    <div class="resultado-image">
-                        <i class="fas fa-image"></i>
-                    </div>
-                    <div class="resultado-content">
-                        <span class="resultado-tag">PTAR</span>
-                        <h3>Tratamiento Municipal</h3>
-                        <p>Planta de tratamiento de aguas residuales municipales que recupera agua para riego agrícola.</p>
-                        <a href="#" class="read-more">Leer más <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-
-                <div class="resultado-card">
-                    <div class="resultado-image">
-                        <i class="fas fa-image"></i>
-                    </div>
-                    <div class="resultado-content">
-                        <span class="resultado-tag">Industrial</span>
-                        <h3>Tratamiento de Camales</h3>
-                        <p>Sistema especializado para tratamiento de aguas residuales de camales con cumplimiento normativo.</p>
-                        <a href="#" class="read-more">Leer más <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ========== RESPONSABILIDAD SOCIAL ========== -->
-    <section class="responsabilidad-section" id="responsabilidad">
-        <div class="container">
-            <h2 class="section-title">Responsabilidad Social</h2>
-            <p class="section-subtitle">Nuestro compromiso con el medio ambiente y las comunidades</p>
-
-            <div class="responsabilidad-content">
-                <div class="responsabilidad-text">
-                    <h3>Preservar el Ecosistema</h3>
-                    <p>EcoFluidSystem se centra en el tratamiento de fluidos y su deshidratación, obteniendo dos fases: agua cristalina y sólidos compactos con porcentajes superiores al 65%.</p>
-                    
-                    <ul class="responsabilidad-list">
-                        <li><i class="fas fa-leaf"></i> <span>Reducir descargas de agua contaminada al medio ambiente</span></li>
-                        <li><i class="fas fa-recycle"></i> <span>Promover la reutilización del agua tratada</span></li>
-                        <li><i class="fas fa-globe"></i> <span>Disminuir impacto ambiental en comunidades locales</span></li>
-                        <li><i class="fas fa-hand-holding-water"></i> <span>Garantizar agua limpia para futuras generaciones</span></li>
-                        <li><i class="fas fa-heart"></i> <span>Apoyar iniciativas comunitarias de sostenibilidad</span></li>
-                    </ul>
-                </div>
-
-                <div class="responsabilidad-image">
-                    <i class="fas fa-earth-americas"></i>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ========== PRODUCTOS/TECNOLOGIA ========== -->
-    <section class="productos-section">
-        <div class="container">
-            <h2 class="section-title">Tecnología TRL y Floculadores</h2>
-            <p class="section-subtitle">Equipos innovadores diseñados para máxima eficiencia en el tratamiento de lodos y aguas residuales</p>
-
-            <div class="productos-grid">
-                <div class="producto-card">
-                    <div class="producto-icon"><i class="fas fa-microchip"></i></div>
-                    <h3>Laminillas (TRL)</h3>
-                    <p>Tecnología de laminillas inclinadas que favorecen la aglutinación de flóculos con precipitación instantánea.</p>
-                </div>
-
-                <div class="producto-card">
-                    <div class="producto-icon"><i class="fas fa-flask-vial"></i></div>
-                    <h3>Floculadores Verticales</h3>
-                    <p>Aglutinan microflóculos en flóculos más grandes, permitiendo obtener agua cristalina de inmediato.</p>
-                </div>
-
-                <div class="producto-card">
-                    <div class="producto-icon"><i class="fas fa-wind"></i></div>
-                    <h3>Bajo Consumo Energético</h3>
-                    <p>26% menos consumo de energía comparado con tecnología tradicional, reduciendo costos operacionales.</p>
-                </div>
-
-                <div class="producto-card">
-                    <div class="producto-icon"><i class="fas fa-cube"></i></div>
-                    <h3>Equipo Compacto y Móvil</h3>
-                    <p>Helitransportable, de fácil montaje y desmontaje, sin contaminar acústicamente.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ========== FAQ SECTION ========== -->
-    <section class="faq-section" id="faq">
-        <div class="container">
-            <h2 class="section-title">Preguntas Frecuentes</h2>
-            <p class="section-subtitle">Resolvemos las dudas más comunes sobre nuestros servicios y tecnología</p>
-
-            <div class="faq-container">
-                <div class="faq-item">
-                    <div class="faq-header" onclick="toggleFAQ(this)">
-                        <span class="faq-title">¿Cómo funciona el sistema de tratamiento TRL?</span>
-                        <i class="fas fa-chevron-down faq-icon"></i>
-                    </div>
-                    <div class="faq-content">
-                        <p class="faq-text">El sistema TRL utiliza laminillas inclinadas en una cámara clarificadora que ayudan a aglutinar los flóculos en mayor tamaño, favoreciendo su precipitación instantánea. Los sólidos quedan totalmente en el fondo, superando inmediatamente el 65% de densidad, y pasados tres días pueden superar el 82%.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-header" onclick="toggleFAQ(this)">
-                        <span class="faq-title">¿Cuánto cuesta tratar una tonelada de relave con EFS?</span>
-                        <i class="fas fa-chevron-down faq-icon"></i>
-                    </div>
-                    <div class="faq-content">
-                        <p class="faq-text">El tratamiento con EFS cuesta aproximadamente $0.55 por tonelada, que representa el 45.83% del costo del método convencional, y menos de la novena parte del filtrado. Esto incluye tanto proceso como transporte.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-header" onclick="toggleFAQ(this)">
-                        <span class="faq-title">¿Requiere mucho espacio la instalación?</span>
-                        <i class="fas fa-chevron-down faq-icon"></i>
-                    </div>
-                    <div class="faq-content">
-                        <p class="faq-text">No. El equipo es compacto y móvil, helitransportable y de fácil montaje. Funciona con grandes cargas hidráulicas en áreas reducidas, por lo que no hace falta rehacer la infraestructura existente.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-header" onclick="toggleFAQ(this)">
-                        <span class="faq-title">¿Qué porcentaje de agua se puede recuperar?</span>
-                        <i class="fas fa-chevron-down faq-icon"></i>
-                    </div>
-                    <div class="faq-content">
-                        <p class="faq-text">Nuestro sistema recupera hasta el 90% del agua tratada, transformando relaves en agua cristalina reutilizable. En comparación, el método convencional solo recupera el 28.4% del agua.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-header" onclick="toggleFAQ(this)">
-                        <span class="faq-title">¿El proceso es silencioso?</span>
-                        <i class="fas fa-chevron-down faq-icon"></i>
-                    </div>
-                    <div class="faq-content">
-                        <p class="faq-text">Sí, el proceso es completamente silencioso (0 dB de contaminación acústica), lo que permite su instalación cerca de comunidades sin causar molestias sonoras.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-header" onclick="toggleFAQ(this)">
-                        <span class="faq-title">¿Qué tipos de fluidos se pueden tratar?</span>
-                        <i class="fas fa-chevron-down faq-icon"></i>
-                    </div>
-                    <div class="faq-content">
-                        <p class="faq-text">Podemos tratar múltiples tipos de fluidos: relaves mineros, lamas, concentrados, agua de mina, fluidos de perforación petrolera, aguas residuales de PTAR, lodos de potabilizadoras, efluentes de extractoras de aceite y residuales industriales como pintura, textil y papel.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-header" onclick="toggleFAQ(this)">
-                        <span class="faq-title">¿Cuál es el costo de mantenimiento?</span>
-                        <i class="fas fa-chevron-down faq-icon"></i>
-                    </div>
-                    <div class="faq-content">
-                        <p class="faq-text">El costo de mantenimiento es muy bajo. El equipo está diseñado para ser confiable y duradero, con piezas de fácil reemplazo si es necesario. Muchos clientes reportan costos de mantenimiento prácticamente nulos.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ========== MAPA SECTION ========== -->
-    <section class="mapa-section" id="mapa">
-        <div class="container">
-            <h2 class="section-title" style="color: white;">Ubicación Regional</h2>
-            <p class="section-subtitle" style="color: white;">Disponibles en toda la región con servicios de consultoría y soporte técnico integral</p>
-
-            <div class="mapa-content">
-                <div id="map"></div>
-                <div class="mapa-info">
-                    <h3>Presencia en América Latina</h3>
-                    <p>New Technology EcoFluidSystem S.A. proporciona soporte técnico especializado, consultoría en proyectos y suministro de productos en toda la región, con presencia activa en Ecuador, Perú y Costa Rica.</p>
-                    
-                    <ul>
-                        <li><i class="fas fa-map-marker-alt"></i> <span>Ecuador - Sede Principal</span></li>
-                        <li><i class="fas fa-map-marker-alt"></i> <span>Perú - Oficina Regional</span></li>
-                        <li><i class="fas fa-map-marker-alt"></i> <span>Costa Rica - Representación</span></li>
-                        <li><i class="fas fa-phone"></i> <span>Disponible 24/7 para soporte técnico</span></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ========== CONTACTO SECTION ========== -->
-    <section class="contacto-section" id="contacto">
-        <div class="container">
-            <h2 class="section-title">¿Listo para Mejorar tu Tratamiento de Aguas?</h2>
-            <p class="section-subtitle">Nuestro equipo de expertos está disponible para asesorarte en la solución más adecuada para tu proyecto</p>
-
-            <div class="contacto-grid">
-                <div class="contacto-info">
-                    <h3>Ponte en Contacto</h3>
-                    
-                    <div class="contacto-item">
-                        <div class="contacto-icon">
-                            <i class="fas fa-envelope"></i>
-                        </div>
-                        <div class="contacto-text">
-                            <h4>Email</h4>
-                            <a href="mailto:ecofluidsystemec@gmail.com">ecofluidsystemec@gmail.com</a>
-                        </div>
-                    </div>
-
-                    <div class="contacto-item">
-                        <div class="contacto-icon">
-                            <i class="fas fa-phone"></i>
-                        </div>
-                        <div class="contacto-text">
-                            <h4>Teléfono / WhatsApp</h4>
-                            <a href="tel:+593963200034">+593 96-320-0034</a>
-                        </div>
-                    </div>
-
-                    <div class="contacto-item">
-                        <div class="contacto-icon">
-                            <i class="fas fa-map-location-dot"></i>
-                        </div>
-                        <div class="contacto-text">
-                            <h4>Ubicación</h4>
-                            <p>Ecuador — Disponible en toda la región</p>
-                        </div>
-                    </div>
-
-                    <div class="contacto-item">
-                        <div class="contacto-icon">
-                            <i class="fas fa-clock"></i>
-                        </div>
-                        <div class="contacto-text">
-                            <h4>Disponibilidad</h4>
-                            <p>Lunes a Viernes: 08:00 - 18:00 | Emergencias 24/7</p>
-                        </div>
-                    </div>
-
-                    <div class="social-links">
-                        <a href="https://wa.me/593963200034" target="_blank" title="WhatsApp">
-                            <i class="fab fa-whatsapp"></i>
-                        </a>
-                        <a href="https://www.instagram.com/ecofluidsystem" target="_blank" title="Instagram">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="https://www.facebook.com/ecofluidsystem" target="_blank" title="Facebook">
-                            <i class="fab fa-facebook"></i>
-                        </a>
-                        <a href="https://www.youtube.com/@ecofluidsystem" target="_blank" title="YouTube">
-                            <i class="fab fa-youtube"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="contacto-form">
-                    <form id="contactForm" onsubmit="enviarFormulario(event)">
-                        <div class="form-group">
-                            <label class="form-label">Nombre Completo *</label>
-                            <input type="text" class="form-input" id="nombre" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="form-label">Empresa *</label>
-                            <input type="text" class="form-input" id="empresa" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="form-label">Email *</label>
-                            <input type="email" class="form-input" id="email" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="form-label">Teléfono *</label>
-                            <input type="tel" class="form-input" id="telefono" placeholder="+593 96-320-0034" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="form-label">Asunto *</label>
-                            <input type="text" class="form-input" id="asunto" placeholder="¿Qué necesitas?" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="form-label">Mensaje *</label>
-                            <textarea class="form-textarea" id="mensaje" placeholder="Cuéntanos más sobre tu proyecto..." required></textarea>
-                        </div>
-
-                        <button type="submit" class="form-submit">
-                            <i class="fas fa-paper-plane"></i> Enviar Mensaje
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ========== FOOTER ========== -->
-    <footer>
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-column">
-                    <h4>EcoFluidSystem</h4>
-                    <p>Soluciones de tratamiento de aguas para la industria moderna. Compromiso con la sostenibilidad y la excelencia técnica.</p>
-                    <div class="social-links">
-                        <a href="https://www.facebook.com/ecofluidsystem" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                        <a href="https://www.instagram.com/ecofluidsystem" target="_blank"><i class="fab fa-instagram"></i></a>
-                        <a href="https://www.youtube.com/@ecofluidsystem" target="_blank"><i class="fab fa-youtube"></i></a>
-                        <a href="https://wa.me/593963200034" target="_blank"><i class="fab fa-whatsapp"></i></a>
-                    </div>
-                </div>
-
-                <div class="footer-column">
-                    <h4>Navegación</h4>
-                    <ul>
-                        <li><a href="#inicio">Inicio</a></li>
-                        <li><a href="#servicios">Servicios</a></li>
-                        <li><a href="#resultados">Resultados</a></li>
-                        <li><a href="#responsabilidad">Responsabilidad Social</a></li>
-                        <li><a href="#faq">Preguntas Frecuentes</a></li>
-                        <li><a href="#contacto">Contacto</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-column">
-                    <h4>Contacto</h4>
-                    <ul>
-                        <li><a href="tel:+593963200034"><i class="fas fa-phone"></i> +593 96-320-0034</a></li>
-                        <li><a href="mailto:ecofluidsystemec@gmail.com"><i class="fas fa-envelope"></i> ecofluidsystemec@gmail.com</a></li>
-                        <li><a href="https://wa.me/593963200034"><i class="fab fa-whatsapp"></i> WhatsApp 24/7</a></li>
-                        <li><i class="fas fa-map-pin"></i> Ecuador - América Latina</li>
-                    </ul>
-                </div>
-
-                <div class="footer-column">
-                    <h4>Servicios</h4>
-                    <ul>
-                        <li><a href="#">Industria Minera</a></li>
-                        <li><a href="#">Plantas PTAR</a></li>
-                        <li><a href="#">Floculantes</a></li>
-                        <li><a href="#">Coagulantes</a></li>
-                        <li><a href="#">Consultoría Técnica</a></li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="footer-bottom">
-                <p>&copy; 2026 New Technology EcoFluidSystem S.A. Todos los derechos reservados.</p>
-                <p>Hecho con <i class="fas fa-heart" style="color: var(--secondary);"></i> para el medio ambiente</p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- ========== FLOATING BUTTONS ========== -->
-    <div class="floating-buttons">
-        <a href="tel:+593963200034" class="float-btn phone" title="Llamar">
-            <i class="fas fa-phone"></i>
-        </a>
-        <a href="https://wa.me/593963200034" target="_blank" class="float-btn whatsapp" title="WhatsApp">
-            <i class="fab fa-whatsapp"></i>
-        </a>
-    </div>
-
-    <!-- ========== MAPA ========== -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
-
-    <script>
-        // ========== NAVBAR SCROLL EFFECT ==========
-        window.addEventListener('scroll', function() {
-            const navbar = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                navbar.style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.15)';
-            } else {
-                navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
-            }
-        });
-
-        // ========== MOBILE MENU TOGGLE ==========
-        function toggleMobileMenu() {
-            const navMenu = document.getElementById('navMenu');
-            navMenu.classList.toggle('active');
-        }
-
-        // Close menu when link is clicked
-        document.querySelectorAll('.nav-menu a').forEach(link => {
-            link.addEventListener('click', () => {
-                document.getElementById('navMenu').classList.remove('active');
-            });
-        });
-
-        // ========== FAQ TOGGLE ==========
-        function toggleFAQ(header) {
-            const item = header.parentElement;
-            item.classList.toggle('active');
-        }
-
-        // ========== FORMULARIO ==========
-        function enviarFormulario(event) {
-            event.preventDefault();
-
-            const nombre = document.getElementById('nombre').value;
-            const empresa = document.getElementById('empresa').value;
-            const email = document.getElementById('email').value;
-            const telefono = document.getElementById('telefono').value;
-            const asunto = document.getElementById('asunto').value;
-            const mensaje = document.getElementById('mensaje').value;
-
-            const mensaje_whatsapp = `
-Consulta desde EcoFluidSystem.com
-
-👤 *Nombre:* ${nombre}
-🏢 *Empresa:* ${empresa}
-📧 *Email:* ${email}
-📞 *Teléfono:* ${telefono}
-📌 *Asunto:* ${asunto}
-
-💬 *Mensaje:*
-${mensaje}
-            `;
-
-            const url = `https://wa.me/593963200034?text=${encodeURIComponent(mensaje_whatsapp)}`;
-            window.open(url, '_blank');
-
-            // Reset form
-            document.getElementById('contactForm').reset();
-            
-            // Show success message
-            alert('¡Mensaje enviado! Te contactaremos pronto.');
-        }
-
-        // ========== MAPA LEAFLET ==========
-        document.addEventListener('DOMContentLoaded', function() {
-            const map = L.map('map').setView([0, -75], 4);
-
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '© OpenStreetMap contributors',
-                maxZoom: 19
-            }).addTo(map);
-
-            // Markers
-            const locations = [
-                { lat: -0.2202, lng: -78.5124, name: 'Quito', country: 'Ecuador', type: 'Sede Principal' },
-                { lat: -3.6961, lng: -79.9789, name: 'Machala', country: 'Ecuador', type: 'Operaciones' },
-                { lat: -12.0462, lng: -77.0369, name: 'Lima', country: 'Perú', type: 'Oficina Regional' },
-                { lat: 10.0, lng: -84.0, name: 'San José', country: 'Costa Rica', type: 'Representación' }
-            ];
-
-            locations.forEach(loc => {
-                L.circleMarker([loc.lat, loc.lng], {
-                    radius: 10,
-                    fillColor: '#34A853',
-                    color: '#1561ad',
-                    weight: 2,
-                    opacity: 1,
-                    fillOpacity: 0.8
-                }).bindPopup(`<strong>${loc.name}</strong><br>${loc.country}<br>${loc.type}`).addTo(map);
-            });
-        });
-
-        // ========== ANIMACIÓN ON SCROLL ==========
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('animate-on-scroll');
-                }
-            });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('.stat-card, .service-card, .resultado-card, .producto-card, .faq-item').forEach(el => {
-            observer.observe(el);
-        });
-
-        // ========== SMOOTH SCROLL ==========
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            });
-        });
-    </script>
-</body>
-</html>
